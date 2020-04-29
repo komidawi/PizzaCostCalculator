@@ -1,0 +1,2 @@
+rootProject.name='Pizza Cost Calculator'
+include ':app'

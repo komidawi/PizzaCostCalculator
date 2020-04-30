@@ -7,12 +7,13 @@
     tools:context=".MainActivity">
 
     <fragment
-        android:id="@+id/titleFragment"
-        android:name="com.github.komidawi.pizzacostcalculator.TitleFragment"
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/navigation" />
 
     <TextView
         android:layout_width="wrap_content"

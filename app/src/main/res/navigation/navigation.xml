@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.github.komidawi.pizzacostcalculator.SecondFragment"
+        android:name="com.github.komidawi.pizzacostcalculator.HomeFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_home" />
 </navigation>

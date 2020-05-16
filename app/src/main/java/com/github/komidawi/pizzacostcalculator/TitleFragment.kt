@@ -11,13 +11,16 @@ import com.github.komidawi.pizzacostcalculator.databinding.FragmentTitleBinding
 class TitleFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentTitleBinding.inflate(inflater, container, false)
-        binding.button.setOnClickListener(
+
+        binding.appStartButton.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_secondFragment)
         )
+
         return binding.root
     }
 }

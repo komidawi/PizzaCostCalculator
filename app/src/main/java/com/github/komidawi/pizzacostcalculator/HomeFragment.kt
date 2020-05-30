@@ -15,7 +15,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        showRandomNumberMessage()
+//        showRandomNumberMessage()
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 

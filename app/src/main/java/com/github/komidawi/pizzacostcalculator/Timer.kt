@@ -8,7 +8,7 @@ import androidx.lifecycle.OnLifecycleEvent
 
 class Timer(lifecycle: Lifecycle) : LifecycleObserver {
 
-    private var secondsElapsed = 0
+    var secondsElapsed = 0
     private val handler: Handler = Handler()
     private lateinit var runnable: Runnable
 

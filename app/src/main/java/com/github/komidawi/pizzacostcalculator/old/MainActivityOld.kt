@@ -8,10 +8,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.databinding.ActivityMainBinding
+import com.github.komidawi.pizzacostcalculator.databinding.ActivityMainOldBinding
 
 private const val TIMER_SECONDS_ELAPSED_KEY = "timer_seconds_elapsed"
 
-class MainActivity : AppCompatActivity() {
+class MainActivityOld : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainOldBinding.inflate(layoutInflater)
         drawerLayout = binding.drawerLayout
         setContentView(binding.root)
 

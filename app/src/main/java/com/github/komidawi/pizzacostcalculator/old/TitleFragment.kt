@@ -1,12 +1,12 @@
-package com.github.komidawi.pizzacostcalculator
+package com.github.komidawi.pizzacostcalculator.old
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.github.komidawi.pizzacostcalculator.old.TitleFragmentDirections
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {
@@ -21,7 +21,11 @@ class TitleFragment : Fragment() {
         binding.appStartButton.setOnClickListener { view: View ->
             val randomNumber = (0..10).random()
             view.findNavController()
-                .navigate(TitleFragmentDirections.actionTitleFragmentToHomeFragment(randomNumber))
+                .navigate(
+                    TitleFragmentDirections.actionTitleFragmentToHomeFragment(
+                        randomNumber
+                    )
+                )
         }
 
         return binding.root

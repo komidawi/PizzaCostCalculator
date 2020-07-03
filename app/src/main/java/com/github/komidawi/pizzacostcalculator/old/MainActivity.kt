@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator
+package com.github.komidawi.pizzacostcalculator.old
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.databinding.ActivityMainBinding
 
 private const val TIMER_SECONDS_ELAPSED_KEY = "timer_seconds_elapsed"

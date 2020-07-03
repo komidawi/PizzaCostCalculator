@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator
+package com.github.komidawi.pizzacostcalculator.old
 
 import android.os.Bundle
 import android.view.*
@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.github.komidawi.pizzacostcalculator.old.HomeFragmentArgs
+import com.github.komidawi.pizzacostcalculator.R
 
 class HomeFragment : Fragment() {
 
@@ -20,7 +22,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun showRandomNumberMessage() {
-        val args = HomeFragmentArgs.fromBundle(requireArguments())
+        val args =
+            HomeFragmentArgs.fromBundle(
+                requireArguments()
+            )
         Toast.makeText(context, "Random number: ${args.randomNumber}", Toast.LENGTH_SHORT).show()
     }
 

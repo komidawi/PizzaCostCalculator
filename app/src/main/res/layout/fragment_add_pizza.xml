@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="addPizzaFragmentViewModel"
+            type="com.github.komidawi.pizzacostcalculator.add.AddPizzaFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".add.AddPizzaFragment">
+
+        <EditText
+            android:id="@+id/pizza_name_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="name"
+            android:inputType="textPersonName"
+            android:text="@={addPizzaFragmentViewModel.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/pizza_size_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="size"
+            android:inputType="numberDecimal"
+            android:text="@={addPizzaFragmentViewModel.size}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pizza_name_input" />
+
+        <EditText
+            android:id="@+id/pizza_price_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="price"
+            android:inputType="numberDecimal"
+            android:text="@={addPizzaFragmentViewModel.price}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pizza_size_input" />
+
+        <Button
+            android:id="@+id/pizza_add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> addPizzaFragmentViewModel.addPizza()}"
+            android:text="Add pizza!"
+            app:layout_constraintEnd_toEndOf="@+id/pizza_price_input"
+            app:layout_constraintStart_toStartOf="@+id/pizza_price_input"
+            app:layout_constraintTop_toBottomOf="@+id/pizza_price_input" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

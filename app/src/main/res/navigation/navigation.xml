@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/pizzaListFragment"
-        android:name="com.github.komidawi.pizzacostcalculator.PizzaListFragment"
+        android:name="com.github.komidawi.pizzacostcalculator.list.PizzaListFragment"
         android:label="fragment_pizza_list"
         tools:layout="@layout/fragment_pizza_list">
         <action

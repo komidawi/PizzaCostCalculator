@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator
+package com.github.komidawi.pizzacostcalculator.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +10,15 @@ import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBind
 
 class PizzaListFragment : Fragment() {
 
+    private lateinit var binding: FragmentPizzaListBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentPizzaListBinding.inflate(inflater, container, false)
+        binding = FragmentPizzaListBinding.inflate(inflater, container, false)
 
-        binding.pizzaAddButton.setOnClickListener { view: View ->
+        binding.addPizzaFab.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())
         }

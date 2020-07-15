@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.github.komidawi.pizzacostcalculator.data.SampleRepository
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentAddPizzaBinding
 import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
 
@@ -18,9 +19,10 @@ class AddPizzaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddPizzaBinding.inflate(layoutInflater, container, false)
+        binding = FragmentAddPizzaBinding.inflate(inflater, container, false)
 
-        addPizzaFragmentViewModel = ViewModelFactory.create(AddPizzaFragmentViewModel::class.java)
+        addPizzaFragmentViewModel = ViewModelFactory(SampleRepository)
+            .create(AddPizzaFragmentViewModel::class.java)
         binding.addPizzaFragmentViewModel = addPizzaFragmentViewModel
 
         // Specify the current activity as the lifecycle owner of the binding.

@@ -1,5 +1,6 @@
 package com.github.komidawi.pizzacostcalculator.add
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.komidawi.pizzacostcalculator.data.Repository
@@ -13,19 +14,28 @@ class AddPizzaFragmentViewModel(private val repository: Repository) : ViewModel(
 
     val price = MutableLiveData<String>()
 
-    fun addPizza() {
-        repository.add(createPizza())
+    private val _addedPizza = MutableLiveData<PizzaModel>()
+    val addedPizza: LiveData<PizzaModel>
+        get() = _addedPizza
+
+
+    fun onAddPizza() {
+        _addedPizza.value = createPizza()
     }
 
-    private fun createPizza(): PizzaModel {
+    fun onAddPizzaComplete() {
+        _addedPizza.value = null
+    }
+
+    private fun createPizza(): PizzaModel? {
         val currentName = name.value
         val currentSize = size.value
         val currentPrice = price.value
 
-        if (currentName == null || currentSize == null || currentPrice == null) {
-            throw IllegalArgumentException("Fields must be not empty!")
+        return if (currentName == null || currentSize == null || currentPrice == null) {
+            null
         } else {
-            return PizzaModel(currentName, currentSize.toFloat(), currentPrice.toFloat())
+            PizzaModel(currentName, currentSize.toFloat(), currentPrice.toFloat())
         }
     }
 }

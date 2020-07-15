@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:onClick="@{() -> addPizzaFragmentViewModel.addPizza()}"
+            android:onClick="@{() -> addPizzaFragmentViewModel.onAddPizza()}"
             android:text="Add pizza!"
             app:layout_constraintEnd_toEndOf="@+id/pizza_price_input"
             app:layout_constraintStart_toStartOf="@+id/pizza_price_input"

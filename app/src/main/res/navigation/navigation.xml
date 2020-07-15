@@ -13,10 +13,19 @@
         <action
             android:id="@+id/action_pizzaListFragment_to_addPizzaFragment"
             app:destination="@id/addPizzaFragment" />
+        <argument
+            android:name="addedPizza"
+            android:defaultValue="@null"
+            app:argType="com.github.komidawi.pizzacostcalculator.model.PizzaModel"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/addPizzaFragment"
         android:name="com.github.komidawi.pizzacostcalculator.add.AddPizzaFragment"
         android:label="fragment_add_pizza"
-        tools:layout="@layout/fragment_add_pizza" />
+        tools:layout="@layout/fragment_add_pizza">
+        <action
+            android:id="@+id/action_addPizzaFragment_to_pizzaListFragment"
+            app:destination="@id/pizzaListFragment" />
+    </fragment>
 </navigation>

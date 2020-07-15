@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.komidawi.pizzacostcalculator.add.AddPizzaFragmentViewModel
 import com.github.komidawi.pizzacostcalculator.data.Repository
+import com.github.komidawi.pizzacostcalculator.list.PizzaListFragmentViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(private val repository: Repository) :
@@ -14,6 +15,8 @@ class ViewModelFactory(private val repository: Repository) :
             when {
                 isAssignableFrom(AddPizzaFragmentViewModel::class.java) ->
                     AddPizzaFragmentViewModel(repository)
+                isAssignableFrom(PizzaListFragmentViewModel::class.java) ->
+                    PizzaListFragmentViewModel()
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

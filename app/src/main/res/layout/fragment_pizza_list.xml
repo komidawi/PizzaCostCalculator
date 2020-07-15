@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="pizzaListFragmentViewModel"
+            type="com.github.komidawi.pizzacostcalculator.list.PizzaListFragmentViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pizza_list_root_layout"
         android:layout_width="match_parent"

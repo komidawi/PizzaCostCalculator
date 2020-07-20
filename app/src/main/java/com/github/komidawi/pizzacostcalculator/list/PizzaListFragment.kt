@@ -1,6 +1,7 @@
 package com.github.komidawi.pizzacostcalculator.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,10 @@ class PizzaListFragment : Fragment() {
         viewModel =
             ViewModelFactory(SampleRepository).create(PizzaListFragmentViewModel::class.java)
         binding.pizzaListFragmentViewModel = viewModel
+
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
 
         binding.addPizzaFab.setOnClickListener { view: View ->
             view.findNavController()

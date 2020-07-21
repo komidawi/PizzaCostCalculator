@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.github.komidawi.pizzacostcalculator.data.SampleRepository
+import com.github.komidawi.pizzacostcalculator.database.SampleRepository
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentAddPizzaBinding
 import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
 

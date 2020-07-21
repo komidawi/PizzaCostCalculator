@@ -3,7 +3,7 @@ package com.github.komidawi.pizzacostcalculator.add
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.komidawi.pizzacostcalculator.data.Repository
+import com.github.komidawi.pizzacostcalculator.database.Repository
 import com.github.komidawi.pizzacostcalculator.model.PizzaModel
 
 class AddPizzaFragmentViewModel(private val repository: Repository) : ViewModel() {

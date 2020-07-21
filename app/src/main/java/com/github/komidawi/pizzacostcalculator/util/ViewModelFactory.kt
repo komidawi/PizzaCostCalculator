@@ -3,7 +3,7 @@ package com.github.komidawi.pizzacostcalculator.util
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.komidawi.pizzacostcalculator.add.AddPizzaFragmentViewModel
-import com.github.komidawi.pizzacostcalculator.data.Repository
+import com.github.komidawi.pizzacostcalculator.database.Repository
 import com.github.komidawi.pizzacostcalculator.list.PizzaListFragmentViewModel
 
 @Suppress("UNCHECKED_CAST")

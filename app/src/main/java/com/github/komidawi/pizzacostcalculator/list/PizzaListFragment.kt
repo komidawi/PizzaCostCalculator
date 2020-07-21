@@ -1,14 +1,13 @@
 package com.github.komidawi.pizzacostcalculator.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.github.komidawi.pizzacostcalculator.data.SampleRepository
+import com.github.komidawi.pizzacostcalculator.database.SampleRepository
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
 import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
 

@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.github.komidawi.pizzacostcalculator.database.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.model.PizzaModel
 
-class PizzaListFragmentViewModel : ViewModel() {
+class PizzaListFragmentViewModel(val databaseDao: PizzaDatabaseDao) : ViewModel() {
 
     private val _pizzaList = MutableLiveData<MutableList<PizzaModel>>()
     val pizzaList: LiveData<MutableList<PizzaModel>>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.github.komidawi.pizzacostcalculator.database.SampleRepository
+import com.github.komidawi.pizzacostcalculator.database.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
 import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
 
@@ -21,8 +21,11 @@ class PizzaListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPizzaListBinding.inflate(inflater, container, false)
-        viewModel =
-            ViewModelFactory(SampleRepository).create(PizzaListFragmentViewModel::class.java)
+
+        val application = requireNotNull(this.activity).application
+        val databaseDao = PizzaDatabase.getInstance(application).pizzaDatabaseDao
+
+        viewModel = ViewModelFactory(databaseDao).create(PizzaListFragmentViewModel::class.java)
         binding.pizzaListFragmentViewModel = viewModel
 
         // Specify the current activity as the lifecycle owner of the binding. This is used so that

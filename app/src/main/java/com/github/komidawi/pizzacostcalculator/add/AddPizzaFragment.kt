@@ -32,8 +32,7 @@ class AddPizzaFragment : Fragment() {
 
         viewModel.addedPizza.observe(viewLifecycleOwner, Observer { addedPizza ->
             if (addedPizza != null) {
-                val action =
-                    AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment(addedPizza)
+                val action = AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment()
                 findNavController().navigate(action)
                 viewModel.onAddPizzaComplete()
             }

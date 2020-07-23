@@ -20,4 +20,7 @@ interface PizzaDatabaseDao {
 
     @Query("DELETE FROM pizza_table WHERE id = :id")
     fun delete(id: Long)
+
+    @Query("DELETE FROM pizza_table")
+    fun deleteAll()
 }

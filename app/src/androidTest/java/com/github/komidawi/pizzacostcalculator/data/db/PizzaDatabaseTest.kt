@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator.database
+package com.github.komidawi.pizzacostcalculator.data.db
 
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4

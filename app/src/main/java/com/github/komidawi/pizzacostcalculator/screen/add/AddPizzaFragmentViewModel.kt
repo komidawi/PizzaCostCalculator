@@ -1,10 +1,9 @@
-package com.github.komidawi.pizzacostcalculator.add
+package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.komidawi.pizzacostcalculator.database.Repository
-import com.github.komidawi.pizzacostcalculator.model.PizzaModel
+import com.github.komidawi.pizzacostcalculator.data.model.PizzaModel
 
 class AddPizzaFragmentViewModel() : ViewModel() {
 

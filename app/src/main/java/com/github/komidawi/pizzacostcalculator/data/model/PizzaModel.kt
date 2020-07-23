@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator.model
+package com.github.komidawi.pizzacostcalculator.data.model
 
 import java.io.Serializable
 

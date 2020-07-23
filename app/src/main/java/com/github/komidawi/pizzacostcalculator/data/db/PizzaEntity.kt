@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator.database
+package com.github.komidawi.pizzacostcalculator.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/pizzaListFragment"
-        android:name="com.github.komidawi.pizzacostcalculator.list.PizzaListFragment"
+        android:name="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragment"
         android:label="fragment_pizza_list"
         tools:layout="@layout/fragment_pizza_list">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPizzaFragment"
-        android:name="com.github.komidawi.pizzacostcalculator.add.AddPizzaFragment"
+        android:name="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragment"
         android:label="fragment_add_pizza"
         tools:layout="@layout/fragment_add_pizza">
         <action

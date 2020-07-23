@@ -7,13 +7,13 @@
 
         <variable
             name="addPizzaFragmentViewModel"
-            type="com.github.komidawi.pizzacostcalculator.add.AddPizzaFragmentViewModel" />
+            type="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".add.AddPizzaFragment">
+        tools:context=".screen.add.AddPizzaFragment">
 
         <EditText
             android:id="@+id/pizza_name_input"

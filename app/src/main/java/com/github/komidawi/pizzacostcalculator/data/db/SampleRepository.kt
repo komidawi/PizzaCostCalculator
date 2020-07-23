@@ -1,6 +1,6 @@
-package com.github.komidawi.pizzacostcalculator.database
+package com.github.komidawi.pizzacostcalculator.data.db
 
-import com.github.komidawi.pizzacostcalculator.model.PizzaModel
+import com.github.komidawi.pizzacostcalculator.data.model.PizzaModel
 
 object SampleRepository : Repository {
     val pizzaList = mutableListOf<PizzaModel>()

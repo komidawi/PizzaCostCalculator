@@ -1,9 +1,9 @@
-package com.github.komidawi.pizzacostcalculator.list
+package com.github.komidawi.pizzacostcalculator.screen.list
 
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.github.komidawi.pizzacostcalculator.database.PizzaDatabaseDao
-import com.github.komidawi.pizzacostcalculator.database.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import kotlinx.coroutines.*
 
 class PizzaListFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) : ViewModel() {

@@ -3,9 +3,15 @@ package com.github.komidawi.pizzacostcalculator.screen.add
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.komidawi.pizzacostcalculator.data.model.PizzaModel
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import kotlinx.coroutines.*
 
-class AddPizzaFragmentViewModel() : ViewModel() {
+class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) : ViewModel() {
+
+    private val viewModelJob = Job()
+
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     val name = MutableLiveData<String>()
 
@@ -13,20 +19,32 @@ class AddPizzaFragmentViewModel() : ViewModel() {
 
     val price = MutableLiveData<String>()
 
-    private val _addedPizza = MutableLiveData<PizzaModel>()
-    val addedPizza: LiveData<PizzaModel>
-        get() = _addedPizza
+    private val _navigateToPizzaListFragment = MutableLiveData<Boolean>()
+    val navigateToPizzaListFragment: LiveData<Boolean>
+        get() = _navigateToPizzaListFragment
 
 
-    fun onAddPizza() {
-        _addedPizza.value = createPizza()
+    fun handleAddPizza() {
+        val pizza = createPizza()
+        pizza?.let {
+            uiScope.launch {
+                insertPizza(it)
+                _navigateToPizzaListFragment.value = true
+            }
+        }
     }
 
-    fun onAddPizzaComplete() {
-        _addedPizza.value = null
+    private suspend fun insertPizza(pizza: PizzaEntity) {
+        withContext(Dispatchers.IO) {
+            pizzaDatabaseDao.insert(pizza)
+        }
     }
 
-    private fun createPizza(): PizzaModel? {
+    fun doneNavigating() {
+        _navigateToPizzaListFragment.value = false
+    }
+
+    private fun createPizza(): PizzaEntity? {
         val currentName = name.value
         val currentSize = size.value
         val currentPrice = price.value
@@ -34,7 +52,7 @@ class AddPizzaFragmentViewModel() : ViewModel() {
         return if (currentName == null || currentSize == null || currentPrice == null) {
             null
         } else {
-            PizzaModel(currentName, currentSize.toFloat(), currentPrice.toFloat())
+            PizzaEntity(0L, currentName, currentSize.toFloat(), currentPrice.toFloat())
         }
     }
 }

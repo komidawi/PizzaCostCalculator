@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
 import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
 
@@ -37,10 +35,6 @@ class PizzaListFragment : Fragment() {
             view.findNavController()
                 .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())
         }
-
-        val pizza = PizzaEntity(0L, "name", 10f, 20f)
-        viewModel.addPizza(pizza)
-        Toast.makeText(context, pizza.toString(), Toast.LENGTH_SHORT).show()
 
         return binding.root
     }

@@ -29,11 +29,11 @@ class AddPizzaFragment : Fragment() {
         viewModel = ViewModelFactory(databaseDao).create(AddPizzaFragmentViewModel::class.java)
         binding.addPizzaFragmentViewModel = viewModel
 
-        viewModel.addedPizza.observe(viewLifecycleOwner, Observer { addedPizza ->
-            if (addedPizza != null) {
-                val action = AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment()
-                findNavController().navigate(action)
-                viewModel.onAddPizzaComplete()
+        viewModel.navigateToPizzaListFragment.observe(viewLifecycleOwner, Observer { navigate ->
+            if (navigate) {
+                this.findNavController()
+                    .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
+                viewModel.doneNavigating()
             }
         })
 

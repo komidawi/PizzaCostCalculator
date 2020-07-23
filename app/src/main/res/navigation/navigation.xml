@@ -21,6 +21,8 @@
         tools:layout="@layout/fragment_add_pizza">
         <action
             android:id="@+id/action_addPizzaFragment_to_pizzaListFragment"
-            app:destination="@id/pizzaListFragment" />
+            app:destination="@id/pizzaListFragment"
+            app:popUpTo="@id/pizzaListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

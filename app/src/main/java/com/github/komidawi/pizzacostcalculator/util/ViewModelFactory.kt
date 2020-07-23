@@ -14,11 +14,9 @@ class ViewModelFactory(private val databaseDao: PizzaDatabaseDao) :
         with(modelClass) {
             when {
                 isAssignableFrom(AddPizzaFragmentViewModel::class.java) ->
-                    AddPizzaFragmentViewModel()
+                    AddPizzaFragmentViewModel(databaseDao)
                 isAssignableFrom(PizzaListFragmentViewModel::class.java) ->
-                    PizzaListFragmentViewModel(
-                        databaseDao
-                    )
+                    PizzaListFragmentViewModel(databaseDao)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

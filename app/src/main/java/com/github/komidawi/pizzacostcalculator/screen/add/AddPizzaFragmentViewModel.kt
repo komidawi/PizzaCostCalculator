@@ -23,14 +23,20 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
     val navigateToPizzaListFragment: LiveData<Boolean>
         get() = _navigateToPizzaListFragment
 
+    private val _displayEmptyFieldsToast = MutableLiveData<Boolean>()
+    val displayEmptyFieldsToast: LiveData<Boolean>
+        get() = _displayEmptyFieldsToast
+
 
     fun handleAddPizza() {
         val pizza = createPizza()
-        pizza?.let {
+        if (pizza != null) {
             uiScope.launch {
-                insertPizza(it)
+                insertPizza(pizza)
                 _navigateToPizzaListFragment.value = true
             }
+        } else {
+            _displayEmptyFieldsToast.value = true
         }
     }
 
@@ -38,10 +44,6 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
         withContext(Dispatchers.IO) {
             pizzaDatabaseDao.insert(pizza)
         }
-    }
-
-    fun doneNavigating() {
-        _navigateToPizzaListFragment.value = false
     }
 
     private fun createPizza(): PizzaEntity? {
@@ -54,5 +56,13 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
         } else {
             PizzaEntity(0L, currentName, currentSize.toFloat(), currentPrice.toFloat())
         }
+    }
+
+    fun doneNavigating() {
+        _navigateToPizzaListFragment.value = false
+    }
+
+    fun doneDisplayingEmptyFieldsToast() {
+        _displayEmptyFieldsToast.value = false
     }
 }

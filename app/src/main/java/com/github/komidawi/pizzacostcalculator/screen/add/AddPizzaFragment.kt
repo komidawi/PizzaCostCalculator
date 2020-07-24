@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentAddPizzaBinding
 import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
@@ -37,8 +39,14 @@ class AddPizzaFragment : Fragment() {
             }
         })
 
-        // Specify the current activity as the lifecycle owner of the binding.
-        // This is used so that the binding can observe LiveData updates
+        viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, Observer { displayToast ->
+            if (displayToast) {
+                val message = getString(R.string.all_fields_are_required)
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                viewModel.doneDisplayingEmptyFieldsToast()
+            }
+        })
+
         binding.lifecycleOwner = this
 
         return binding.root

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
@@ -26,6 +27,15 @@ class PizzaListFragment : Fragment() {
 
         viewModel = ViewModelFactory(databaseDao).create(PizzaListFragmentViewModel::class.java)
         binding.pizzaListFragmentViewModel = viewModel
+
+        val adapter = PizzaListAdapter()
+        binding.recyclerView.adapter = adapter
+
+        viewModel.pizzaList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
 
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates

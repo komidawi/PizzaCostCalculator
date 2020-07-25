@@ -27,6 +27,12 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
     val displayEmptyFieldsToast: LiveData<Boolean>
         get() = _displayEmptyFieldsToast
 
+    init {
+        name.value = "Default Name"
+        size.value = "42"
+        price.value = "9.99"
+    }
+
 
     fun handleAddPizza() {
         val pizza = createPizza()

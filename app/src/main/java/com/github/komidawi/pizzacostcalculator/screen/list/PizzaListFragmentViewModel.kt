@@ -22,7 +22,7 @@ class PizzaListFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao)
      */
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val pizzaList = pizzaDatabaseDao.getAll()
+    val pizzaList = pizzaDatabaseDao.getAll()
 
     val pizzaListText = Transformations.map(pizzaList) { pizzas ->
         pizzas.toString()

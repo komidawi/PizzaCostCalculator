@@ -5,25 +5,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 
-class PizzaListAdapter : RecyclerView.Adapter<PizzaListAdapter.PizzaItemViewHolder>() {
-    var data = listOf<PizzaEntity>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class PizzaListAdapter :
+    ListAdapter<PizzaEntity, PizzaListAdapter.PizzaItemViewHolder>(PizzaDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PizzaItemViewHolder {
         return PizzaItemViewHolder.from(parent)
     }
 
-    override fun getItemCount() = data.size
-
     override fun onBindViewHolder(holder: PizzaItemViewHolder, position: Int) {
-        val pizza = data[position]
+        val pizza = getItem(position)
         holder.bind(pizza)
     }
 
@@ -48,4 +44,12 @@ class PizzaListAdapter : RecyclerView.Adapter<PizzaListAdapter.PizzaItemViewHold
             }
         }
     }
+}
+
+class PizzaDiffCallback : DiffUtil.ItemCallback<PizzaEntity>() {
+    override fun areItemsTheSame(oldItem: PizzaEntity, newItem: PizzaEntity) =
+        oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: PizzaEntity, newItem: PizzaEntity) =
+        oldItem == newItem
 }

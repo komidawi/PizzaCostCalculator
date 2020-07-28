@@ -8,11 +8,16 @@
         <variable
             name="pizzaEntity"
             type="com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity" />
+
+        <variable
+            name="clickListener"
+            type="com.github.komidawi.pizzacostcalculator.screen.list.PizzaItemListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(pizzaEntity)}">
 
         <TextView
             android:id="@+id/pizza_name_display"

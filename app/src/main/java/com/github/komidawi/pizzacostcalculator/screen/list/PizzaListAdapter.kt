@@ -25,11 +25,8 @@ class PizzaListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pizza: PizzaEntity) {
-            binding.apply {
-                pizzaNameDisplay.text = pizza.name
-                pizzaSizeDisplay.text = pizza.size.toString()
-                pizzaPriceDisplay.text = pizza.price.toString()
-            }
+            binding.pizzaEntity = pizza
+            binding.executePendingBindings()
         }
 
         companion object {

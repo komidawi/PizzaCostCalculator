@@ -25,6 +25,7 @@
             app:layout_constraintEnd_toStartOf="@+id/pizza_size_display"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:pizzaNameDisplay="@{pizzaEntity}"
             tools:text="Name" />
 
         <TextView
@@ -37,6 +38,7 @@
             app:layout_constraintEnd_toStartOf="@+id/pizza_price_display"
             app:layout_constraintStart_toEndOf="@+id/pizza_name_display"
             app:layout_constraintTop_toTopOf="@+id/pizza_name_display"
+            app:pizzaSizeDisplay="@{pizzaEntity}"
             tools:text="Size" />
 
         <TextView
@@ -48,6 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/pizza_size_display"
             app:layout_constraintTop_toTopOf="@+id/pizza_size_display"
+            app:pizzaPriceDisplay="@{pizzaEntity}"
             tools:text="Price" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

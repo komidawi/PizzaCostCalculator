@@ -36,7 +36,7 @@ class PizzaListFragment : Fragment() {
 
         viewModel.pizzaList.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                adapter.addHeaderAndSubmitList(it)
             }
         })
 

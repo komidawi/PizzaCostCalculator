@@ -3,4 +3,5 @@
     <string name="app_start_button_text">Start app</string>
 
     <string name="all_fields_are_required">All fields are required</string>
+    <string name="pizza_list_header_text">Pizza List</string>
 </resources>

@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import com.github.komidawi.pizzacostcalculator.databinding.ListItemPizzaBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.ClassCastException
 
 private const val ITEM_VIEW_TYPE_HEADER = 0
@@ -17,6 +21,8 @@ private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class PizzaListAdapter(private val clickListener: PizzaItemListener) :
     ListAdapter<PizzaListItemType, RecyclerView.ViewHolder>(PizzaDiffCallback()) {
+
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
@@ -44,11 +50,16 @@ class PizzaListAdapter(private val clickListener: PizzaItemListener) :
      * Modifies the list by adding the header at the beginning.
      */
     fun addHeaderAndSubmitList(list: List<PizzaEntity>?) {
-        val items = when (list) {
-            null -> listOf(PizzaListItemType.Header)
-            else -> listOf(PizzaListItemType.Header) + list.map { PizzaListItemType.PizzaListItem(it) }
+        adapterScope.launch {
+            val items = when (list) {
+                null -> listOf(PizzaListItemType.Header)
+                else -> listOf(PizzaListItemType.Header) +
+                        list.map { PizzaListItemType.PizzaListItem(it) }
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
         }
-        submitList(items)
     }
 
     class PizzaItemViewHolder private constructor(private val binding: ListItemPizzaBinding) :

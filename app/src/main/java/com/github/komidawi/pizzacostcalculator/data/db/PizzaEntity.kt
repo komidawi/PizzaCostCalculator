@@ -2,6 +2,7 @@ package com.github.komidawi.pizzacostcalculator.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.math.BigDecimal
 
 @Entity(tableName = "pizza_table")
 data class PizzaEntity(
@@ -11,7 +12,7 @@ data class PizzaEntity(
 
     val name: String,
 
-    val size: Float,
+    val size: BigDecimal,
 
-    val price: Float
+    val price: BigDecimal
 )

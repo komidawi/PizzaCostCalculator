@@ -4,14 +4,14 @@
     <string name="app_start_button_text">Start app</string>
 
     <!-- Pizza List Fragment -->
-    <string name="pizza_list_fragment_title">Pizza List</string>
+    <string name="pizza_list_fragment_title">Your Pizza List</string>
     <string name="pizza_list_name_header">NAME</string>
     <string name="pizza_list_size_header">SIZE</string>
     <string name="pizza_list_price_header">PRICE</string>
 
     <!-- Add Pizza Fragment -->
-    <string name="add_pizza_fragment_title">Add new Pizza</string>
-    <string name="pizza_name_input_hint">Name</string>
+    <string name="add_pizza_fragment_title">Add Pizza</string>
+    <string name="pizza_name_input_hint">name</string>
     <string name="pizza_size_input_hint">size</string>
     <string name="pizza_price_input_hint">price</string>
     <string name="all_fields_are_required_message">All fields are required</string>

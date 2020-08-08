@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import kotlinx.coroutines.*
+import java.math.BigDecimal
 
 class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) : ViewModel() {
 
@@ -54,7 +55,7 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
         return if (currentName == null || currentSize == null || currentPrice == null) {
             null
         } else {
-            PizzaEntity(0L, currentName, currentSize.toFloat(), currentPrice.toFloat())
+            PizzaEntity(0L, currentName, BigDecimal(currentSize), BigDecimal(currentPrice))
         }
     }
 

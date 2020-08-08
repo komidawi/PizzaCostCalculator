@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
-import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
+import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 
 class PizzaListFragment : Fragment() {
 
@@ -29,26 +29,30 @@ class PizzaListFragment : Fragment() {
         viewModel = ViewModelFactory(databaseDao).create(PizzaListFragmentViewModel::class.java)
         binding.pizzaListFragmentViewModel = viewModel
 
+        setupRecyclerView()
+        setupFabOnClickListener()
+
+        binding.lifecycleOwner = this
+
+        return binding.root
+    }
+
+    private fun setupRecyclerView() {
         val adapter = PizzaListAdapter(PizzaItemListener { pizzaId ->
             Toast.makeText(context, "$pizzaId", Toast.LENGTH_SHORT).show()
         })
+        
         binding.recyclerView.adapter = adapter
 
         viewModel.pizzaList.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.addHeaderAndSubmitList(it)
-            }
+            it?.let { adapter.addHeaderAndSubmitList(it) }
         })
+    }
 
-        // Specify the current activity as the lifecycle owner of the binding. This is used so that
-        // the binding can observe LiveData updates
-        binding.lifecycleOwner = this
-
+    private fun setupFabOnClickListener() {
         binding.addPizzaFab.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())
         }
-
-        return binding.root
     }
 }

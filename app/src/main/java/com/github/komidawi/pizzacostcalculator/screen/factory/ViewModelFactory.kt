@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator.util
+package com.github.komidawi.pizzacostcalculator.screen.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

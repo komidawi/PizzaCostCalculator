@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentAddPizzaBinding
-import com.github.komidawi.pizzacostcalculator.util.ViewModelFactory
+import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 
 
 class AddPizzaFragment : Fragment() {
@@ -31,14 +31,15 @@ class AddPizzaFragment : Fragment() {
         viewModel = ViewModelFactory(databaseDao).create(AddPizzaFragmentViewModel::class.java)
         binding.addPizzaFragmentViewModel = viewModel
 
-        viewModel.navigateToPizzaListFragment.observe(viewLifecycleOwner, Observer { navigate ->
-            if (navigate) {
-                this.findNavController()
-                    .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
-                viewModel.doneNavigating()
-            }
-        })
+        setupNavigateToPizzaListObserver()
+        setupDisplayEmptyFieldToastObserver()
 
+        binding.lifecycleOwner = this
+
+        return binding.root
+    }
+
+    private fun setupDisplayEmptyFieldToastObserver() {
         viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, Observer { displayToast ->
             if (displayToast) {
                 val message = getString(R.string.all_fields_are_required)
@@ -46,9 +47,15 @@ class AddPizzaFragment : Fragment() {
                 viewModel.doneDisplayingEmptyFieldsToast()
             }
         })
+    }
 
-        binding.lifecycleOwner = this
-
-        return binding.root
+    private fun setupNavigateToPizzaListObserver() {
+        viewModel.navigateToPizzaListFragment.observe(viewLifecycleOwner, Observer { navigate ->
+            if (navigate) {
+                this.findNavController()
+                    .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
+                viewModel.doneNavigating()
+            }
+        })
     }
 }

@@ -11,5 +11,8 @@
 
     <!-- Add Pizza Fragment -->
     <string name="add_pizza_fragment_title">Add new Pizza</string>
-    <string name="all_fields_are_required">All fields are required</string>
+    <string name="pizza_name_input_hint">Name</string>
+    <string name="pizza_size_input_hint">size</string>
+    <string name="pizza_price_input_hint">price</string>
+    <string name="all_fields_are_required_message">All fields are required</string>
 </resources>

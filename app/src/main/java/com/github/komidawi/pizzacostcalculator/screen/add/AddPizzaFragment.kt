@@ -32,17 +32,17 @@ class AddPizzaFragment : Fragment() {
         binding.addPizzaFragmentViewModel = viewModel
 
         setupNavigateToPizzaListObserver()
-        setupDisplayEmptyFieldToastObserver()
+        setupDisplayEmptyFieldsToastObserver()
 
         binding.lifecycleOwner = this
 
         return binding.root
     }
 
-    private fun setupDisplayEmptyFieldToastObserver() {
+    private fun setupDisplayEmptyFieldsToastObserver() {
         viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, Observer { displayToast ->
             if (displayToast) {
-                val message = getString(R.string.all_fields_are_required)
+                val message = getString(R.string.all_fields_are_required_message)
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
                 viewModel.doneDisplayingEmptyFieldsToast()
             }

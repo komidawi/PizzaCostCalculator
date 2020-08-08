@@ -47,7 +47,7 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
         }
     }
 
-    private fun createPizza(): PizzaEntity? {
+    fun createPizza(): PizzaEntity? {
         val currentName = name.value
         val currentSize = size.value
         val currentPrice = price.value

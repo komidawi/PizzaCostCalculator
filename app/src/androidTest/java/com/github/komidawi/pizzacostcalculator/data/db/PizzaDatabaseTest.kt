@@ -10,6 +10,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 import java.lang.Exception
+import java.math.BigDecimal
 
 @RunWith(AndroidJUnit4::class)
 class PizzaDatabaseTest {
@@ -37,7 +38,7 @@ class PizzaDatabaseTest {
     fun insertAndGetPizza() {
         val name = "test_name"
         val id = 1L
-        val pizza = PizzaEntity(id, name, 123f, 456f)
+        val pizza = PizzaEntity(id, name, BigDecimal("123"), BigDecimal("456"))
 
         pizzaDatabaseDao.insert(pizza)
 

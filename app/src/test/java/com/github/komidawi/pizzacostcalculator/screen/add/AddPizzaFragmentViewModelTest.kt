@@ -1,8 +1,8 @@
 package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 import org.junit.Assert.*
 import org.junit.Before
@@ -43,27 +43,18 @@ class AddPizzaFragmentViewModelTest {
         // when
         val createdPizza = viewModel.createPizza()
 
-        // expected
+        // then
         assertNull(createdPizza)
     }
 
 
     @Test
     fun handleAddPizzaWithNullValue_triggersToastEvent() {
-        // given
-        val observer = Observer<Boolean> { }
-        viewModel.displayEmptyFieldsToast.observeForever(observer)
+        // when
+        viewModel.handleAddPizza()
 
-        try {
-            // when
-            viewModel.handleAddPizza()
-
-            // then
-            assertTrue(viewModel.displayEmptyFieldsToast.value!!)
-
-        } finally {
-            viewModel.displayEmptyFieldsToast.removeObserver(observer)
-        }
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
     }
 
     companion object {

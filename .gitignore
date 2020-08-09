@@ -381,3 +381,5 @@ obj/
 
 # End of https://www.gitignore.io/api/code,java,linux,gradle,windows,android,intellij,androidstudio
 
+
+.ignored/

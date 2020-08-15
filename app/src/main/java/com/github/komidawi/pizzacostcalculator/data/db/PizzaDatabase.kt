@@ -6,7 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [PizzaEntity::class], version = 2, exportSchema = false)
+// TODO: set exportSchema to true
+@Database(entities = [PizzaEntity::class], version = 3, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PizzaDatabase : RoomDatabase() {
 

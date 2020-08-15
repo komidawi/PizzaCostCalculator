@@ -3,17 +3,14 @@ package com.github.komidawi.pizzacostcalculator.screen.add
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.komidawi.pizzacostcalculator.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import com.github.komidawi.pizzacostcalculator.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.*
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
-import java.math.BigDecimal
 
 @ExperimentalCoroutinesApi
 class AddPizzaFragmentViewModelTest {
@@ -39,14 +36,15 @@ class AddPizzaFragmentViewModelTest {
     @Test
     fun createPizzaWithValidInput_returnsPizza() {
         // given
-        val expectedPizza = PizzaEntity(0L, testName, BigDecimal(testSize), BigDecimal(testValue))
+        setValidTestPizzaData(viewModel)
 
         // when
-        setValidTestPizzaData(viewModel)
-        val createdPizza = viewModel.createPizza()
+        val createdPizza = viewModel.createPizza()!!
 
         // then
-        assertEquals(expectedPizza, createdPizza)
+        assertEquals(testName, createdPizza.name)
+        assertEquals(testSize, createdPizza.size)
+        assertEquals(testPrice, createdPizza.price)
     }
 
     @Test
@@ -78,8 +76,10 @@ class AddPizzaFragmentViewModelTest {
         viewModel.handleAddPizza()
 
         // then
-        assertEquals(1, databaseDao.getAll().getOrAwaitValue().size)
-        assertEquals(createdPizza, databaseDao.getById(createdPizza.id))
+        val receivedPizza = databaseDao.getById(createdPizza.id)!!
+        assertEquals(testName, receivedPizza.name)
+        assertEquals(testSize, receivedPizza.size)
+        assertEquals(testPrice, receivedPizza.price)
     }
 
     @Test
@@ -94,13 +94,13 @@ class AddPizzaFragmentViewModelTest {
     companion object {
         private const val testName = "TestPizzaName"
         private const val testSize = "42"
-        private const val testValue = "30"
+        private const val testPrice = "30"
 
         fun setValidTestPizzaData(viewModel: AddPizzaFragmentViewModel) {
             viewModel.apply {
                 name.value = testName
                 size.value = testSize
-                price.value = testValue
+                price.value = testPrice
             }
         }
     }

@@ -79,17 +79,25 @@ class AddPizzaFragmentViewModelTest {
 
     @Test
     fun handleAddPizzaWithValidValue_insertsPizzaToDatabase() = runBlockingTest {
+        // given
         setValidTestPizzaData(viewModel)
         val createdPizza = viewModel.createPizza()!!
+
+        // when
         viewModel.handleAddPizza()
 
         // then
-        val receivedPizza = databaseDao.getById(createdPizza.id)
-        val all = databaseDao.getAll()
+        assertEquals(1, databaseDao.getAll().getOrAwaitValue().size)
+        assertEquals(createdPizza, databaseDao.getById(createdPizza.id))
+    }
 
-        // TODO does not work
-        assertEquals(1, all.value?.size)
-        assertEquals(createdPizza, receivedPizza)
+    @Test
+    fun handleAddPizzaWithNullValue_notInsertsPizzaToDatabase() = runBlockingTest {
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertEquals(0, databaseDao.getAll().getOrAwaitValue().size)
     }
 
     companion object {

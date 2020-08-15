@@ -1,19 +1,16 @@
 package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.github.komidawi.pizzacostcalculator.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import com.github.komidawi.pizzacostcalculator.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import java.math.BigDecimal
@@ -26,7 +23,8 @@ class AddPizzaFragmentViewModelTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    private val testDispatcher = TestCoroutineDispatcher()
+    @get:Rule
+    var mainCoroutineRule = MainCoroutineRule()
 
     private lateinit var viewModel: AddPizzaFragmentViewModel
 
@@ -34,15 +32,8 @@ class AddPizzaFragmentViewModelTest {
 
     @Before
     fun initialize() {
-        Dispatchers.setMain(testDispatcher)
         databaseDao = FakeDatabaseDao()
         viewModel = ViewModelFactory(databaseDao).create(AddPizzaFragmentViewModel::class.java)
-    }
-
-    @After
-    fun tearDownDispatcher() {
-        Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 
     @Test

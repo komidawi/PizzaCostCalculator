@@ -58,7 +58,7 @@ class AddPizzaFragmentViewModelTest {
 
 
     @Test
-    fun handleAddPizzaWithNullValue_triggersToastEvent() {
+    fun handleAddPizzaWithNullValue_triggersEmptyFieldsToastEvent() {
         // when
         viewModel.handleAddPizza()
 
@@ -80,6 +80,18 @@ class AddPizzaFragmentViewModelTest {
         assertEquals(testName, receivedPizza.name)
         assertEquals(testSize, receivedPizza.size)
         assertEquals(testPrice, receivedPizza.price)
+    }
+
+    @Test
+    fun handleAddPizzaWithValidValue_triggersNavigationEvent() = runBlockingTest {
+        // given
+        setValidTestPizzaData(viewModel)
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.navigateToPizzaListFragment.getOrAwaitValue())
     }
 
     @Test

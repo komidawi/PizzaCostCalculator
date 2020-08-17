@@ -13,27 +13,4 @@ abstract class PizzaDatabase : RoomDatabase() {
 
     abstract val pizzaDatabaseDao: PizzaDatabaseDao
 
-    companion object {
-        @Volatile
-        private var INSTANCE: PizzaDatabase? = null
-
-        fun getInstance(context: Context): PizzaDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
-
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        PizzaDatabase::class.java,
-                        "pizza_database"
-                    )
-                        .fallbackToDestructiveMigration()
-                        .build()
-                    INSTANCE = instance
-                }
-
-                return instance
-            }
-        }
-    }
 }

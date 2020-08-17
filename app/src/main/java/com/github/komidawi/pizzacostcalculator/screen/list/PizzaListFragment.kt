@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import com.github.komidawi.pizzacostcalculator.PizzaApplication
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
@@ -23,8 +24,7 @@ class PizzaListFragment : Fragment() {
     ): View? {
         binding = FragmentPizzaListBinding.inflate(inflater, container, false)
 
-        val application = requireNotNull(this.activity).application
-        val databaseDao = PizzaDatabase.getInstance(application).pizzaDatabaseDao
+        val databaseDao = (requireContext().applicationContext as PizzaApplication).pizzaDatabaseDao
 
         viewModel = ViewModelFactory(databaseDao).create(PizzaListFragmentViewModel::class.java)
         binding.pizzaListFragmentViewModel = viewModel

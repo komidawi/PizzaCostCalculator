@@ -2,6 +2,7 @@ package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.komidawi.pizzacostcalculator.MainCoroutineRule
+import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
@@ -43,8 +44,8 @@ class AddPizzaFragmentViewModelTest {
 
         // then
         assertEquals(testName, createdPizza.name)
-        assertEquals(testSize, createdPizza.size)
-        assertEquals(testPrice, createdPizza.price)
+        assertEquals(testSize.toBigDecimal(), createdPizza.size)
+        assertEquals(testPrice.toBigDecimal(), createdPizza.price)
     }
 
     @Test
@@ -78,8 +79,8 @@ class AddPizzaFragmentViewModelTest {
         // then
         val receivedPizza = databaseDao.getById(createdPizza.id)!!
         assertEquals(testName, receivedPizza.name)
-        assertEquals(testSize, receivedPizza.size)
-        assertEquals(testPrice, receivedPizza.price)
+        assertEquals(testSize.toBigDecimal(), receivedPizza.size)
+        assertEquals(testPrice.toBigDecimal(), receivedPizza.price)
     }
 
     @Test

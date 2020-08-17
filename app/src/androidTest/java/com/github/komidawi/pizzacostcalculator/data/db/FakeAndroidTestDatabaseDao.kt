@@ -1,11 +1,9 @@
-package com.github.komidawi.pizzacostcalculator.screen.add
+package com.github.komidawi.pizzacostcalculator.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 
-class FakeDatabaseDao : PizzaDatabaseDao {
+class FakeAndroidTestDatabaseDao : PizzaDatabaseDao {
 
     private val data = hashSetOf<PizzaEntity>()
 

@@ -1,10 +1,12 @@
-package com.github.komidawi.pizzacostcalculator.screen.list
+package com.github.komidawi.pizzacostcalculator.screen.add
 
+import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
@@ -18,13 +20,12 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 
-@ExperimentalCoroutinesApi
-@MediumTest
 @RunWith(AndroidJUnit4::class)
-class PizzaListFragmentTest {
+@MediumTest
+@ExperimentalCoroutinesApi
+class AddPizzaFragmentTest {
 
     private lateinit var databaseDao: PizzaDatabaseDao
 
@@ -39,19 +40,38 @@ class PizzaListFragmentTest {
         ServiceLocator.resetDatabase()
     }
 
+    @Test
+    fun insertValidPizzaDataAndClickAdd_triggersNavigation() {
+        // given
+        val scenario = launchFragmentInContainer<AddPizzaFragment>(Bundle(), R.style.AppTheme)
+        val navController = mock(NavController::class.java)
+        scenario.onFragment { Navigation.setViewNavController(it.view!!, navController) }
+
+        // and
+        onView(withId(R.id.pizza_name_input)).perform(typeText("PizzaName"))
+        onView(withId(R.id.pizza_size_input)).perform(typeText("42"))
+        onView(withId(R.id.pizza_price_input)).perform(typeText("24.99"))
+
+        // when
+        onView(withId(R.id.pizza_add_button)).perform(click())
+
+        // then
+        verify(navController)
+            .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
+    }
 
     @Test
-    fun addPizzaFabClick_triggersNavigation() = runBlockingTest {
+    fun insertNoPizzaDataAndClickAdd_notTriggersNavigation() {
         // given
-        val scenario = launchFragmentInContainer<PizzaListFragment>(themeResId = R.style.AppTheme)
+        val scenario = launchFragmentInContainer<AddPizzaFragment>(Bundle(), R.style.AppTheme)
         val navController = mock(NavController::class.java)
         scenario.onFragment { Navigation.setViewNavController(it.view!!, navController) }
 
         // when
-        onView(withId(R.id.add_pizza_fab)).perform(click())
+        onView(withId(R.id.pizza_add_button)).perform(click())
 
         // then
-        verify(navController)
-            .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())
+        verify(navController, never())
+            .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
     }
 }

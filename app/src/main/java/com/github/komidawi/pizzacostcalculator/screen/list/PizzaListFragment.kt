@@ -38,11 +38,12 @@ class PizzaListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = PizzaListAdapter(PizzaItemListener { pizzaId ->
-            Toast.makeText(context, "$pizzaId", Toast.LENGTH_SHORT).show()
-        })
-        
-        binding.recyclerView.adapter = adapter
+        val clickListener = PizzaItemListener { pizza ->
+            Toast.makeText(context, "$pizza", Toast.LENGTH_SHORT).show()
+        }
+        val adapter = PizzaListAdapter(clickListener, viewModel)
+
+        binding.pizzaListRecyclerView.adapter = adapter
 
         viewModel.pizzaList.observe(viewLifecycleOwner, Observer {
             it?.let { adapter.addHeaderAndSubmitList(it) }

@@ -12,6 +12,10 @@
         <variable
             name="clickListener"
             type="com.github.komidawi.pizzacostcalculator.screen.list.PizzaItemListener" />
+
+        <variable
+            name="viewModel"
+            type="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,12 +54,24 @@
             android:id="@+id/pizza_price_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/pizza_size_display"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pizza_remove_button"
             app:layout_constraintStart_toEndOf="@+id/pizza_size_display"
             app:layout_constraintTop_toTopOf="@+id/pizza_size_display"
             app:pizzaPriceDisplay="@{pizzaEntity}"
             tools:text="Price" />
+
+        <ImageButton
+            android:id="@+id/pizza_remove_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{() -> viewModel.onRemove(pizzaEntity)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_delete"
+            tools:ignore="ContentDescription" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

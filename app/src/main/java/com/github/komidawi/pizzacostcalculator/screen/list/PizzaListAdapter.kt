@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
-import com.github.komidawi.pizzacostcalculator.databinding.ListItemPizzaBinding
+import com.github.komidawi.pizzacostcalculator.databinding.ListItemPizzaElementBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +19,10 @@ private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
 
-class PizzaListAdapter(private val clickListener: PizzaItemListener) :
+class PizzaListAdapter(
+    private val clickListener: PizzaItemListener,
+    private val pizzaListFragmentViewModel: PizzaListFragmentViewModel
+) :
     ListAdapter<PizzaListItemType, RecyclerView.ViewHolder>(PizzaDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -35,7 +38,7 @@ class PizzaListAdapter(private val clickListener: PizzaItemListener) :
         when (holder) {
             is PizzaItemViewHolder -> {
                 val pizzaItem = getItem(position) as PizzaListItemType.PizzaListItem
-                holder.bind(clickListener, pizzaItem.pizza)
+                holder.bind(clickListener, pizzaItem.pizza, pizzaListFragmentViewModel)
             }
         }
     }
@@ -62,19 +65,24 @@ class PizzaListAdapter(private val clickListener: PizzaItemListener) :
         }
     }
 
-    class PizzaItemViewHolder private constructor(private val binding: ListItemPizzaBinding) :
+    class PizzaItemViewHolder private constructor(private val binding: ListItemPizzaElementBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(clickListener: PizzaItemListener, pizza: PizzaEntity) {
+        fun bind(
+            clickListener: PizzaItemListener,
+            pizza: PizzaEntity,
+            pizzaListFragmentViewModel: PizzaListFragmentViewModel
+        ) {
             binding.pizzaEntity = pizza
             binding.clickListener = clickListener
+            binding.viewModel = pizzaListFragmentViewModel
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): PizzaItemViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
-                val binding = ListItemPizzaBinding.inflate(inflater, parent, false)
+                val binding = ListItemPizzaElementBinding.inflate(inflater, parent, false)
                 return PizzaItemViewHolder(binding)
             }
         }
@@ -99,8 +107,8 @@ class PizzaDiffCallback : DiffUtil.ItemCallback<PizzaListItemType>() {
         oldItem == newItem
 }
 
-class PizzaItemListener(val clickListener: (pizzaId: Long) -> Unit) {
-    fun onClick(pizza: PizzaEntity) = clickListener(pizza.id)
+class PizzaItemListener(val clickListener: (pizza: PizzaEntity) -> Unit) {
+    fun onClick(pizza: PizzaEntity) = clickListener(pizza)
 }
 
 sealed class PizzaListItemType {

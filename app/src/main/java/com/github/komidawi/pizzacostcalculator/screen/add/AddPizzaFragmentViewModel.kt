@@ -20,11 +20,11 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
 
     val price = MutableLiveData<String>()
 
-    private val _navigateToPizzaListFragment = MutableLiveData<Boolean>()
+    private val _navigateToPizzaListFragment = MutableLiveData<Boolean>(false)
     val navigateToPizzaListFragment: LiveData<Boolean>
         get() = _navigateToPizzaListFragment
 
-    private val _displayEmptyFieldsToast = MutableLiveData<Boolean>()
+    private val _displayEmptyFieldsToast = MutableLiveData<Boolean>(false)
     val displayEmptyFieldsToast: LiveData<Boolean>
         get() = _displayEmptyFieldsToast
 

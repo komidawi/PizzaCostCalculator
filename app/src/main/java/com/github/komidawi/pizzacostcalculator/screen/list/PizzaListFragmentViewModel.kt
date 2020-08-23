@@ -1,9 +1,7 @@
 package com.github.komidawi.pizzacostcalculator.screen.list
 
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import kotlinx.coroutines.*
 
 class PizzaListFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) : ViewModel() {
@@ -24,21 +22,6 @@ class PizzaListFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao)
 
     val pizzaList = pizzaDatabaseDao.getAll()
 
-    val pizzaListText = Transformations.map(pizzaList) { pizzas ->
-        pizzas.toString()
-    }
-
-    fun addPizza(pizza: PizzaEntity) {
-        uiScope.launch {
-            add(pizza)
-        }
-    }
-
-    private suspend fun add(pizza: PizzaEntity) {
-        withContext(Dispatchers.IO) {
-            pizzaDatabaseDao.insert(pizza)
-        }
-    }
 
     fun onClear() {
         uiScope.launch {

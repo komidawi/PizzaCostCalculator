@@ -40,7 +40,7 @@ class AddPizzaFragmentViewModelTest {
     @Test
     fun createPizzaWithValidInput_returnsPizza() {
         // given
-        setValidTestPizzaData(viewModel)
+        setValidTestPizzaData()
 
         // when
         val createdPizza = viewModel.createPizza()!!
@@ -61,99 +61,9 @@ class AddPizzaFragmentViewModelTest {
     }
 
     @Test
-    fun handleAddPizzaWithNullName_triggersEmptyFieldsToastEvent() {
+    fun handleAddPizzaWithValidValue_insertsPizzaToDatabase() = mainCoroutineRule.runBlockingTest {
         // given
-        viewModel.apply {
-            name.value = null
-            size.value = testSize
-            price.value = testPrice
-        }
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithNullSize_triggersEmptyFieldsToastEvent() {
-        // given
-        viewModel.apply {
-            name.value = testSize
-            size.value = null
-            price.value = testPrice
-        }
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithNullPrice_triggersEmptyFieldsToastEvent() {
-        // given
-        viewModel.apply {
-            name.value = testName
-            size.value = testSize
-            price.value = null
-        }
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithEmptyName_triggersEmptyFieldsToastEvent() {
-        // given
-        viewModel.name.value = ""
-        viewModel.size.value = testSize
-        viewModel.price.value = testPrice
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithEmptySize_triggersEmptyFieldsToastEvent() {
-        // given
-        viewModel.name.value = testName
-        viewModel.size.value = ""
-        viewModel.price.value = testPrice
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithEmptyPrice_triggersEmptyFieldsToastEvent() {
-        // given
-        viewModel.name.value = testName
-        viewModel.size.value = testSize
-        viewModel.price.value = ""
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithValidValue_insertsPizzaToDatabase() = runBlockingTest {
-        // given
-        setValidTestPizzaData(viewModel)
+        setValidTestPizzaData()
         val createdPizza = viewModel.createPizza()!!
 
         // when
@@ -167,19 +77,20 @@ class AddPizzaFragmentViewModelTest {
     }
 
     @Test
-    fun handleAddPizzaWithValidValue_triggersNavigationEvent() = runBlockingTest {
+    fun handleAddPizzaWithValidValue_triggersNavigationEvent() = mainCoroutineRule.runBlockingTest {
         // given
-        setValidTestPizzaData(viewModel)
+        setValidTestPizzaData()
 
         // when
         viewModel.handleAddPizza()
+        Thread.sleep(1) // TODO: fix it - currently no idea how to make it work
 
         // then
         assertTrue(viewModel.navigateToPizzaListFragment.getOrAwaitValue())
     }
 
     @Test
-    fun handleAddPizzaWithNullValue_notInsertsPizzaToDatabase() = runBlockingTest {
+    fun handleAddPizzaWithNullValue_notInsertsPizzaToDatabase() = mainCoroutineRule.runBlockingTest {
         // when
         viewModel.handleAddPizza()
 
@@ -187,12 +98,94 @@ class AddPizzaFragmentViewModelTest {
         assertEquals(0, databaseDao.getAll().getOrAwaitValue().size)
     }
 
+    @Test
+    fun handleAddPizzaWithNullValue_notTriggersNavigationEvent() = mainCoroutineRule.runBlockingTest {
+        // when
+        viewModel.handleAddPizza()
 
-    private fun setValidTestPizzaData(viewModel: AddPizzaFragmentViewModel) {
-        viewModel.apply {
-            name.value = testName
-            size.value = testSize
-            price.value = testPrice
-        }
+        // then
+        assertFalse(viewModel.navigateToPizzaListFragment.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithNullName_triggersEmptyFieldsToastEvent() {
+        // given
+        setPizzaData(null, testSize, testPrice)
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithNullSize_triggersEmptyFieldsToastEvent() {
+        // given
+        setPizzaData(testSize, null, testPrice)
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithNullPrice_triggersEmptyFieldsToastEvent() {
+        // given
+        setPizzaData(testName, testSize, null)
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithEmptyName_triggersEmptyFieldsToastEvent() {
+        // given
+        setPizzaData("", testSize, testPrice)
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithEmptySize_triggersEmptyFieldsToastEvent() {
+        // given
+        setPizzaData(testName, "", testPrice)
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithEmptyPrice_triggersEmptyFieldsToastEvent() {
+        // given
+        setPizzaData(testName, testSize, "")
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    private fun setPizzaData(name: String? = null, size: String? = null, price: String? = null) {
+        viewModel.name.value = name
+        viewModel.size.value = size
+        viewModel.price.value = price
+    }
+
+    private fun setValidTestPizzaData() {
+        setPizzaData(testName, testSize, testPrice)
     }
 }

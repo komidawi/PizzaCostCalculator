@@ -1,10 +1,13 @@
 package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.github.komidawi.pizzacostcalculator.MainCoroutineRule
+import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
-import com.github.komidawi.pizzacostcalculator.getOrAwaitValue
+import com.github.komidawi.pizzacostcalculator.helper.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -59,7 +62,88 @@ class AddPizzaFragmentViewModelTest {
 
 
     @Test
-    fun handleAddPizzaWithNullValue_triggersEmptyFieldsToastEvent() {
+    fun handleAddPizzaWithNullName_triggersEmptyFieldsToastEvent() {
+        // given
+        viewModel.apply {
+            name.value = null
+            size.value = testSize
+            price.value = testPrice
+        }
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithNullSize_triggersEmptyFieldsToastEvent() {
+        // given
+        viewModel.apply {
+            name.value = testSize
+            size.value = null
+            price.value = testPrice
+        }
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithNullPrice_triggersEmptyFieldsToastEvent() {
+        // given
+        viewModel.apply {
+            name.value = testName
+            size.value = testSize
+            price.value = null
+        }
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithEmptyName_triggersEmptyFieldsToastEvent() {
+        // given
+        viewModel.name.value = ""
+        viewModel.size.value = testSize
+        viewModel.price.value = testPrice
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithEmptySize_triggersEmptyFieldsToastEvent() {
+        // given
+        viewModel.name.value = testName
+        viewModel.size.value = ""
+        viewModel.price.value = testPrice
+
+        // when
+        viewModel.handleAddPizza()
+
+        // then
+        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
+    }
+
+    @Test
+    fun handleAddPizzaWithEmptyPrice_triggersEmptyFieldsToastEvent() {
+        // given
+        viewModel.name.value = testName
+        viewModel.size.value = testSize
+        viewModel.price.value = ""
+
         // when
         viewModel.handleAddPizza()
 
@@ -104,17 +188,12 @@ class AddPizzaFragmentViewModelTest {
         assertEquals(0, databaseDao.getAll().getOrAwaitValue().size)
     }
 
-    companion object {
-        private const val testName = "TestPizzaName"
-        private const val testSize = "42"
-        private const val testPrice = "30"
 
-        fun setValidTestPizzaData(viewModel: AddPizzaFragmentViewModel) {
-            viewModel.apply {
-                name.value = testName
-                size.value = testSize
-                price.value = testPrice
-            }
+    private fun setValidTestPizzaData(viewModel: AddPizzaFragmentViewModel) {
+        viewModel.apply {
+            name.value = testName
+            size.value = testSize
+            price.value = testPrice
         }
     }
 }

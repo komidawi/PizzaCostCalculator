@@ -52,7 +52,7 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
         val currentSize = size.value
         val currentPrice = price.value
 
-        return if (currentName == null || currentSize == null || currentPrice == null) {
+        return if (currentName.isNullOrEmpty() || currentSize.isNullOrEmpty() || currentPrice.isNullOrEmpty()) {
             null
         } else {
             PizzaEntity(currentName, BigDecimal(currentSize), BigDecimal(currentPrice))

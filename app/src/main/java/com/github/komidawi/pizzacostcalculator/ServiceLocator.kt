@@ -52,7 +52,9 @@ object ServiceLocator {
             context.applicationContext,
             PizzaDatabase::class.java,
             "pizza_database"
-        ).build()
+        )
+            .fallbackToDestructiveMigration() // TODO: add safe migrations
+            .build()
         database = result
         return result
     }

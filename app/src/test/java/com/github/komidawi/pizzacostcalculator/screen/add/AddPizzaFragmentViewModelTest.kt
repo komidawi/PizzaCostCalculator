@@ -60,7 +60,6 @@ class AddPizzaFragmentViewModelTest {
         assertNull(createdPizza)
     }
 
-
     @Test
     fun handleAddPizzaWithNullName_triggersEmptyFieldsToastEvent() {
         // given

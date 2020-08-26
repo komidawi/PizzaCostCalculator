@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator
+package com.github.komidawi.pizzacostcalculator.helper
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData

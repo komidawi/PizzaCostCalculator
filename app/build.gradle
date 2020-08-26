@@ -92,17 +92,10 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    // Contains testing code for more advanced views, such as DatePicker and RecyclerView
     testImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     testImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
-
-    // Dependencies for Android unit tests
-    androidTestImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
-    // Enables Mockito to generate objects during runtime on Android
-    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion"
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
     // AndroidX Test - JVM testing
     testImplementation "androidx.test:core:$androidXTestCoreVersion"
@@ -114,6 +107,14 @@ dependencies {
     debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     implementation "androidx.test:core:$androidXTestCoreVersion"
     implementation "androidx.fragment:fragment:$fragmentVersion"
+
+    // Dependencies for Android unit tests
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    // Enables Mockito to generate objects during runtime on Android
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
     // AndroidX Test - Instrumented testing
     androidTestImplementation "androidx.test:core:$androidXTestCoreVersion"
@@ -127,9 +128,13 @@ dependencies {
     // Contains testing code for more advanced views, such as DatePicker and RecyclerView
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    // To properly handle writing E2E tests that involve both long running operations and the data binding library.
     androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
+    // The following Espresso dependency can be either "implementation"or "androidTestImplementation",
+    // depending on whether you want the dependency
+    // to appear on your APK's compile classpath or the test APK classpath.
+    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
     androidTestImplementation "org.robolectric:annotations:$robolectricVersion"
-    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
     // Resolve conflicts between main and test APK:
     androidTestImplementation "androidx.annotation:annotation:$androidXAnnotations"

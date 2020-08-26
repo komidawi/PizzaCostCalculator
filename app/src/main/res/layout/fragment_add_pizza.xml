@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="addPizzaFragmentViewModel"
+            name="viewModel"
             type="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModel" />
     </data>
 
@@ -36,7 +36,7 @@
                 android:hint="@string/pizza_name_input_hint"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
-                android:text="@={addPizzaFragmentViewModel.name}" />
+                android:text="@={viewModel.name}" />
 
             <EditText
                 android:id="@+id/pizza_size_input"
@@ -50,7 +50,7 @@
                 android:hint="@string/pizza_size_input_hint"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
-                android:text="@={addPizzaFragmentViewModel.size}" />
+                android:text="@={viewModel.size}" />
 
             <EditText
                 android:id="@+id/pizza_price_input"
@@ -64,7 +64,19 @@
                 android:hint="@string/pizza_price_input_hint"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
-                android:text="@={addPizzaFragmentViewModel.price}" />
+                android:text="@={viewModel.price}" />
+
+            <TextView
+                android:id="@+id/pizza_ratio_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{viewModel.ratio}"
+                android:textAlignment="center" />
 
             <Button
                 android:id="@+id/pizza_add_button"
@@ -75,7 +87,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:onClick="@{() -> addPizzaFragmentViewModel.handleAddPizza()}"
+                android:onClick="@{() -> viewModel.handleAddPizza()}"
                 android:text="Add pizza!" />
         </LinearLayout>
 

@@ -3,6 +3,8 @@ package com.github.komidawi.pizzacostcalculator.screen.add
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import kotlinx.coroutines.*
@@ -19,6 +21,10 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
     val size = MutableLiveData<String>()
 
     val price = MutableLiveData<String>()
+
+    private val _ratio = MutableLiveData<BigDecimal>(BigDecimal.ZERO)
+    val ratio: LiveData<String>
+        get() = _ratio.map { it?.toString() ?: "n/a" }
 
     private val _navigateToPizzaListFragment = MutableLiveData<Boolean>(false)
     val navigateToPizzaListFragment: LiveData<Boolean>
@@ -56,6 +62,17 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
             null
         } else {
             PizzaEntity(currentName, BigDecimal(currentSize), BigDecimal(currentPrice))
+        }
+    }
+
+    fun calculateRatio(): BigDecimal {
+        return if (price.value != null && !size.value.isNullOrEmpty() && BigDecimal(size.value) != BigDecimal.ZERO) {
+            CostCalculator.calculateRatioPerSqMeter(
+                BigDecimal(size.value),
+                BigDecimal(price.value)
+            )
+        } else {
+            BigDecimal.ZERO
         }
     }
 

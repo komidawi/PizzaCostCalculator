@@ -7,12 +7,14 @@ object CostCalculator {
 
     private val sqCentimetersInSqMeter = BigDecimal(10000)
 
-    fun calculateRatioPerSqMeter(pizza: PizzaEntity): BigDecimal {
-        val d = pizza.size
-        val r = d / BigDecimal(2)
+    fun calculateRatioPerSqMeter(pizza: PizzaEntity): BigDecimal =
+        calculateRatioPerSqMeter(pizza.size, pizza.price)
+
+    fun calculateRatioPerSqMeter(size: BigDecimal, price: BigDecimal): BigDecimal {
+        val r = size / BigDecimal(2)
         val areaInSqCentimeters = BigDecimal(Math.PI) * r.pow(2)
         val areaInSqMeters = areaInSqCentimeters / sqCentimetersInSqMeter
 
-        return pizza.price / areaInSqMeters
+        return price / areaInSqMeters
     }
 }

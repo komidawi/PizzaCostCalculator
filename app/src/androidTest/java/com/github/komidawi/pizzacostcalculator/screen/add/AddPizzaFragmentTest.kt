@@ -5,8 +5,7 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
@@ -51,6 +50,7 @@ class AddPizzaFragmentTest {
         onView(withId(R.id.pizza_name_input)).perform(typeText("PizzaName"))
         onView(withId(R.id.pizza_size_input)).perform(typeText("42"))
         onView(withId(R.id.pizza_price_input)).perform(typeText("24.99"))
+            .perform(closeSoftKeyboard())
 
         // when
         onView(withId(R.id.pizza_add_button)).perform(click())

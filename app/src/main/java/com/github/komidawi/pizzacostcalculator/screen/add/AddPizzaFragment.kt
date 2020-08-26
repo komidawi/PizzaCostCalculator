@@ -29,7 +29,7 @@ class AddPizzaFragment : Fragment() {
         val databaseDao = (requireContext().applicationContext as PizzaApplication).pizzaDatabaseDao
 
         viewModel = ViewModelFactory(databaseDao).create(AddPizzaFragmentViewModel::class.java)
-        binding.addPizzaFragmentViewModel = viewModel
+        binding.viewModel = viewModel
 
         setupNavigateToPizzaListObserver()
         setupDisplayEmptyFieldsToastObserver()

@@ -1,9 +1,11 @@
 package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.delta
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatio
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
@@ -15,6 +17,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.math.BigDecimal
 
 @ExperimentalCoroutinesApi
 class AddPizzaFragmentViewModelTest {
@@ -90,21 +93,71 @@ class AddPizzaFragmentViewModelTest {
     }
 
     @Test
-    fun handleAddPizzaWithNullValue_notInsertsPizzaToDatabase() = mainCoroutineRule.runBlockingTest {
+    fun handleAddPizzaWithNullValue_notInsertsPizzaToDatabase() =
+        mainCoroutineRule.runBlockingTest {
+            // when
+            viewModel.handleAddPizza()
+
+            // then
+            assertEquals(0, databaseDao.getAll().getOrAwaitValue().size)
+        }
+
+    @Test
+    fun handleAddPizzaWithNullValue_notTriggersNavigationEvent() =
+        mainCoroutineRule.runBlockingTest {
+            // when
+            viewModel.handleAddPizza()
+
+            // then
+            assertFalse(viewModel.navigateToPizzaListFragment.getOrAwaitValue())
+        }
+
+    @Test
+    fun calculateRatioWithValidValue_returnsRatio() {
+        // given
+        setPizzaData(size = testSize, price = testPrice)
+
         // when
-        viewModel.handleAddPizza()
+        val ratio = viewModel.calculateRatio()
 
         // then
-        assertEquals(0, databaseDao.getAll().getOrAwaitValue().size)
+        assertEquals(testRatio, ratio.toFloat(), delta)
     }
 
     @Test
-    fun handleAddPizzaWithNullValue_notTriggersNavigationEvent() = mainCoroutineRule.runBlockingTest {
+    fun calculateRatioWhenNullSize_returnsZero() {
+        // given
+        setPizzaData(price = testPrice)
+
         // when
-        viewModel.handleAddPizza()
+        val ratio = viewModel.calculateRatio()
 
         // then
-        assertFalse(viewModel.navigateToPizzaListFragment.getOrAwaitValue())
+        assertEquals(BigDecimal.ZERO, ratio)
+    }
+
+    @Test
+    fun calculateRatioWhenEmptySize_returnsZero() {
+        // given
+        setPizzaData(price = "")
+
+        // when
+        val ratio = viewModel.calculateRatio()
+
+        // then
+        assertEquals(BigDecimal.ZERO, ratio)
+    }
+
+    @Test
+    fun calculateRatioWhenZeroSize_returnsZero() {
+        // given
+        setPizzaData(price = "0")
+
+        // when
+        val ratio = viewModel.calculateRatio()
+
+        // then
+        assertEquals(BigDecimal.ZERO, ratio)
     }
 
     @Test

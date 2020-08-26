@@ -31,4 +31,9 @@ data class PizzaEntity(
     constructor(name: String, size: String, price: String) :
             this(name, BigDecimal(size), BigDecimal(price))
 
+    /**
+     * Overloaded constructor with empty name for testing purposes
+     */
+    constructor(size: Int, price: String) :
+            this("", BigDecimal(size), BigDecimal(price))
 }

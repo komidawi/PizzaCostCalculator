@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -12,6 +13,7 @@ import androidx.test.filters.LargeTest
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,7 +39,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun e2e_test() = runBlocking {
+    fun addNewPizza_displaysPizzaInList() = runBlocking {
         // given
         val testPizzaName = "TestPizzaName"
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
@@ -53,6 +55,26 @@ class MainActivityTest {
 
         // then
         onView(withText(testPizzaName)).check(matches(isDisplayed()))
+
+        // cleanup
+        activityScenario.close()
+    }
+
+    @Test
+    fun removePizzaButton_removesPizzaFromList() = runBlocking {
+        // given
+        val pizza = AndroidTestPizzaData.createTestPizza()
+        pizzaDatabaseDao.insert(pizza)
+
+        // and
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        // when
+        onView(withId(R.id.pizza_remove_button)).perform(click())
+
+        // then
+        onView(withId(R.id.list_item_pizza_element_root)).check(doesNotExist())
+        assertNull(pizzaDatabaseDao.getById(pizza.id))
 
         // cleanup
         activityScenario.close()

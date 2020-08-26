@@ -18,4 +18,17 @@ data class PizzaEntity(
 
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L
-)
+) {
+    /**
+     * Overloaded constructor to make providing numbers easier
+     */
+    constructor(name: String, size: Int, price: String) :
+            this(name, BigDecimal(size), BigDecimal(price))
+
+    /**
+     * Overloaded constructor to make providing numbers easier
+     */
+    constructor(name: String, size: String, price: String) :
+            this(name, BigDecimal(size), BigDecimal(price))
+
+}

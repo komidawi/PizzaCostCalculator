@@ -5,9 +5,10 @@
 
     <!-- Pizza List Fragment -->
     <string name="pizza_list_fragment_title">Your Pizza List</string>
-    <string name="pizza_list_name_header">NAME</string>
-    <string name="pizza_list_size_header">SIZE</string>
-    <string name="pizza_list_price_header">PRICE</string>
+    <string name="pizza_list_name_header">Name</string>
+    <string name="pizza_list_size_header">Size</string>
+    <string name="pizza_list_price_header">Price</string>
+    <string name="pizza_list_remove_header">Remove</string>
 
     <!-- Add Pizza Fragment -->
     <string name="add_pizza_fragment_title">Add Pizza</string>

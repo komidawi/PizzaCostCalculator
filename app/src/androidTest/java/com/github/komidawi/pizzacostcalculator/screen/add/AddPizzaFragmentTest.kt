@@ -4,11 +4,19 @@ import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
+import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testName
+import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testPrice
+import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testSize
+import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testRatioDisplayText
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
 import com.github.komidawi.pizzacostcalculator.data.db.FakeAndroidTestDatabaseDao
@@ -47,10 +55,8 @@ class AddPizzaFragmentTest {
         scenario.onFragment { Navigation.setViewNavController(it.view!!, navController) }
 
         // and
-        onView(withId(R.id.pizza_name_input)).perform(typeText("PizzaName"))
-        onView(withId(R.id.pizza_size_input)).perform(typeText("42"))
-        onView(withId(R.id.pizza_price_input)).perform(typeText("24.99"))
-            .perform(closeSoftKeyboard())
+        provideTestPizzaData()
+        closeSoftKeyboard()
 
         // when
         onView(withId(R.id.pizza_add_button)).perform(click())
@@ -73,5 +79,23 @@ class AddPizzaFragmentTest {
         // then
         verify(navController, never())
             .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
+    }
+
+    @Test
+    fun insertValidPizzaData_updatesRatioValue() {
+        // given
+        launchFragmentInContainer<AddPizzaFragment>(Bundle(), R.style.AppTheme)
+
+        // when
+        provideTestPizzaData()
+
+        // then
+        onView(withId(R.id.pizza_ratio_display)).check(matches(withText(testRatioDisplayText)))
+    }
+
+    private fun provideTestPizzaData() {
+        onView(withId(R.id.pizza_name_input)).perform(typeText(testName))
+        onView(withId(R.id.pizza_size_input)).perform(typeText(testSize))
+        onView(withId(R.id.pizza_price_input)).perform(typeText(testPrice))
     }
 }

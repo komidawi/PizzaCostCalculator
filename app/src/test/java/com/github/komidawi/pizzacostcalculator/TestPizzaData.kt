@@ -1,7 +1,6 @@
 package com.github.komidawi.pizzacostcalculator
 
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
-import java.math.BigDecimal
 
 object TestPizzaData {
     const val testName = "TestPizzaName"

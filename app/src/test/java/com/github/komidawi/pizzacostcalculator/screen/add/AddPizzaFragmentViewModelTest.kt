@@ -86,7 +86,7 @@ class AddPizzaFragmentViewModelTest {
 
         // when
         viewModel.handleAddPizza()
-        Thread.sleep(1) // TODO: fix it - currently no idea how to make it work
+        Thread.sleep(10) // TODO: fix it - currently no idea how to make it work
 
         // then
         assertTrue(viewModel.navigateToPizzaListFragment.getOrAwaitValue())

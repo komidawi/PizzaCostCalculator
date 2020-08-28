@@ -7,5 +7,7 @@ object AndroidTestPizzaData {
     const val testSize = "42"
     const val testPrice = "24.99"
 
+    const val testRatioDisplayText = "180"
+
     fun createTestPizza(): PizzaEntity = PizzaEntity(testName, testSize, testPrice)
 }

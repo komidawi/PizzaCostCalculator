@@ -9,6 +9,7 @@ import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import kotlinx.coroutines.*
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) : ViewModel() {
 
@@ -24,7 +25,7 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
 
     private val _ratio = MutableLiveData<BigDecimal>(BigDecimal.ZERO)
     val ratio: LiveData<String>
-        get() = _ratio.map { it?.toString() ?: "n/a" }
+        get() = _ratio.map { it.setScale(0, RoundingMode.HALF_UP).toString() }
 
     private val _navigateToPizzaListFragment = MutableLiveData<Boolean>(false)
     val navigateToPizzaListFragment: LiveData<Boolean>
@@ -66,7 +67,7 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
     }
 
     fun calculateRatio(): BigDecimal {
-        return if (price.value != null && !size.value.isNullOrEmpty() && BigDecimal(size.value) != BigDecimal.ZERO) {
+        return if (!price.value.isNullOrEmpty() && !size.value.isNullOrEmpty() && BigDecimal(size.value) != BigDecimal.ZERO) {
             CostCalculator.calculateRatioPerSqMeter(
                 BigDecimal(size.value),
                 BigDecimal(price.value)
@@ -74,6 +75,10 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
         } else {
             BigDecimal.ZERO
         }
+    }
+
+    fun updateRatioDisplay() {
+        _ratio.value = calculateRatio()
     }
 
     fun doneNavigating() {

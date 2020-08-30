@@ -90,7 +90,7 @@ class AddPizzaFragmentTest {
         provideTestPizzaData()
 
         // then
-        onView(withId(R.id.pizza_ratio_display)).check(matches(withText(testRatioDisplayText)))
+        onView(withId(R.id.list_pizza_ratio_display)).check(matches(withText(testRatioDisplayText)))
     }
 
     private fun provideTestPizzaData() {

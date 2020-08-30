@@ -7,6 +7,7 @@ import androidx.lifecycle.map
 import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
 import kotlinx.coroutines.*
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -62,7 +63,7 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
         return if (currentName.isNullOrEmpty() || currentSize.isNullOrEmpty() || currentPrice.isNullOrEmpty()) {
             null
         } else {
-            PizzaEntity(currentName, BigDecimal(currentSize), BigDecimal(currentPrice))
+            PizzaEntityFactory.create(currentName, currentSize, currentPrice)
         }
     }
 

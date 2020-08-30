@@ -2,7 +2,6 @@ package com.github.komidawi.pizzacostcalculator.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import java.util.*
 
 @Dao
 interface PizzaDatabaseDao {

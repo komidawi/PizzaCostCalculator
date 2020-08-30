@@ -39,7 +39,7 @@ class PizzaDatabaseDaoTest {
     @Test
     fun insertPizzaAndGetByUuid() = runBlockingTest {
         // given
-        val pizza = PizzaEntity("Name", BigDecimal("42"), BigDecimal("24.99"))
+        val pizza = PizzaEntityFactory.create("Name", "42", "24.99")
 
         // when
         database.pizzaDatabaseDao.insert(pizza)

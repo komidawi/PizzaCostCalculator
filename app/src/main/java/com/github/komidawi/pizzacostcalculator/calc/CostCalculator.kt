@@ -12,7 +12,7 @@ object CostCalculator {
 
     fun calculateRatioPerSqMeter(size: BigDecimal, price: BigDecimal): BigDecimal {
         val r = size / BigDecimal(2)
-        val areaInSqCentimeters = BigDecimal(Math.PI) * r.pow(2)
+        val areaInSqCentimeters = BigDecimal.valueOf(Math.PI) * r.pow(2)
         val areaInSqMeters = areaInSqCentimeters / sqCentimetersInSqMeter
 
         return price / areaInSqMeters

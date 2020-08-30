@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -35,7 +36,7 @@ class PizzaListFragmentViewModelTest {
     @Test
     fun onRemove_removesPizzaFromDatabase() = runBlockingTest {
         // given
-        val pizzaEntity = PizzaEntity("RemovePizzaTest", 1, "1")
+        val pizzaEntity = PizzaEntityFactory.create("RemovePizzaTest", 1, "1")
         databaseDao.insert(pizzaEntity)
 
         // when

@@ -23,3 +23,8 @@ fun TextView.setPizzaSizeDisplay(pizza: PizzaEntity?) {
 fun TextView.setPizzaPriceDisplay(pizza: PizzaEntity?) {
     pizza?.let { text = pizza.price.toString() }
 }
+
+@BindingAdapter("listPizzaRatioDisplay")
+fun TextView.setListPizzaRatioDisplay(pizza: PizzaEntity?){
+    pizza?.let { text = pizza.ratio.toString() }
+}

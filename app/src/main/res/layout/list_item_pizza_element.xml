@@ -42,6 +42,10 @@
             app:pizzaPriceDisplay="@{pizzaEntity}"
             tools:text="Price" />
 
+        <TextView
+            android:id="@+id/list_pizza_ratio_display"
+            style="@style/PizzaListItemElementText" />
+
         <ImageButton
             android:id="@+id/pizza_remove_button"
             style="@style/PizzaListItemElementText"

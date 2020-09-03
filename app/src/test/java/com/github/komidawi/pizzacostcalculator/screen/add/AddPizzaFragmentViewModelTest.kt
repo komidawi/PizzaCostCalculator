@@ -69,6 +69,8 @@ class AddPizzaFragmentViewModelTest {
         // when
         viewModel.handleAddPizza()
 
+        Thread.sleep(100) // TODO: fix
+
         // then
         val receivedPizza = databaseDao.getById(createdPizza.id)!!
         assertEquals(testName, receivedPizza.name)
@@ -83,7 +85,7 @@ class AddPizzaFragmentViewModelTest {
 
         // when
         viewModel.handleAddPizza()
-        Thread.sleep(1) // TODO: fix it - currently no idea how to make it work
+        Thread.sleep(100) // TODO: fix
 
         // then
         assertTrue(viewModel.navigateToPizzaListFragment.getOrAwaitValue())

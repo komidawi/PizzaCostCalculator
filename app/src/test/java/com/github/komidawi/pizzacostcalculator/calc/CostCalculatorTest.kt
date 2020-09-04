@@ -17,6 +17,6 @@ class CostCalculatorTest {
         val ratio = CostCalculator.calculateRatioPerSqMeter(pizza)
 
         // then
-        assertEquals(180.37560f, ratio.toFloat(), delta)
+        assertEquals(180.37560, ratio.toDouble(), delta)
     }
 }

@@ -121,7 +121,7 @@ class AddPizzaFragmentViewModelTest {
         val ratio = viewModel.calculateRatio()
 
         // then
-        assertEquals(testRatio, ratio.toFloat(), delta)
+        assertEquals(testRatio, ratio.toDouble(), delta)
     }
 
     @Test

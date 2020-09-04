@@ -25,6 +25,6 @@ fun TextView.setPizzaPriceDisplay(pizza: PizzaEntity?) {
 }
 
 @BindingAdapter("listPizzaRatioDisplay")
-fun TextView.setListPizzaRatioDisplay(pizza: PizzaEntity?){
-    pizza?.let { text = pizza.ratio.toString() }
+fun TextView.setListPizzaRatioDisplay(pizza: PizzaEntity?) {
+    pizza?.let { text = String.format("%.0f", pizza.ratio.toFloat()) }
 }

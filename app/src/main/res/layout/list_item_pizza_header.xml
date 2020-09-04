@@ -23,6 +23,11 @@
         android:text="@string/pizza_list_price_header" />
 
     <TextView
+        android:id="@+id/list_pizza_ratio_header"
+        style="@style/PizzaListItemHeaderText"
+        android:text="@string/pizza_list_ratio_header" />
+
+    <TextView
         android:id="@+id/pizza_remove_header"
         style="@style/PizzaListItemHeaderText"
         android:text="@string/pizza_list_remove_header" />

@@ -44,7 +44,9 @@
 
         <TextView
             android:id="@+id/list_pizza_ratio_display"
-            style="@style/PizzaListItemElementText" />
+            style="@style/PizzaListItemElementText"
+            app:listPizzaRatioDisplay="@{pizzaEntity}"
+            tools:text="Ratio" />
 
         <ImageButton
             android:id="@+id/pizza_remove_button"

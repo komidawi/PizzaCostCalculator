@@ -43,7 +43,7 @@ class PizzaListFragmentViewModelTest {
         viewModel.onRemove(pizzaEntity)
 
         // then
-        Thread.sleep(5) // TODO: fix concurrency issue
+        Thread.sleep(100) // TODO: fix
         assertNull(databaseDao.getById(pizzaEntity.id))
     }
 }

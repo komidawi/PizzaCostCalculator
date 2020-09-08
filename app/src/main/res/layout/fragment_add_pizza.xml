@@ -75,8 +75,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="@{viewModel.ratio}"
-                android:textAlignment="center" />
+                android:text="@{@string/pizza_ratio_display_text(viewModel.ratio)}"
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/pizza_add_button"
@@ -88,7 +89,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:onClick="@{() -> viewModel.handleAddPizza()}"
-                android:text="Add pizza!" />
+                android:text="@string/pizza_add_button_text" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

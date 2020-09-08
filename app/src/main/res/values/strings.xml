@@ -17,5 +17,7 @@
     <string name="pizza_name_input_hint">name</string>
     <string name="pizza_size_input_hint">size</string>
     <string name="pizza_price_input_hint">price</string>
+    <string name="pizza_ratio_display_text">Ratio: %s zł/m^2</string>
+    <string name="pizza_add_button_text">Add pizza!</string>
     <string name="all_fields_are_required_message">All fields are required</string>
 </resources>

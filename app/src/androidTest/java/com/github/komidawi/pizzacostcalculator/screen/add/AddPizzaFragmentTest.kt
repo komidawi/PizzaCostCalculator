@@ -23,6 +23,7 @@ import com.github.komidawi.pizzacostcalculator.data.db.FakeAndroidTestDatabaseDa
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.hamcrest.core.StringContains.containsString
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -88,9 +89,11 @@ class AddPizzaFragmentTest {
 
         // when
         provideTestPizzaData()
+        closeSoftKeyboard()
 
         // then
-        onView(withId(R.id.list_pizza_ratio_display)).check(matches(withText(testRatioDisplayText)))
+        onView(withId(R.id.list_pizza_ratio_display))
+            .check(matches(withText(containsString(testRatioDisplayText))))
     }
 
     private fun provideTestPizzaData() {

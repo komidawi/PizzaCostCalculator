@@ -63,6 +63,8 @@ class PizzaListFragmentTest {
         // given
         val pizza = AndroidTestPizzaData.createTestPizza()
         databaseDao.insert(pizza)
+
+        // and
         launchFragmentInContainer<PizzaListFragment>(themeResId = R.style.AppTheme)
 
         // when

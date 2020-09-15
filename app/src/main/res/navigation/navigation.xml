@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/pizzaListFragment">
+
+    <fragment
+        android:id="@+id/pizzaListFragment"
+        android:name="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragment"
+        android:label="@string/pizza_list_fragment_title"
+        tools:layout="@layout/fragment_pizza_list">
+        <action
+            android:id="@+id/action_pizzaListFragment_to_addPizzaFragment"
+            app:destination="@id/addPizzaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPizzaFragment"
+        android:name="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragment"
+        android:label="@string/add_pizza_fragment_title"
+        tools:layout="@layout/fragment_add_pizza">
+        <action
+            android:id="@+id/action_addPizzaFragment_to_pizzaListFragment"
+            app:destination="@id/pizzaListFragment"
+            app:popUpTo="@id/pizzaListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

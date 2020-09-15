@@ -1,3 +1,22 @@
 <resources>
+    <!-- Main -->
     <string name="app_name">Pizza Cost Calculator</string>
+
+    <!-- Pizza List Fragment -->
+    <string name="pizza_list_fragment_title">Your Pizza List</string>
+    <string name="pizza_list_name_header">Name</string>
+    <string name="pizza_list_size_header">Size</string>
+    <string name="pizza_list_price_header">Price</string>
+    <string name="pizza_list_ratio_header">Ratio</string>
+    <string name="pizza_list_remove_header">Remove</string>
+    <string name="pizza_list_clear_button">Clear data</string>
+
+    <!-- Add Pizza Fragment -->
+    <string name="add_pizza_fragment_title">Add Pizza</string>
+    <string name="pizza_name_input_hint">name</string>
+    <string name="pizza_size_input_hint">size</string>
+    <string name="pizza_price_input_hint">price</string>
+    <string name="pizza_ratio_display_text">Ratio: %s zł/m^2</string>
+    <string name="pizza_add_button_text">Add pizza!</string>
+    <string name="all_fields_are_required_message">All fields are required</string>
 </resources>

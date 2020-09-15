@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pizzaEntity"
+            type="com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity" />
+
+        <variable
+            name="clickListener"
+            type="com.github.komidawi.pizzacostcalculator.screen.list.PizzaItemListener" />
+
+        <variable
+            name="viewModel"
+            type="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/list_item_pizza_element_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(pizzaEntity)}">
+
+        <TextView
+            android:id="@+id/pizza_name_display"
+            style="@style/PizzaListItemElementText"
+            app:pizzaNameDisplay="@{pizzaEntity}"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/pizza_size_display"
+            style="@style/PizzaListItemElementText"
+            app:pizzaSizeDisplay="@{pizzaEntity}"
+            tools:text="Size" />
+
+        <TextView
+            android:id="@+id/pizza_price_display"
+            style="@style/PizzaListItemElementText"
+            app:pizzaPriceDisplay="@{pizzaEntity}"
+            tools:text="Price" />
+
+        <TextView
+            android:id="@+id/list_pizza_ratio_display"
+            style="@style/PizzaListItemElementText"
+            app:listPizzaRatioDisplay="@{pizzaEntity}"
+            tools:text="Ratio" />
+
+        <ImageButton
+            android:id="@+id/pizza_remove_button"
+            style="@style/PizzaListItemElementText"
+            android:onClick="@{() -> viewModel.onRemove(pizzaEntity)}"
+            android:scaleType="center"
+            app:srcCompat="@android:drawable/ic_delete"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+</layout>

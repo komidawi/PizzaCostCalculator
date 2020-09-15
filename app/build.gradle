@@ -16,6 +16,8 @@ android {
         versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions.annotationProcessorOptions.arguments += ["room.incremental": "true"]
     }
 
     buildTypes {
@@ -38,6 +40,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+// To get rid of "More than one file was found with OS independent path" errors
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'win32-x86-64/attach_hotspot_windows.dll'
+        exclude 'win32-x86/attach_hotspot_windows.dll'
+        exclude 'META-INF/licenses/ASM'
     }
 }
 

@@ -1,7 +1,6 @@
 <resources>
     <!-- Main -->
     <string name="app_name">Pizza Cost Calculator</string>
-    <string name="app_start_button_text">Start app</string>
 
     <!-- Pizza List Fragment -->
     <string name="pizza_list_fragment_title">Your Pizza List</string>

@@ -22,8 +22,6 @@ import java.math.BigDecimal
 @ExperimentalCoroutinesApi
 class AddPizzaFragmentViewModelTest {
 
-    // This rule is mandatory to use ViewModel with LiveData
-    // Executes each task synchronously using Architecture Components.
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 

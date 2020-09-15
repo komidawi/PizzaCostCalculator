@@ -6,7 +6,7 @@ import java.math.RoundingMode
 
 object CostCalculator {
 
-    private val sqCentimetersInSqMeter = BigDecimal(10000)
+    private val sqCentimetersInSqMeter = BigDecimal(10_000)
 
     fun calculateRatioPerSqMeter(pizza: PizzaEntity): BigDecimal =
         calculateRatioPerSqMeter(pizza.size, pizza.price)

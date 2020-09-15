@@ -27,7 +27,7 @@ class PizzaListFragment : Fragment() {
         val databaseDao = (requireContext().applicationContext as PizzaApplication).pizzaDatabaseDao
 
         viewModel = ViewModelFactory(databaseDao).create(PizzaListFragmentViewModel::class.java)
-        binding.pizzaListFragmentViewModel = viewModel
+        binding.viewModel = viewModel
 
         setupRecyclerView()
         setupFabOnClickListener()

@@ -28,6 +28,7 @@ class MainActivityTest {
     fun setupDatabaseDao() {
         pizzaDatabaseDao =
             ServiceLocator.provideDatabaseDao(ApplicationProvider.getApplicationContext())
+
         runBlocking {
             pizzaDatabaseDao.deleteAll()
         }

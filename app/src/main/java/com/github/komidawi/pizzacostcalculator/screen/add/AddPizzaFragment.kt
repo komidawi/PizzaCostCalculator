@@ -40,22 +40,22 @@ class AddPizzaFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupDisplayEmptyFieldsToastObserver() {
-        viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, Observer { displayToast ->
-            if (displayToast) {
-                val message = getString(R.string.all_fields_are_required_message)
-                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-                viewModel.doneDisplayingEmptyFieldsToast()
-            }
-        })
-    }
-
     private fun setupNavigateToPizzaListObserver() {
         viewModel.navigateToPizzaListFragment.observe(viewLifecycleOwner, Observer { navigate ->
             if (navigate) {
                 this.findNavController()
                     .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
                 viewModel.doneNavigating()
+            }
+        })
+    }
+
+    private fun setupDisplayEmptyFieldsToastObserver() {
+        viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, Observer { displayToast ->
+            if (displayToast) {
+                val message = getString(R.string.all_fields_are_required_message)
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                viewModel.doneDisplayingEmptyFieldsToast()
             }
         })
     }

@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="pizzaListFragmentViewModel"
+            name="viewModel"
             type="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentViewModel" />
     </data>
 
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:onClick="@{() -> pizzaListFragmentViewModel.onClear()}"
+            android:onClick="@{() -> viewModel.onClear()}"
             android:text="@string/pizza_list_clear_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,9 +35,7 @@
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_pizza_fab"

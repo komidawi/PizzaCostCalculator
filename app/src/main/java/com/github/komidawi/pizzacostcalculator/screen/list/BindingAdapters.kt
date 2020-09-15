@@ -16,12 +16,12 @@ fun TextView.setPizzaNameDisplay(pizza: PizzaEntity?) {
 
 @BindingAdapter("pizzaSizeDisplay")
 fun TextView.setPizzaSizeDisplay(pizza: PizzaEntity?) {
-    pizza?.let { text = pizza.size.toString() }
+    pizza?.let { text = String.format("%s", pizza.size.toString()) }
 }
 
 @BindingAdapter("pizzaPriceDisplay")
 fun TextView.setPizzaPriceDisplay(pizza: PizzaEntity?) {
-    pizza?.let { text = pizza.price.toString() }
+    pizza?.let { text = String.format("%s", pizza.price.toString()) }
 }
 
 @BindingAdapter("listPizzaRatioDisplay")

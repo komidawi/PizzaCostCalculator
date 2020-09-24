@@ -8,7 +8,6 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
 import com.github.komidawi.pizzacostcalculator.data.db.FakeAndroidTestDatabaseDao
@@ -16,7 +15,6 @@ import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
-import org.junit.Assert
 import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
@@ -61,7 +59,7 @@ class PizzaListFragmentTest {
     @Test
     fun removePizzaButton_removesPizza() = runBlockingTest {
         // given
-        val pizza = AndroidTestPizzaData.createTestPizza()
+        val pizza = TestPizzaData.createTestPizza()
         databaseDao.insert(pizza)
 
         // and

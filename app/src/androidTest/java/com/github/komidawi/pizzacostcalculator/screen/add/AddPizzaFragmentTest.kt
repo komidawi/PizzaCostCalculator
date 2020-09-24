@@ -13,10 +13,10 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testName
-import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testPrice
-import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testSize
-import com.github.komidawi.pizzacostcalculator.AndroidTestPizzaData.testRatioDisplayText
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatioDisplayText
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
 import com.github.komidawi.pizzacostcalculator.data.db.FakeAndroidTestDatabaseDao

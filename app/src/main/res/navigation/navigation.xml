@@ -25,4 +25,8 @@
             app:popUpTo="@id/pizzaListFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/restApiTestFragment"
+        android:name="com.github.komidawi.pizzacostcalculator.screen.restapitest.RestApiTestFragment"
+        android:label="RestApiTestFragment" />
 </navigation>

@@ -64,7 +64,7 @@ class MainActivityTest {
     @Test
     fun removePizzaButton_removesPizzaFromList() = runBlocking {
         // given
-        val pizza = AndroidTestPizzaData.createTestPizza()
+        val pizza = TestPizzaData.createTestPizza()
         pizzaDatabaseDao.insert(pizza)
 
         // and

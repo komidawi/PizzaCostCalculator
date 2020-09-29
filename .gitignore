@@ -383,4 +383,4 @@ obj/
 
 
 .ignored/
-config/Env.kt
+app/src/main/java/com/github/komidawi/pizzacostcalculator/config/Env.kt

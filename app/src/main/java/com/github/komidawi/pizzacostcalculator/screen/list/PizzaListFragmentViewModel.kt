@@ -29,6 +29,9 @@ class PizzaListFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao)
         viewModelScope.launch {
             try {
                 val allPizzas = RestApi.retrofitService.getAllPizzas()
+                // TODO: temporary solution until Repository provided
+                pizzaDatabaseDao.deleteAll()
+                pizzaDatabaseDao.insert(allPizzas)
                 _fetchingStatusMessage.value = "Success, ${allPizzas.size} fetched"
             } catch (e: Exception) {
                 _fetchingStatusMessage.value = "Error while fetching pizzas: ${e.message}"

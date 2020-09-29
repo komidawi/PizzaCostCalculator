@@ -31,10 +31,20 @@ class PizzaListFragment : Fragment() {
 
         setupRecyclerView()
         setupFabOnClickListener()
+        setupDisplayFetchStatusToastObserver()
 
         binding.lifecycleOwner = this
 
         return binding.root
+    }
+
+    private fun setupDisplayFetchStatusToastObserver() {
+        viewModel.displayFetchingStatusToast.observe(viewLifecycleOwner, { displayToast ->
+            if (displayToast) {
+                Toast.makeText(context, viewModel.fetchingStatusMessage.value, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
     }
 
     private fun setupRecyclerView() {

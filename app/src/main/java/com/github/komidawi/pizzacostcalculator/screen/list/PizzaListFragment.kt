@@ -31,6 +31,7 @@ class PizzaListFragment : Fragment() {
 
         setupRecyclerView()
         setupFabOnClickListener()
+        setupDisplayFetchStatusToastObserver()
 
         binding.lifecycleOwner = this
 
@@ -41,12 +42,12 @@ class PizzaListFragment : Fragment() {
         val clickListener = PizzaItemListener { pizza ->
             Toast.makeText(context, "$pizza", Toast.LENGTH_SHORT).show()
         }
-        val adapter = PizzaListAdapter(clickListener, viewModel)
 
+        val adapter = PizzaListAdapter(clickListener, viewModel)
         binding.pizzaListRecyclerView.adapter = adapter
 
-        viewModel.pizzaList.observe(viewLifecycleOwner, Observer {
-            it?.let { adapter.addHeaderAndSubmitList(it) }
+        viewModel.pizzaList.observe(viewLifecycleOwner, { pizzas ->
+            pizzas?.let { adapter.addHeaderAndSubmitList(pizzas) }
         })
     }
 
@@ -55,5 +56,14 @@ class PizzaListFragment : Fragment() {
             view.findNavController()
                 .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())
         }
+    }
+
+    private fun setupDisplayFetchStatusToastObserver() {
+        viewModel.displayFetchingStatusToast.observe(viewLifecycleOwner, { displayToast ->
+            if (displayToast) {
+                Toast.makeText(context, viewModel.fetchingStatusMessage.value, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
     }
 }

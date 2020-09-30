@@ -44,6 +44,8 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    // Add support for Java 8 language features
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
@@ -51,7 +53,8 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-// To get rid of "More than one file was found with OS independent path" errors
+
+    // To get rid of "More than one file was found with OS independent path" errors
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/AL2.0'
@@ -85,6 +88,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
+    /// Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     /// Persistence
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

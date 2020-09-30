@@ -60,7 +60,7 @@ class PizzaListFragmentTest {
     fun removePizzaButton_removesPizza() = runBlockingTest {
         // given
         val pizza = TestPizzaData.createTestPizza()
-        databaseDao.insert(pizza)
+        databaseDao.insertAll(pizza)
 
         // and
         launchFragmentInContainer<PizzaListFragment>(themeResId = R.style.AppTheme)

@@ -10,7 +10,7 @@ interface PizzaDatabaseDao {
     suspend fun insert(pizzaEntity: PizzaEntity)
 
     @Insert
-    suspend fun insert(pizzaEntities: List<PizzaEntity>)
+    suspend fun insertAll(pizzaEntities: List<PizzaEntity>)
 
     @Query("SELECT * FROM pizza_table WHERE id = :id")
     suspend fun getById(id: Long): PizzaEntity?

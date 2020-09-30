@@ -11,13 +11,13 @@ import kotlinx.coroutines.*
 
 class PizzaListFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) : ViewModel() {
 
-    private val _displayFetchingStatusToast = MutableLiveData(false)
-    val displayFetchingStatusToast: LiveData<Boolean>
-        get() = _displayFetchingStatusToast
+    private val _displayFetchStatusToast = MutableLiveData(false)
+    val displayFetchStatusToast: LiveData<Boolean>
+        get() = _displayFetchStatusToast
 
-    private val _fetchingStatusMessage = MutableLiveData<String>()
-    val fetchingStatusMessage: LiveData<String>
-        get() = _fetchingStatusMessage
+    private val _fetchStatusMessage = MutableLiveData<String>()
+    val fetchStatusMessage: LiveData<String>
+        get() = _fetchStatusMessage
 
     val pizzaList = pizzaDatabaseDao.getAll()
 
@@ -31,12 +31,12 @@ class PizzaListFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao)
                 val allPizzas = RestApi.retrofitService.getAllPizzas()
                 // TODO: temporary solution until Repository provided
                 pizzaDatabaseDao.deleteAll()
-                pizzaDatabaseDao.insert(allPizzas)
-                _fetchingStatusMessage.value = "Success, ${allPizzas.size} fetched"
+                pizzaDatabaseDao.insertAll(allPizzas)
+                _fetchStatusMessage.value = "Success, ${allPizzas.size} fetched"
             } catch (e: Exception) {
-                _fetchingStatusMessage.value = "Error while fetching pizzas: ${e.message}"
+                _fetchStatusMessage.value = "Error while fetching pizzas: ${e.message}"
             }
-            _displayFetchingStatusToast.value = true
+            _displayFetchStatusToast.value = true
         }
     }
 

@@ -10,8 +10,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
+import com.github.komidawi.pizzacostcalculator.TestPizzaData
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
 import com.github.komidawi.pizzacostcalculator.data.db.FakeAndroidTestDatabaseDao
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -27,17 +29,18 @@ import org.mockito.Mockito.verify
 @RunWith(AndroidJUnit4::class)
 class PizzaListFragmentTest {
 
-    private lateinit var databaseDao: PizzaDatabaseDao
+    private lateinit var pizzaRepository: PizzaRepository
 
     @Before
-    fun initializeDatabase() {
-        databaseDao = FakeAndroidTestDatabaseDao()
-        ServiceLocator.databaseDao = databaseDao
+    fun initializeRepository() {
+        val databaseDao = FakeAndroidTestDatabaseDao()
+        pizzaRepository = PizzaRepositoryImpl(databaseDao)
+        ServiceLocator.repository = pizzaRepository
     }
 
     @After
-    fun cleanupDatabase() = runBlockingTest {
-        ServiceLocator.resetDatabase()
+    fun cleanupRepository() = runBlockingTest {
+        ServiceLocator.resetRepository()
     }
 
 
@@ -60,7 +63,7 @@ class PizzaListFragmentTest {
     fun removePizzaButton_removesPizza() = runBlockingTest {
         // given
         val pizza = TestPizzaData.createTestPizza()
-        databaseDao.insertAll(pizza)
+        pizzaRepository.insert(pizza)
 
         // and
         launchFragmentInContainer<PizzaListFragment>(themeResId = R.style.AppTheme)
@@ -69,6 +72,6 @@ class PizzaListFragmentTest {
         onView(withId(R.id.pizza_remove_button)).perform(click())
 
         // then
-        assertNull(databaseDao.getById(pizza.id))
+        assertNull(pizzaRepository.getById(pizza.id))
     }
 }

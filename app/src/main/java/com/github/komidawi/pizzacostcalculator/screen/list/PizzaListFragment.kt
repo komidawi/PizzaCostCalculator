@@ -22,9 +22,10 @@ class PizzaListFragment : Fragment() {
     ): View? {
         binding = FragmentPizzaListBinding.inflate(inflater, container, false)
 
-        val databaseDao = (requireContext().applicationContext as PizzaApplication).pizzaDatabaseDao
+        val pizzaRepository =
+            (requireContext().applicationContext as PizzaApplication).pizzaRepository
 
-        viewModel = ViewModelFactory(databaseDao).create(PizzaListFragmentViewModel::class.java)
+        viewModel = ViewModelFactory(pizzaRepository).create(PizzaListFragmentViewModel::class.java)
         binding.viewModel = viewModel
 
         setupRecyclerView()

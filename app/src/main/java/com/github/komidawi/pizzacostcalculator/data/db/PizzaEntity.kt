@@ -29,3 +29,6 @@ data class PizzaEntity(
 
 fun PizzaEntity.asDomainModel(): Pizza =
     Pizza(id, name, size, price, ratio, UUID.fromString(uuid))
+
+fun List<PizzaEntity>.asDomainModel(): List<Pizza> =
+    map { pizzaEntity -> pizzaEntity.asDomainModel() }

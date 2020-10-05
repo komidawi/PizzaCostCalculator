@@ -14,6 +14,10 @@ class FakeDatabaseDao : PizzaDatabaseDao {
         data.add(pizzaEntity)
     }
 
+    override suspend fun insertAll(pizzaEntities: List<PizzaEntity>) {
+        data.addAll(pizzaEntities)
+    }
+
     override suspend fun getById(id: Long): PizzaEntity? =
         data.stream().filter { it.id == id }.findAny().orElse(null)
 

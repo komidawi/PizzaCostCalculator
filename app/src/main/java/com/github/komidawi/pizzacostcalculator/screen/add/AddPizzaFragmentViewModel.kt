@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
 import kotlinx.coroutines.*
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) : ViewModel() {
+class AddPizzaFragmentViewModel(private val pizzaRepository: PizzaRepository) : ViewModel() {
 
     private val viewModelJob = Job()
 
@@ -51,7 +51,7 @@ class AddPizzaFragmentViewModel(private val pizzaDatabaseDao: PizzaDatabaseDao) 
 
     private suspend fun insertPizza(pizza: PizzaEntity) {
         withContext(Dispatchers.IO) {
-            pizzaDatabaseDao.insert(pizza)
+            pizzaRepository.insert(pizza)
         }
     }
 

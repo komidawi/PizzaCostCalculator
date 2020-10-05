@@ -2,13 +2,14 @@ package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.delta
-import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatio
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
 import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.helper.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,12 +31,13 @@ class AddPizzaFragmentViewModelTest {
 
     private lateinit var viewModel: AddPizzaFragmentViewModel
 
-    private lateinit var databaseDao: PizzaDatabaseDao
+    private lateinit var pizzaRepository: PizzaRepository
 
     @Before
     fun initialize() {
-        databaseDao = FakeDatabaseDao()
-        viewModel = ViewModelFactory(databaseDao).create(AddPizzaFragmentViewModel::class.java)
+        val databaseDao = FakeDatabaseDao()
+        pizzaRepository = PizzaRepositoryImpl(databaseDao)
+        viewModel = ViewModelFactory(pizzaRepository).create(AddPizzaFragmentViewModel::class.java)
     }
 
     @Test
@@ -71,7 +73,7 @@ class AddPizzaFragmentViewModelTest {
         viewModel.handleAddPizza()
 
         // then
-        val receivedPizza = databaseDao.getById(createdPizza.id)!!
+        val receivedPizza = pizzaRepository.getById(createdPizza.id)!!
         assertEquals(testName, receivedPizza.name)
         assertEquals(testSize.toBigDecimal(), receivedPizza.size)
         assertEquals(testPrice.toBigDecimal(), receivedPizza.price)
@@ -97,7 +99,7 @@ class AddPizzaFragmentViewModelTest {
             viewModel.handleAddPizza()
 
             // then
-            assertEquals(0, databaseDao.getAll().getOrAwaitValue().size)
+            assertEquals(0, pizzaRepository.getAll().getOrAwaitValue().size)
         }
 
     @Test

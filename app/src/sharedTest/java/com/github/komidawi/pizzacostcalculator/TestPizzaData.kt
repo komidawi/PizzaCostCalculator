@@ -11,6 +11,8 @@ object TestPizzaData {
 
     const val testRatio = 180.3756022
 
+    const val testRatioDisplayText = "180"
+
     /**
      * Precision delta for calculations
      */

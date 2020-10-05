@@ -1,10 +1,10 @@
 package com.github.komidawi.pizzacostcalculator
 
 import android.app.Application
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
 
 class PizzaApplication : Application() {
 
-    val pizzaDatabaseDao: PizzaDatabaseDao
-        get() = ServiceLocator.provideDatabaseDao(this)
+    val pizzaRepository: PizzaRepository
+        get() = ServiceLocator.providePizzaRepository(this)
 }

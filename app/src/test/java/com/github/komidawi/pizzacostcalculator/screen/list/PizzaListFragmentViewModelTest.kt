@@ -1,9 +1,8 @@
 package com.github.komidawi.pizzacostcalculator.screen.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
-import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
@@ -29,8 +28,7 @@ class PizzaListFragmentViewModelTest {
 
     @Before
     fun initialize() {
-        val databaseDao = FakeDatabaseDao()
-        pizzaRepository = PizzaRepositoryImpl(databaseDao)
+        pizzaRepository = TestRepositoryFactory.create()
         viewModel = ViewModelFactory(pizzaRepository).create(PizzaListFragmentViewModel::class.java)
     }
 

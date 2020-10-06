@@ -11,9 +11,8 @@ import androidx.test.filters.MediumTest
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
 import com.github.komidawi.pizzacostcalculator.TestPizzaData
+import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
-import com.github.komidawi.pizzacostcalculator.data.db.FakeAndroidTestDatabaseDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -33,8 +32,7 @@ class PizzaListFragmentTest {
 
     @Before
     fun initializeRepository() {
-        val databaseDao = FakeAndroidTestDatabaseDao()
-        pizzaRepository = PizzaRepositoryImpl(databaseDao)
+        pizzaRepository = TestRepositoryFactory.create()
         ServiceLocator.repository = pizzaRepository
     }
 

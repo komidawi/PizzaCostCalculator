@@ -2,8 +2,8 @@ package com.github.komidawi.pizzacostcalculator.screen.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi

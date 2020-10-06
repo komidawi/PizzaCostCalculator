@@ -12,7 +12,7 @@ import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
 import com.github.komidawi.pizzacostcalculator.TestPizzaData
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After

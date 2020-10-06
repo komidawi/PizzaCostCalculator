@@ -1,9 +1,9 @@
-package com.github.komidawi.pizzacostcalculator.data
+package com.github.komidawi.pizzacostcalculator.data.repository
 
 import androidx.lifecycle.LiveData
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 
-interface DataSource {
+interface PizzaRepository {
 
     suspend fun insert(pizzaEntity: PizzaEntity)
 

@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import kotlinx.coroutines.*
 import java.math.BigDecimal
 import java.math.RoundingMode

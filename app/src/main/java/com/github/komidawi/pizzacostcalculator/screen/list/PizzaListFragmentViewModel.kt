@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.network.RestApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

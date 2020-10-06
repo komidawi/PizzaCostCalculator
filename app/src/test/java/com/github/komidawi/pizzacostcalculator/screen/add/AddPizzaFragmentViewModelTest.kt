@@ -7,7 +7,7 @@ import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatio
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.helper.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory

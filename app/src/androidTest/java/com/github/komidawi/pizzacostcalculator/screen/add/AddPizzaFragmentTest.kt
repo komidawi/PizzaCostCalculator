@@ -20,7 +20,7 @@ import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatioDisplayText
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.core.StringContains.containsString

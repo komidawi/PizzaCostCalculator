@@ -1,4 +1,4 @@
-package com.github.komidawi.pizzacostcalculator.data
+package com.github.komidawi.pizzacostcalculator.data.datasource
 
 import androidx.lifecycle.LiveData
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao

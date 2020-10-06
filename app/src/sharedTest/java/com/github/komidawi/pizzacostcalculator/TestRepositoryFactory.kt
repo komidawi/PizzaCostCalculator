@@ -1,9 +1,9 @@
 package com.github.komidawi.pizzacostcalculator
 
-import com.github.komidawi.pizzacostcalculator.data.LocalDataSource
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
+import com.github.komidawi.pizzacostcalculator.data.datasource.LocalDataSource
 import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepositoryImpl
 
 object TestRepositoryFactory {
 

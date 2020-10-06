@@ -3,11 +3,11 @@ package com.github.komidawi.pizzacostcalculator
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
-import com.github.komidawi.pizzacostcalculator.data.LocalDataSource
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
+import com.github.komidawi.pizzacostcalculator.data.datasource.LocalDataSource
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepositoryImpl
 import kotlinx.coroutines.runBlocking
 
 

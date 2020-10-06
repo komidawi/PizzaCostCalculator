@@ -3,9 +3,10 @@ package com.github.komidawi.pizzacostcalculator
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao_Impl
 import kotlinx.coroutines.runBlocking
 
 
@@ -14,35 +15,47 @@ object ServiceLocator {
 
     private var database: PizzaDatabase? = null
 
+    private var databaseDao: PizzaDatabaseDao? = null
+
     @Volatile
-    var databaseDao: PizzaDatabaseDao? = null
+    var repository: PizzaRepository? = null
         @VisibleForTesting set
 
     private val lock = Any()
 
 
     @VisibleForTesting
-    fun resetDatabase() {
+    fun resetRepository() {
         synchronized(lock) {
-            runBlocking { databaseDao?.deleteAll() }
+            runBlocking {
+                databaseDao?.deleteAll()
+            }
             database?.apply {
                 clearAllTables()
                 close()
             }
             database = null
             databaseDao = null
+            repository = null
         }
     }
 
-    fun provideDatabaseDao(context: Context): PizzaDatabaseDao {
+    fun providePizzaRepository(context: Context): PizzaRepository {
         synchronized(this) {
-            return databaseDao ?: createDatabaseDao(context)
+            return repository ?: createPizzaRepository(context)
         }
+    }
+
+    private fun createPizzaRepository(context: Context): PizzaRepository {
+        val pizzaDatabaseDao = createDatabaseDao(context)
+        val newRepository = PizzaRepositoryImpl(pizzaDatabaseDao)
+        repository = newRepository
+        return newRepository
     }
 
     private fun createDatabaseDao(context: Context): PizzaDatabaseDao {
         val db = database ?: createDatabase(context)
-        val newDatabaseDao = PizzaDatabaseDao_Impl(db)
+        val newDatabaseDao = db.pizzaDatabaseDao
         databaseDao = newDatabaseDao
         return newDatabaseDao
     }

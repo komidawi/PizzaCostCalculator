@@ -14,6 +14,10 @@ class FakeAndroidTestDatabaseDao : PizzaDatabaseDao {
         data.add(pizzaEntity)
     }
 
+    override suspend fun insertAll(pizzaEntities: List<PizzaEntity>) {
+        data.addAll(pizzaEntities)
+    }
+
     override suspend fun getById(id: Long): PizzaEntity? =
         data.stream().filter { it.id == id }.findAny().orElse(null)
 
@@ -21,7 +25,7 @@ class FakeAndroidTestDatabaseDao : PizzaDatabaseDao {
         data.stream().filter { it.uuid == uuid }.findAny().orElse(null)
 
     override fun getAll(): LiveData<List<PizzaEntity>> {
-        observableData.value = data.toList()
+        observableData.postValue(data.toList())
         return observableData
     }
 

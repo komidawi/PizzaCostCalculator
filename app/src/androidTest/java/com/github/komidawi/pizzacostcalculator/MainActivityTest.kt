@@ -10,7 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertNull
@@ -22,21 +22,21 @@ import org.junit.runner.RunWith
 @LargeTest
 class MainActivityTest {
 
-    private lateinit var pizzaDatabaseDao: PizzaDatabaseDao
+    private lateinit var pizzaRepository: PizzaRepository
 
     @Before
-    fun setupDatabaseDao() {
-        pizzaDatabaseDao =
-            ServiceLocator.provideDatabaseDao(ApplicationProvider.getApplicationContext())
+    fun setupPizzaRepository() {
+        pizzaRepository =
+            ServiceLocator.providePizzaRepository(ApplicationProvider.getApplicationContext())
 
         runBlocking {
-            pizzaDatabaseDao.deleteAll()
+            pizzaRepository.deleteAll()
         }
     }
 
     @After
-    fun resetDatabase() {
-        ServiceLocator.resetDatabase()
+    fun resetRepository() {
+        ServiceLocator.resetRepository()
     }
 
     @Test
@@ -65,7 +65,7 @@ class MainActivityTest {
     fun removePizzaButton_removesPizzaFromList() = runBlocking {
         // given
         val pizza = TestPizzaData.createTestPizza()
-        pizzaDatabaseDao.insert(pizza)
+        pizzaRepository.insert(pizza)
 
         // and
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
@@ -75,7 +75,7 @@ class MainActivityTest {
 
         // then
         onView(withId(R.id.list_item_pizza_element_root)).check(doesNotExist())
-        assertNull(pizzaDatabaseDao.getById(pizza.id))
+        assertNull(pizzaRepository.getById(pizza.id))
 
         // cleanup
         activityScenario.close()

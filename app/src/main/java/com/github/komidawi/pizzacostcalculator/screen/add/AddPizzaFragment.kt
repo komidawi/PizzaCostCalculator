@@ -26,9 +26,10 @@ class AddPizzaFragment : Fragment() {
     ): View? {
         binding = FragmentAddPizzaBinding.inflate(inflater, container, false)
 
-        val databaseDao = (requireContext().applicationContext as PizzaApplication).pizzaDatabaseDao
+        val pizzaRepository =
+            (requireContext().applicationContext as PizzaApplication).pizzaRepository
 
-        viewModel = ViewModelFactory(databaseDao).create(AddPizzaFragmentViewModel::class.java)
+        viewModel = ViewModelFactory(pizzaRepository).create(AddPizzaFragmentViewModel::class.java)
         binding.viewModel = viewModel
 
         setupNavigateToPizzaListObserver()

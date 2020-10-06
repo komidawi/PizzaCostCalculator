@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.github.komidawi.pizzacostcalculator.PizzaApplication
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
 
@@ -24,9 +22,10 @@ class PizzaListFragment : Fragment() {
     ): View? {
         binding = FragmentPizzaListBinding.inflate(inflater, container, false)
 
-        val databaseDao = (requireContext().applicationContext as PizzaApplication).pizzaDatabaseDao
+        val pizzaRepository =
+            (requireContext().applicationContext as PizzaApplication).pizzaRepository
 
-        viewModel = ViewModelFactory(databaseDao).create(PizzaListFragmentViewModel::class.java)
+        viewModel = ViewModelFactory(pizzaRepository).create(PizzaListFragmentViewModel::class.java)
         binding.viewModel = viewModel
 
         setupRecyclerView()
@@ -59,9 +58,9 @@ class PizzaListFragment : Fragment() {
     }
 
     private fun setupDisplayFetchStatusToastObserver() {
-        viewModel.displayFetchingStatusToast.observe(viewLifecycleOwner, { displayToast ->
+        viewModel.displayFetchStatusToast.observe(viewLifecycleOwner, { displayToast ->
             if (displayToast) {
-                Toast.makeText(context, viewModel.fetchingStatusMessage.value, Toast.LENGTH_SHORT)
+                Toast.makeText(context, viewModel.fetchStatusMessage.value, Toast.LENGTH_SHORT)
                     .show()
             }
         })

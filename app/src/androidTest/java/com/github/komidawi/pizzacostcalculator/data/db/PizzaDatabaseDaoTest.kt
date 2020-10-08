@@ -49,7 +49,7 @@ class PizzaDatabaseDaoTest {
         val received = database.pizzaDatabaseDao.getByUuid(pizza.uuid.toString())!!
         assertEquals(pizza.uuid.toString(), received.uuid)
         assertEquals(pizza.name, received.name)
-        assertEquals(pizza.size, received.size)
-        assertEquals(pizza.price, received.price)
+        assertEquals(pizza.size.toString(), received.size)
+        assertEquals(pizza.price.toString(), received.price)
     }
 }

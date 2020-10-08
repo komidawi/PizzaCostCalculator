@@ -6,7 +6,6 @@ import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import java.math.BigDecimal
 import java.util.*
 
-// TODO: probably use Strings instead of BigDecimals
 /**
  * Database-side Pizza object
  */
@@ -15,11 +14,11 @@ data class PizzaEntity(
 
     val name: String,
 
-    val size: BigDecimal,
+    val size: String,
 
-    val price: BigDecimal,
+    val price: String,
 
-    val ratio: BigDecimal,
+    val ratio: String,
 
     val uuid: String,
 
@@ -28,7 +27,7 @@ data class PizzaEntity(
 )
 
 fun PizzaEntity.asDomainModel(): Pizza =
-    Pizza(name, size, price, ratio, UUID.fromString(uuid), id)
+    Pizza(name, BigDecimal(size), BigDecimal(price), BigDecimal(ratio), UUID.fromString(uuid), id)
 
 fun List<PizzaEntity>.asDomainModel(): List<Pizza> =
     map { pizzaEntity -> pizzaEntity.asDomainModel() }

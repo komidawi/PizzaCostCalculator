@@ -28,6 +28,6 @@ class Pizza(
 }
 
 fun Pizza.asDatabaseModel(): PizzaEntity =
-    PizzaEntity(name, size, price, ratio, uuid.toString(), id)
+    PizzaEntity(name, size.toString(), price.toString(), ratio.toString(), uuid.toString(), id)
 
 fun List<Pizza>.asDatabaseModel(): List<PizzaEntity> = map(Pizza::asDatabaseModel)

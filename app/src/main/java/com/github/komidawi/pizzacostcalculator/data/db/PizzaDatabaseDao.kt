@@ -9,8 +9,6 @@ import androidx.room.Update
 @Dao
 interface PizzaDatabaseDao {
 
-    // TODO: trzeba zrobić tak, żeby insert w razie jak nie ma ID nadawał je
-
     @Insert
     suspend fun insert(pizzaEntity: PizzaEntity)
 

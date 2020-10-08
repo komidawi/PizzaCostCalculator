@@ -121,7 +121,6 @@ sealed class PizzaListItemType {
         override val uuid: String = pizza.uuid.toString()
     }
 
-    // TODO: zastanowić się nad tym miejscem
     object Header : PizzaListItemType() {
         override val uuid: String = "6324b8ed-b268-4225-8764-393a64079425"
     }

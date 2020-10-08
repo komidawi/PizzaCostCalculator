@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.komidawi.pizzacostcalculator.R
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import com.github.komidawi.pizzacostcalculator.databinding.ListItemPizzaElementBinding
+import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.ClassCastException
 
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
@@ -52,7 +51,7 @@ class PizzaListAdapter(
     /**
      * Modifies the list by adding the header at the beginning.
      */
-    fun addHeaderAndSubmitList(list: List<PizzaEntity>?) {
+    fun addHeaderAndSubmitList(list: List<Pizza>?) {
         adapterScope.launch {
             val items = when (list) {
                 null -> listOf(PizzaListItemType.Header)
@@ -70,10 +69,10 @@ class PizzaListAdapter(
 
         fun bind(
             clickListener: PizzaItemListener,
-            pizza: PizzaEntity,
+            pizza: Pizza,
             pizzaListFragmentViewModel: PizzaListFragmentViewModel
         ) {
-            binding.pizzaEntity = pizza
+            binding.pizza = pizza
             binding.clickListener = clickListener
             binding.viewModel = pizzaListFragmentViewModel
             binding.executePendingBindings()
@@ -101,14 +100,14 @@ class PizzaListAdapter(
 
 class PizzaDiffCallback : DiffUtil.ItemCallback<PizzaListItemType>() {
     override fun areItemsTheSame(oldItem: PizzaListItemType, newItem: PizzaListItemType) =
-        oldItem.id == newItem.id
+        oldItem.uuid == newItem.uuid
 
     override fun areContentsTheSame(oldItem: PizzaListItemType, newItem: PizzaListItemType) =
         oldItem == newItem
 }
 
-class PizzaItemListener(val clickListener: (pizza: PizzaEntity) -> Unit) {
-    fun onClick(pizza: PizzaEntity) = clickListener(pizza)
+class PizzaItemListener(val clickListener: (pizza: Pizza) -> Unit) {
+    fun onClick(pizza: Pizza) = clickListener(pizza)
 }
 
 sealed class PizzaListItemType {
@@ -116,13 +115,14 @@ sealed class PizzaListItemType {
     /**
      * Property needed especially for DiffUtil to determine changes basing on ids
      */
-    abstract val id: Long
+    abstract val uuid: String
 
-    data class PizzaListItem(val pizza: PizzaEntity) : PizzaListItemType() {
-        override val id: Long = pizza.id
+    data class PizzaListItem(val pizza: Pizza) : PizzaListItemType() {
+        override val uuid: String = pizza.uuid.toString()
     }
 
+    // TODO: zastanowić się nad tym miejscem
     object Header : PizzaListItemType() {
-        override val id: Long = Long.MIN_VALUE
+        override val uuid: String = "6324b8ed-b268-4225-8764-393a64079425"
     }
 }

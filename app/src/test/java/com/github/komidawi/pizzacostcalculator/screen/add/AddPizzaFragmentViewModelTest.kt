@@ -65,13 +65,12 @@ class AddPizzaFragmentViewModelTest {
     fun handleAddPizzaWithValidValue_insertsPizzaToDatabase() = mainCoroutineRule.runBlockingTest {
         // given
         setValidTestPizzaData()
-        val createdPizza = viewModel.createPizza()!!
 
         // when
-        viewModel.handleAddPizza()
+        val createdPizza = viewModel.handleAddPizza()!!
 
         // then
-        val receivedPizza = pizzaRepository.getById(createdPizza.id)!!
+        val receivedPizza = pizzaRepository.getByUuid(createdPizza.uuid)!!
         assertEquals(testName, receivedPizza.name)
         assertEquals(testSize.toBigDecimal(), receivedPizza.size)
         assertEquals(testPrice.toBigDecimal(), receivedPizza.price)

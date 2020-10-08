@@ -1,16 +1,16 @@
-package com.github.komidawi.pizzacostcalculator.data.db
+package com.github.komidawi.pizzacostcalculator.domain
 
 import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
 import java.math.BigDecimal
 
-object PizzaEntityFactory {
+object PizzaFactory {
 
     private val calculator = CostCalculator
 
     /**
      * Makes providing numbers easier
      */
-    fun create(name: String, size: Int, price: String): PizzaEntity {
+    fun create(name: String, size: Int, price: String): Pizza {
         val sizeNumber = BigDecimal(size)
         val priceNumber = BigDecimal(price)
 
@@ -20,7 +20,7 @@ object PizzaEntityFactory {
     /**
      * Makes providing numbers easier
      */
-    fun create(name: String, size: String, price: String): PizzaEntity {
+    fun create(name: String, size: String, price: String): Pizza {
         val sizeNumber = BigDecimal(size)
         val priceNumber = BigDecimal(price)
 
@@ -28,17 +28,17 @@ object PizzaEntityFactory {
     }
 
     /**
-     * Creates [PizzaEntity] with empty name for testing purposes
+     * Creates [Pizza] with empty name for testing purposes
      */
-    fun create(size: Int, price: String): PizzaEntity {
+    fun create(size: Int, price: String): Pizza {
         val sizeNumber = BigDecimal(size)
         val priceNumber = BigDecimal(price)
 
         return create("", sizeNumber, priceNumber)
     }
 
-    fun create(name: String, size: BigDecimal, price: BigDecimal): PizzaEntity {
+    fun create(name: String, size: BigDecimal, price: BigDecimal): Pizza {
         val ratio = calculator.calculateRatioPerSqMeter(size, price)
-        return PizzaEntity(name, size, price, ratio)
+        return Pizza(name, size, price, ratio)
     }
 }

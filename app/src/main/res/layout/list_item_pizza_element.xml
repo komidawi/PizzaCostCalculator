@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="pizzaEntity"
-            type="com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity" />
+            name="pizza"
+            type="com.github.komidawi.pizzacostcalculator.domain.Pizza" />
 
         <variable
             name="clickListener"
@@ -22,36 +22,36 @@
         android:id="@+id/list_item_pizza_element_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> clickListener.onClick(pizzaEntity)}">
+        android:onClick="@{() -> clickListener.onClick(pizza)}">
 
         <TextView
             android:id="@+id/pizza_name_display"
             style="@style/PizzaListItemElementText"
-            app:pizzaNameDisplay="@{pizzaEntity}"
+            app:pizzaNameDisplay="@{pizza}"
             tools:text="Name" />
 
         <TextView
             android:id="@+id/pizza_size_display"
             style="@style/PizzaListItemElementText"
-            app:pizzaSizeDisplay="@{pizzaEntity}"
+            app:pizzaSizeDisplay="@{pizza}"
             tools:text="Size" />
 
         <TextView
             android:id="@+id/pizza_price_display"
             style="@style/PizzaListItemElementText"
-            app:pizzaPriceDisplay="@{pizzaEntity}"
+            app:pizzaPriceDisplay="@{pizza}"
             tools:text="Price" />
 
         <TextView
             android:id="@+id/list_pizza_ratio_display"
             style="@style/PizzaListItemElementText"
-            app:listPizzaRatioDisplay="@{pizzaEntity}"
+            app:listPizzaRatioDisplay="@{pizza}"
             tools:text="Ratio" />
 
         <ImageButton
             android:id="@+id/pizza_remove_button"
             style="@style/PizzaListItemElementText"
-            android:onClick="@{() -> viewModel.onRemove(pizzaEntity)}"
+            android:onClick="@{() -> viewModel.onRemove(pizza)}"
             android:scaleType="center"
             app:srcCompat="@android:drawable/ic_delete"
             tools:ignore="ContentDescription" />

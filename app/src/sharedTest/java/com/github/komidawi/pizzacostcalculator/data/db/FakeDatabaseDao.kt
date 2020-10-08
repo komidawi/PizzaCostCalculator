@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 
 class FakeDatabaseDao : PizzaDatabaseDao {
 
-    private val data = hashSetOf<PizzaEntity>()
+    private val data = mutableListOf<PizzaEntity>()
 
     private val observableData = MutableLiveData<List<PizzaEntity>>()
 

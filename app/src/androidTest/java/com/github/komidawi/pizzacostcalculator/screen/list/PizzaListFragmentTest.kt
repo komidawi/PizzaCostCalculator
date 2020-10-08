@@ -70,6 +70,6 @@ class PizzaListFragmentTest {
         onView(withId(R.id.pizza_remove_button)).perform(click())
 
         // then
-        assertNull(pizzaRepository.getById(pizza.id))
+        assertNull(pizzaRepository.getByUuid(pizza.uuid))
     }
 }

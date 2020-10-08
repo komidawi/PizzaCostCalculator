@@ -5,6 +5,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
+import com.github.komidawi.pizzacostcalculator.domain.asDatabaseModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -38,14 +40,14 @@ class PizzaDatabaseDaoTest {
     @Test
     fun insertPizzaAndGetByUuid() = runBlockingTest {
         // given
-        val pizza = PizzaEntityFactory.create("Name", "42", "24.99")
+        val pizza = PizzaFactory.create("Name", "42", "24.99")
 
         // when
-        database.pizzaDatabaseDao.insert(pizza)
+        database.pizzaDatabaseDao.insert(pizza.asDatabaseModel())
 
         // then
-        val received = database.pizzaDatabaseDao.getByUuid(pizza.uuid)!!
-        assertEquals(pizza.uuid, received.uuid)
+        val received = database.pizzaDatabaseDao.getByUuid(pizza.uuid.toString())!!
+        assertEquals(pizza.uuid.toString(), received.uuid)
         assertEquals(pizza.name, received.name)
         assertEquals(pizza.size, received.size)
         assertEquals(pizza.price, received.price)

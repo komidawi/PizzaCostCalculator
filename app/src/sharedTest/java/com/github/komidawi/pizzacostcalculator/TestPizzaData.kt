@@ -1,7 +1,7 @@
 package com.github.komidawi.pizzacostcalculator
 
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
+import com.github.komidawi.pizzacostcalculator.domain.Pizza
+import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
 
 object TestPizzaData {
 
@@ -18,5 +18,5 @@ object TestPizzaData {
      */
     const val delta = 0.01
 
-    fun createTestPizza(): PizzaEntity = PizzaEntityFactory.create(testName, testSize, testPrice)
+    fun createTestPizza(): Pizza = PizzaFactory.create(testName, testSize, testPrice)
 }

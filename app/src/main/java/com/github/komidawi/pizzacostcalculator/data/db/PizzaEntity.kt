@@ -21,14 +21,14 @@ data class PizzaEntity(
 
     val ratio: BigDecimal,
 
-    val uuid: String = UUID.randomUUID().toString(),
+    val uuid: String,
 
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0L
+    val id: Long? = null
 )
 
 fun PizzaEntity.asDomainModel(): Pizza =
-    Pizza(id, name, size, price, ratio, UUID.fromString(uuid))
+    Pizza(name, size, price, ratio, UUID.fromString(uuid), id)
 
 fun List<PizzaEntity>.asDomainModel(): List<Pizza> =
     map { pizzaEntity -> pizzaEntity.asDomainModel() }

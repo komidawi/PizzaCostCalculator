@@ -1,5 +1,6 @@
 package com.github.komidawi.pizzacostcalculator.domain
 
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import java.math.BigDecimal
 import java.util.*
 
@@ -7,8 +8,6 @@ import java.util.*
  * Domain Pizza object
  */
 class Pizza(
-
-    val id: Long,
 
     val name: String,
 
@@ -18,6 +17,17 @@ class Pizza(
 
     val ratio: BigDecimal,
 
-    val uuid: UUID
+    val uuid: UUID = UUID.randomUUID(),
 
-)
+    val id: Long? = null
+
+) {
+    override fun toString(): String {
+        return "Pizza(name='$name', size=$size, price=$price, ratio=$ratio, uuid=$uuid, id=$id)"
+    }
+}
+
+fun Pizza.asDatabaseModel(): PizzaEntity =
+    PizzaEntity(name, size, price, ratio, uuid.toString(), id)
+
+fun List<Pizza>.asDatabaseModel(): List<PizzaEntity> = map(Pizza::asDatabaseModel)

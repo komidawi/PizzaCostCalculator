@@ -1,10 +1,15 @@
 package com.github.komidawi.pizzacostcalculator.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface PizzaDatabaseDao {
+
+    // TODO: trzeba zrobić tak, żeby insert w razie jak nie ma ID nadawał je
 
     @Insert
     suspend fun insert(pizzaEntity: PizzaEntity)

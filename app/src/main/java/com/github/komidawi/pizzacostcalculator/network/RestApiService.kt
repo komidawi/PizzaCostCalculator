@@ -1,7 +1,6 @@
 package com.github.komidawi.pizzacostcalculator.network
 
 import com.github.komidawi.pizzacostcalculator.config.Env
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -13,7 +12,7 @@ private val retrofit = Retrofit.Builder()
 
 interface RestApiService {
     @GET(".")
-    suspend fun getAllPizzas(): List<PizzaEntity>
+    suspend fun getAllPizzas(): List<PizzaDto>
 }
 
 object RestApi {

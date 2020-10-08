@@ -1,25 +1,26 @@
 package com.github.komidawi.pizzacostcalculator.data.datasource
 
 import androidx.lifecycle.LiveData
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.domain.Pizza
+import java.util.*
 
 interface DataSource {
 
-    suspend fun insert(pizzaEntity: PizzaEntity)
+    suspend fun insert(pizza: Pizza)
 
-    suspend fun insertAll(pizzaEntities: List<PizzaEntity>)
+    suspend fun insertAll(pizzas: List<Pizza>)
 
-    suspend fun getById(id: Long): PizzaEntity?
+    suspend fun getById(id: Long): Pizza?
 
-    suspend fun getByUuid(uuid: String): PizzaEntity?
+    suspend fun getByUuid(uuid: UUID): Pizza?
 
-    fun getAll(): LiveData<List<PizzaEntity>>
+    fun getAll(): LiveData<List<Pizza>>
 
-    suspend fun update(pizzaEntity: PizzaEntity)
+    suspend fun update(pizza: Pizza)
 
     suspend fun deleteById(id: Long)
 
-    suspend fun deleteByUuid(uuid: String)
+    suspend fun deleteByUuid(uuid: UUID)
 
     suspend fun deleteAll()
 

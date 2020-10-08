@@ -75,7 +75,7 @@ class MainActivityTest {
 
         // then
         onView(withId(R.id.list_item_pizza_element_root)).check(doesNotExist())
-        assertNull(pizzaRepository.getById(pizza.id))
+        assertNull(pizzaRepository.getByUuid(pizza.uuid))
 
         // cleanup
         activityScenario.close()

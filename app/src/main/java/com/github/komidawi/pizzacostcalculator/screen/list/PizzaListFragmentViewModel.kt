@@ -8,12 +8,12 @@ import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import com.github.komidawi.pizzacostcalculator.network.RestApi
 import com.github.komidawi.pizzacostcalculator.network.asDomainModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
-class PizzaListFragmentViewModel(private val pizzaRepository: PizzaRepository) : ViewModel() {
+class PizzaListFragmentViewModel(
+    private val pizzaRepository: PizzaRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
 
     private val _displayFetchStatusToast = MutableLiveData(false)
     val displayFetchStatusToast: LiveData<Boolean>
@@ -46,7 +46,7 @@ class PizzaListFragmentViewModel(private val pizzaRepository: PizzaRepository) :
 
     fun onRemove(pizza: Pizza) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
+            withContext(ioDispatcher) {
                 pizzaRepository.deleteByUuid(pizza.uuid)
             }
         }
@@ -54,7 +54,7 @@ class PizzaListFragmentViewModel(private val pizzaRepository: PizzaRepository) :
 
     fun onClear() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
+            withContext(ioDispatcher) {
                 pizzaRepository.deleteAll()
             }
         }

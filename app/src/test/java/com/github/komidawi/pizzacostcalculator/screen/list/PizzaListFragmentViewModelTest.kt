@@ -5,7 +5,7 @@ import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
-import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
+import com.github.komidawi.pizzacostcalculator.screen.factory.TestViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertNull
@@ -29,11 +29,12 @@ class PizzaListFragmentViewModelTest {
     @Before
     fun initialize() {
         pizzaRepository = TestRepositoryFactory.create()
-        viewModel = ViewModelFactory(pizzaRepository).create(PizzaListFragmentViewModel::class.java)
+        viewModel =
+            TestViewModelFactory(pizzaRepository).create(PizzaListFragmentViewModel::class.java)
     }
 
     @Test
-    fun onRemove_removesPizzaFromDatabase() = runBlockingTest {
+    fun onRemove_removesPizzaFromDatabase() = mainCoroutineRule.runBlockingTest {
         // given
         val pizzaEntity = PizzaFactory.create("RemovePizzaTest", 1, "1")
         pizzaRepository.insert(pizzaEntity)
@@ -42,7 +43,6 @@ class PizzaListFragmentViewModelTest {
         viewModel.onRemove(pizzaEntity)
 
         // then
-        Thread.sleep(100) // TODO: fix
         assertNull(pizzaRepository.getByUuid(pizzaEntity.uuid))
     }
 }

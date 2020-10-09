@@ -1,9 +1,11 @@
 apply plugin: "org.sonarqube"
 
+apply from: 'env.gradle'
+
 sonarqube {
     properties {
-        property "sonar.host.url", "http://localhost:9000/"
-        property "sonar.login", "159d9b91bdc0faab820ba058327e1adce68bdc1c"
+        property "sonar.host.url", SONAR_HOST_URL
+        property "sonar.login", SONAR_TOKEN
         property "sonar.projectName", "PizzaCostCalculator"
         property "sonar.projectKey", "PizzaCostCalculator"
         property "sonar.sourceEncoding", "UTF-8"

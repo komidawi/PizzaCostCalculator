@@ -2,7 +2,7 @@ package com.github.komidawi.pizzacostcalculator.screen.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModel
 import com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentViewModel
 

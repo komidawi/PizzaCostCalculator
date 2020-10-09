@@ -6,9 +6,8 @@ import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatio
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
-import com.github.komidawi.pizzacostcalculator.data.db.FakeDatabaseDao
+import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.helper.getOrAwaitValue
 import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
@@ -35,8 +34,7 @@ class AddPizzaFragmentViewModelTest {
 
     @Before
     fun initialize() {
-        val databaseDao = FakeDatabaseDao()
-        pizzaRepository = PizzaRepositoryImpl(databaseDao)
+        pizzaRepository = TestRepositoryFactory.create()
         viewModel = ViewModelFactory(pizzaRepository).create(AddPizzaFragmentViewModel::class.java)
     }
 
@@ -67,13 +65,12 @@ class AddPizzaFragmentViewModelTest {
     fun handleAddPizzaWithValidValue_insertsPizzaToDatabase() = mainCoroutineRule.runBlockingTest {
         // given
         setValidTestPizzaData()
-        val createdPizza = viewModel.createPizza()!!
 
         // when
-        viewModel.handleAddPizza()
+        val createdPizza = viewModel.handleAddPizza()!!
 
         // then
-        val receivedPizza = pizzaRepository.getById(createdPizza.id)!!
+        val receivedPizza = pizzaRepository.getByUuid(createdPizza.uuid)!!
         assertEquals(testName, receivedPizza.name)
         assertEquals(testSize.toBigDecimal(), receivedPizza.size)
         assertEquals(testPrice.toBigDecimal(), receivedPizza.price)

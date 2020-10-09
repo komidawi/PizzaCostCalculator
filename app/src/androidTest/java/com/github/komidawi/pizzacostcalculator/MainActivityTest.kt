@@ -10,7 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertNull
@@ -75,7 +75,7 @@ class MainActivityTest {
 
         // then
         onView(withId(R.id.list_item_pizza_element_root)).check(doesNotExist())
-        assertNull(pizzaRepository.getById(pizza.id))
+        assertNull(pizzaRepository.getByUuid(pizza.uuid))
 
         // cleanup
         activityScenario.close()

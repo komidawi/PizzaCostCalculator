@@ -1,6 +1,6 @@
 package com.github.komidawi.pizzacostcalculator.calc
 
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -8,7 +8,7 @@ object CostCalculator {
 
     private val sqCentimetersInSqMeter = BigDecimal(10_000)
 
-    fun calculateRatioPerSqMeter(pizza: PizzaEntity): BigDecimal =
+    fun calculateRatioPerSqMeter(pizza: Pizza): BigDecimal =
         calculateRatioPerSqMeter(pizza.size, pizza.price)
 
     fun calculateRatioPerSqMeter(size: BigDecimal, price: BigDecimal): BigDecimal {

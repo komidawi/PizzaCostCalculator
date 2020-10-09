@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.domain.Pizza
+import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
 import kotlinx.coroutines.*
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -37,7 +37,7 @@ class AddPizzaFragmentViewModel(private val pizzaRepository: PizzaRepository) : 
         get() = _displayEmptyFieldsToast
 
 
-    fun handleAddPizza() {
+    fun handleAddPizza(): Pizza? {
         val pizza = createPizza()
         if (pizza != null) {
             uiScope.launch {
@@ -47,15 +47,16 @@ class AddPizzaFragmentViewModel(private val pizzaRepository: PizzaRepository) : 
         } else {
             _displayEmptyFieldsToast.value = true
         }
+        return pizza
     }
 
-    private suspend fun insertPizza(pizza: PizzaEntity) {
+    private suspend fun insertPizza(pizza: Pizza) {
         withContext(Dispatchers.IO) {
             pizzaRepository.insert(pizza)
         }
     }
 
-    fun createPizza(): PizzaEntity? {
+    fun createPizza(): Pizza? {
         val currentName = name.value
         val currentSize = size.value
         val currentPrice = price.value
@@ -63,7 +64,7 @@ class AddPizzaFragmentViewModel(private val pizzaRepository: PizzaRepository) : 
         return if (currentName.isNullOrEmpty() || currentSize.isNullOrEmpty() || currentPrice.isNullOrEmpty()) {
             null
         } else {
-            PizzaEntityFactory.create(currentName, currentSize, currentPrice)
+            PizzaFactory.create(currentName, currentSize, currentPrice)
         }
     }
 

@@ -1,7 +1,8 @@
 package com.github.komidawi.pizzacostcalculator.network
 
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
+import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import java.math.BigDecimal
+import java.util.*
 
 /**
  * Network-side Pizza object
@@ -22,5 +23,7 @@ data class PizzaDto(
 
 )
 
-fun PizzaDto.asDatabaseModel(): PizzaEntity =
-    PizzaEntity(name, BigDecimal(size), BigDecimal(price), BigDecimal(ratio), uuid, id)
+fun PizzaDto.asDomainModel(): Pizza =
+    Pizza(name, BigDecimal(size), BigDecimal(price), BigDecimal(ratio), UUID.fromString(uuid), id)
+
+fun List<PizzaDto>.asDomainModel(): List<Pizza> = map { it.asDomainModel() }

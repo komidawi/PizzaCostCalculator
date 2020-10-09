@@ -1,9 +1,8 @@
 package com.github.komidawi.pizzacostcalculator.calc
 
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.delta
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntity
-import com.github.komidawi.pizzacostcalculator.data.db.PizzaEntityFactory
-import org.junit.Assert.*
+import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class CostCalculatorTest {
@@ -11,7 +10,7 @@ class CostCalculatorTest {
     @Test
     fun calculateRatio_size42_cost24_99() {
         // given
-        val pizza = PizzaEntityFactory.create(42, "24.99")
+        val pizza = PizzaFactory.create(42, "24.99")
 
         // when
         val ratio = CostCalculator.calculateRatioPerSqMeter(pizza)

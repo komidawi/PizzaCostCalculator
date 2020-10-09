@@ -19,9 +19,8 @@ import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatioDisplayText
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepository
-import com.github.komidawi.pizzacostcalculator.data.PizzaRepositoryImpl
-import com.github.komidawi.pizzacostcalculator.data.db.FakeAndroidTestDatabaseDao
+import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.core.StringContains.containsString
@@ -40,8 +39,7 @@ class AddPizzaFragmentTest {
 
     @Before
     fun initializeRepository() {
-        val databaseDao = FakeAndroidTestDatabaseDao()
-        pizzaRepository = PizzaRepositoryImpl(databaseDao)
+        pizzaRepository = TestRepositoryFactory.create()
         ServiceLocator.repository = pizzaRepository
     }
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 
 class FakeDatabaseDao : PizzaDatabaseDao {
 
-    private val data = hashSetOf<PizzaEntity>()
+    private val data = mutableListOf<PizzaEntity>()
 
     private val observableData = MutableLiveData<List<PizzaEntity>>()
 
@@ -25,7 +25,7 @@ class FakeDatabaseDao : PizzaDatabaseDao {
         data.stream().filter { it.uuid == uuid }.findAny().orElse(null)
 
     override fun getAll(): LiveData<List<PizzaEntity>> {
-        observableData.value = data.toList()
+        observableData.postValue(data.toList())
         return observableData
     }
 

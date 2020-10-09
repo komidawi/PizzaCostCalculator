@@ -68,7 +68,6 @@ object ServiceLocator {
             PizzaDatabase::class.java,
             "pizza_database"
         )
-            .fallbackToDestructiveMigration() // TODO: add safe migrations
             .build()
         database = result
         return result

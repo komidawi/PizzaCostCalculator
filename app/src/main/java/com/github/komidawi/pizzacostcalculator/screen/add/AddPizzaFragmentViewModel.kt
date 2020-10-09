@@ -12,7 +12,10 @@ import kotlinx.coroutines.*
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class AddPizzaFragmentViewModel(private val pizzaRepository: PizzaRepository) : ViewModel() {
+class AddPizzaFragmentViewModel(
+    private val pizzaRepository: PizzaRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
 
     private val viewModelJob = Job()
 
@@ -51,7 +54,7 @@ class AddPizzaFragmentViewModel(private val pizzaRepository: PizzaRepository) : 
     }
 
     private suspend fun insertPizza(pizza: Pizza) {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             pizzaRepository.insert(pizza)
         }
     }

@@ -10,7 +10,7 @@ import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.helper.MainCoroutineRule
 import com.github.komidawi.pizzacostcalculator.helper.getOrAwaitValue
-import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
+import com.github.komidawi.pizzacostcalculator.screen.factory.TestViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.*
@@ -35,7 +35,8 @@ class AddPizzaFragmentViewModelTest {
     @Before
     fun initialize() {
         pizzaRepository = TestRepositoryFactory.create()
-        viewModel = ViewModelFactory(pizzaRepository).create(AddPizzaFragmentViewModel::class.java)
+        viewModel =
+            TestViewModelFactory(pizzaRepository).create(AddPizzaFragmentViewModel::class.java)
     }
 
     @Test
@@ -83,7 +84,6 @@ class AddPizzaFragmentViewModelTest {
 
         // when
         viewModel.handleAddPizza()
-        Thread.sleep(10) // TODO: fix it - currently no idea how to make it work
 
         // then
         assertTrue(viewModel.navigateToPizzaListFragment.getOrAwaitValue())

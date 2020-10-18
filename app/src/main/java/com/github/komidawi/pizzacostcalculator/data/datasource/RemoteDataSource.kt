@@ -50,7 +50,9 @@ class RemoteDataSource(
     }
 
     override suspend fun deleteByUuid(uuid: UUID) {
-        TODO("Not yet implemented")
+        withContext(ioDispatcher) {
+            restService.deletePizzaByUuid(uuid.toString())
+        }
     }
 
     override suspend fun deleteAll() {

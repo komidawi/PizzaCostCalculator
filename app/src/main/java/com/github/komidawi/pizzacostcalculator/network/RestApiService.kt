@@ -5,10 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 private val interceptor = HttpLoggingInterceptor()
@@ -33,6 +30,9 @@ interface RestApiService {
 
     @POST(".")
     suspend fun insertPizza(@Body pizza: PizzaDto)
+
+    @DELETE("uuid/{uuid}")
+    suspend fun deletePizzaByUuid(@Path("uuid") uuid: String)
 
 }
 

@@ -9,7 +9,7 @@ object FakeRestApi {
 
 class FakeRestApiService : RestApiService {
 
-    private val data = mutableSetOf<PizzaDto>()
+    val data = mutableSetOf<PizzaDto>()
 
     override suspend fun getAllPizzas(): List<PizzaDto> = data.toList()
 
@@ -17,5 +17,9 @@ class FakeRestApiService : RestApiService {
 
     override suspend fun insertPizza(pizza: PizzaDto) {
         data.add(pizza)
+    }
+
+    override suspend fun deletePizzaByUuid(uuid: String) {
+        data.removeIf { it.uuid == uuid }
     }
 }

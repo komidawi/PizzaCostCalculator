@@ -29,7 +29,7 @@ interface RestApiService {
     suspend fun getAllPizzas(): List<PizzaDto>
 
     @GET("uuid/{uuid}")
-    suspend fun getPizzaByUuid(@Path("uuid") uuid: String)
+    suspend fun getPizzaByUuid(@Path("uuid") uuid: String): PizzaDto?
 
     @POST(".")
     suspend fun insertPizza(@Body pizza: PizzaDto)

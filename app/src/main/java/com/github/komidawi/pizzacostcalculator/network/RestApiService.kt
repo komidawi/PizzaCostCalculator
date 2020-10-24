@@ -34,6 +34,9 @@ interface RestApiService {
     @DELETE("uuid/{uuid}")
     suspend fun deletePizzaByUuid(@Path("uuid") uuid: String)
 
+    @DELETE("all")
+    suspend fun deleteAll()
+
 }
 
 object RestApi {

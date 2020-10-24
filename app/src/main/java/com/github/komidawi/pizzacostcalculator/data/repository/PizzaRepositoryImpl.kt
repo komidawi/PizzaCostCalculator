@@ -9,7 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
 
-class PizzaRepositoryImpl(private val localDataSource: DataSource) : PizzaRepository {
+class PizzaRepositoryImpl(
+    private val localDataSource: DataSource,
+    private val remoteDataSource: DataSource
+) : PizzaRepository {
 
     suspend fun refreshPizzas() {
         withContext(Dispatchers.IO) {
@@ -47,5 +50,6 @@ class PizzaRepositoryImpl(private val localDataSource: DataSource) : PizzaReposi
 
     override suspend fun deleteAll() {
         localDataSource.deleteAll()
+        remoteDataSource.deleteAll()
     }
 }

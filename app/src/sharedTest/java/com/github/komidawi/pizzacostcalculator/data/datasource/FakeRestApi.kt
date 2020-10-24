@@ -22,4 +22,8 @@ class FakeRestApiService : RestApiService {
     override suspend fun deletePizzaByUuid(uuid: String) {
         data.removeIf { it.uuid == uuid }
     }
+
+    override suspend fun deleteAll() {
+        data.clear()
+    }
 }

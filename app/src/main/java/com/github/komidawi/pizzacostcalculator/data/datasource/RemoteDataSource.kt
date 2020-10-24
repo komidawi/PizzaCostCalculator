@@ -56,7 +56,8 @@ class RemoteDataSource(
     }
 
     override suspend fun deleteAll() {
-        TODO("Not yet implemented")
+        withContext(ioDispatcher) {
+            restService.deleteAll()
+        }
     }
-
 }

@@ -9,8 +9,6 @@ import java.util.*
  */
 data class PizzaDto(
 
-    val id: Long,
-
     val name: String,
 
     val size: String,
@@ -19,7 +17,9 @@ data class PizzaDto(
 
     val ratio: String,
 
-    val uuid: String
+    val uuid: String,
+
+    val id: Long? = null
 
 )
 

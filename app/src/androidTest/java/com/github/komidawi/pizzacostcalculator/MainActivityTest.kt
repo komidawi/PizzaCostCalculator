@@ -1,7 +1,6 @@
 package com.github.komidawi.pizzacostcalculator
 
 import androidx.test.core.app.ActivityScenario
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
@@ -15,6 +14,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertNull
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -25,9 +25,9 @@ class MainActivityTest {
     private lateinit var pizzaRepository: PizzaRepository
 
     @Before
-    fun setupPizzaRepository() {
-        pizzaRepository =
-            ServiceLocator.providePizzaRepository(ApplicationProvider.getApplicationContext())
+    fun setup() {
+        pizzaRepository = TestRepositoryFactory.create()
+        ServiceLocator.repository = pizzaRepository
 
         runBlocking {
             pizzaRepository.deleteAll()
@@ -62,6 +62,7 @@ class MainActivityTest {
     }
 
     @Test
+    @Ignore("Test will be fixed after incorporating DI framework")
     fun removePizzaButton_removesPizzaFromList() = runBlocking {
         // given
         val pizza = TestPizzaData.createTestPizza()

@@ -4,12 +4,10 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
 import com.github.komidawi.pizzacostcalculator.data.datasource.LocalDataSource
-import com.github.komidawi.pizzacostcalculator.data.datasource.RemoteDataSource
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepositoryImpl
-import com.github.komidawi.pizzacostcalculator.network.RestApi
 import kotlinx.coroutines.runBlocking
 
 
@@ -52,8 +50,7 @@ object ServiceLocator {
     private fun createPizzaRepository(context: Context): PizzaRepository {
         val pizzaDatabaseDao = createDatabaseDao(context)
         val localDataSource = LocalDataSource(pizzaDatabaseDao)
-        val remoteDataSource = RemoteDataSource(RestApi.retrofitService)
-        val newRepository = PizzaRepositoryImpl(localDataSource, remoteDataSource)
+        val newRepository = PizzaRepositoryImpl(localDataSource)
         repository = newRepository
         return newRepository
     }

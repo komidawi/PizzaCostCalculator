@@ -15,24 +15,24 @@ interface PizzaDatabaseDao {
     @Insert
     suspend fun insertAll(pizzaEntities: List<PizzaEntity>)
 
-    @Query("SELECT * FROM pizza_table WHERE id = :id")
+    @Query("SELECT * FROM pizza WHERE id = :id")
     suspend fun getById(id: Long): PizzaEntity?
 
-    @Query("SELECT * FROM pizza_table WHERE uuid = :uuid")
+    @Query("SELECT * FROM pizza WHERE uuid = :uuid")
     suspend fun getByUuid(uuid: String): PizzaEntity?
 
-    @Query("SELECT * FROM pizza_table ORDER BY id DESC")
+    @Query("SELECT * FROM pizza ORDER BY id DESC")
     fun getAll(): LiveData<List<PizzaEntity>>
 
     @Update
     suspend fun update(pizzaEntity: PizzaEntity)
 
-    @Query("DELETE FROM pizza_table WHERE id = :id")
+    @Query("DELETE FROM pizza WHERE id = :id")
     suspend fun deleteById(id: Long)
 
-    @Query("DELETE FROM pizza_table WHERE uuid = :uuid")
+    @Query("DELETE FROM pizza WHERE uuid = :uuid")
     suspend fun deleteByUuid(uuid: String)
 
-    @Query("DELETE FROM pizza_table")
+    @Query("DELETE FROM pizza")
     suspend fun deleteAll()
 }

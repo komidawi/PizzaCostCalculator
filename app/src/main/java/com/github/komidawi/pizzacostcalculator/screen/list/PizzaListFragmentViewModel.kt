@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.domain.Pizza
-import com.github.komidawi.pizzacostcalculator.network.RestApi
-import com.github.komidawi.pizzacostcalculator.network.asDomainModel
 import kotlinx.coroutines.*
 
 class PizzaListFragmentViewModel(
@@ -25,24 +23,6 @@ class PizzaListFragmentViewModel(
 
     val pizzaList = pizzaRepository.getAll()
 
-    init {
-        fetchAllPizzas()
-    }
-
-    private fun fetchAllPizzas() {
-        viewModelScope.launch {
-            try {
-                val allPizzas = RestApi.retrofitService.getAllPizzas()
-                // TODO: temporary solution until Remote DataSource provided
-                pizzaRepository.deleteAll()
-                pizzaRepository.insertAll(allPizzas.asDomainModel())
-                _fetchStatusMessage.value = "Success, ${allPizzas.size} fetched"
-            } catch (e: Exception) {
-                _fetchStatusMessage.value = "Error while fetching pizzas: ${e.message}"
-            }
-            _displayFetchStatusToast.value = true
-        }
-    }
 
     fun onRemove(pizza: Pizza) {
         viewModelScope.launch {

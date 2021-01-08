@@ -9,6 +9,8 @@ import java.util.*
  */
 class Pizza(
 
+    val pizzeria: String?,
+
     val name: String,
 
     val size: BigDecimal,
@@ -28,6 +30,14 @@ class Pizza(
 }
 
 fun Pizza.asDatabaseModel(): PizzaEntity =
-    PizzaEntity(name, size.toString(), price.toString(), ratio.toString(), uuid.toString(), id)
+    PizzaEntity(
+        pizzeria,
+        name,
+        size.toString(),
+        price.toString(),
+        ratio.toString(),
+        uuid.toString(),
+        id
+    )
 
 fun List<Pizza>.asDatabaseModel(): List<PizzaEntity> = map(Pizza::asDatabaseModel)

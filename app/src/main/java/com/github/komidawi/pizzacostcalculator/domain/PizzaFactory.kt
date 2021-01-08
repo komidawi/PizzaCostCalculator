@@ -39,6 +39,6 @@ object PizzaFactory {
 
     fun create(name: String, size: BigDecimal, price: BigDecimal): Pizza {
         val ratio = calculator.calculateRatioPerSqMeter(size, price)
-        return Pizza(name, size, price, ratio)
+        return Pizza(null, name, size, price, ratio)
     }
 }

@@ -7,4 +7,5 @@ class PizzaApplication : Application() {
 
     val pizzaRepository: PizzaRepository
         get() = ServiceLocator.providePizzaRepository(this)
+
 }

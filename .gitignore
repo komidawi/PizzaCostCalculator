@@ -383,5 +383,6 @@ obj/
 
 
 .ignored/
+.idea/discord.xml
 app/src/main/java/com/github/komidawi/pizzacostcalculator/config/Env.kt
 env.gradle

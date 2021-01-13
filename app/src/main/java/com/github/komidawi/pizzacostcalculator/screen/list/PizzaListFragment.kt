@@ -19,7 +19,7 @@ class PizzaListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPizzaListBinding.inflate(inflater, container, false)
 
         val pizzaRepository =
@@ -46,7 +46,7 @@ class PizzaListFragment : Fragment() {
         binding.pizzaListRecyclerView.adapter = adapter
 
         viewModel.pizzaList.observe(viewLifecycleOwner, { pizzas ->
-            pizzas?.let { adapter.addHeaderAndSubmitList(pizzas) }
+            pizzas?.let { adapter.submitList(pizzas) }
         })
     }
 

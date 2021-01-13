@@ -6,14 +6,6 @@
     <!-- Pizza List Fragment -->
     <string name="pizza_list_fragment_title">Your Pizza List</string>
 
-    <!-- Headers -->
-    <string name="pizza_list_name_header">Name</string>
-    <string name="pizza_list_size_header">Size</string>
-    <string name="pizza_list_price_header">Price</string>
-    <string name="pizza_list_ratio_header">Ratio</string>
-    <string name="pizza_list_remove_header">Remove</string>
-
-    <!-- Labels -->
     <string name="pizza_list_pizzeria_label">Pizzeria:</string>
     <string name="pizza_list_size_label">Size:</string>
     <string name="pizza_list_price_label">Price:</string>
@@ -33,4 +25,5 @@
     <string name="pizza_ratio_display_text">Ratio: %s zł/m^2</string>
     <string name="pizza_add_button_text">Add pizza!</string>
     <string name="all_fields_are_required_message">All fields are required</string>
+
 </resources>

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.github.komidawi.pizzacostcalculator.PizzaApplication
 import com.github.komidawi.pizzacostcalculator.R
@@ -23,7 +22,7 @@ class AddPizzaFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddPizzaBinding.inflate(inflater, container, false)
 
         val pizzaRepository =
@@ -42,7 +41,7 @@ class AddPizzaFragment : Fragment() {
     }
 
     private fun setupNavigateToPizzaListObserver() {
-        viewModel.navigateToPizzaListFragment.observe(viewLifecycleOwner, Observer { navigate ->
+        viewModel.navigateToPizzaListFragment.observe(viewLifecycleOwner, { navigate ->
             if (navigate) {
                 this.findNavController()
                     .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())
@@ -52,7 +51,7 @@ class AddPizzaFragment : Fragment() {
     }
 
     private fun setupDisplayEmptyFieldsToastObserver() {
-        viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, Observer { displayToast ->
+        viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, { displayToast ->
             if (displayToast) {
                 val message = getString(R.string.all_fields_are_required_message)
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()

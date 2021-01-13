@@ -26,6 +26,7 @@
 
     <!-- Add Pizza Fragment -->
     <string name="add_pizza_fragment_title">Add Pizza</string>
+    <string name="pizza_pizzeria_input_hit">pizzeria</string>
     <string name="pizza_name_input_hint">name</string>
     <string name="pizza_size_input_hint">size</string>
     <string name="pizza_price_input_hint">price</string>

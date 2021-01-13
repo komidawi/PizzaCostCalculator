@@ -25,6 +25,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:id="@+id/pizza_pizzeria_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:ems="12"
+                android:hint="@string/pizza_pizzeria_input_hit"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:text="@={viewModel.pizzeria}" />
+
+            <EditText
                 android:id="@+id/pizza_name_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

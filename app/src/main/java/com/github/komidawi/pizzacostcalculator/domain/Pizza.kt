@@ -25,7 +25,7 @@ class Pizza(
 
 ) {
     override fun toString(): String {
-        return "Pizza(name='$name', size=$size, price=$price, ratio=$ratio, uuid=$uuid, id=$id)"
+        return "Pizza(pizzeria='$pizzeria', name='$name', size=$size, price=$price, ratio=$ratio, uuid=$uuid, id=$id)"
     }
 }
 

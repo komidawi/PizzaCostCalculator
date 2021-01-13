@@ -18,7 +18,7 @@
             type="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/list_item_pizza_element_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,34 +27,129 @@
         <TextView
             android:id="@+id/pizza_name_display"
             style="@style/PizzaListItemElementText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_name_label"
+            app:layout_constraintStart_toEndOf="@+id/pizza_name_label"
+            app:layout_constraintTop_toTopOf="@+id/pizza_name_label"
             app:pizzaNameDisplay="@{pizza}"
             tools:text="Name" />
 
         <TextView
             android:id="@+id/pizza_size_display"
             style="@style/PizzaListItemElementText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_size_label"
+            app:layout_constraintStart_toEndOf="@+id/pizza_size_label"
+            app:layout_constraintTop_toTopOf="@+id/pizza_size_label"
             app:pizzaSizeDisplay="@{pizza}"
             tools:text="Size" />
 
         <TextView
             android:id="@+id/pizza_price_display"
             style="@style/PizzaListItemElementText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_price_label"
+            app:layout_constraintStart_toEndOf="@+id/pizza_price_label"
+            app:layout_constraintTop_toTopOf="@+id/pizza_price_label"
             app:pizzaPriceDisplay="@{pizza}"
             tools:text="Price" />
 
         <TextView
             android:id="@+id/list_pizza_ratio_display"
             style="@style/PizzaListItemElementText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_ratio_label"
+            app:layout_constraintStart_toEndOf="@+id/pizza_ratio_label"
+            app:layout_constraintTop_toTopOf="@+id/pizza_ratio_label"
             app:listPizzaRatioDisplay="@{pizza}"
             tools:text="Ratio" />
 
         <ImageButton
             android:id="@+id/pizza_remove_button"
             style="@style/PizzaListItemElementText"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
             android:onClick="@{() -> viewModel.onRemove(pizza)}"
             android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_delete"
             tools:ignore="ContentDescription" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/pizza_pizzeria_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/pizza_list_pizzeria_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pizza_pizzeria_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_pizzeria_label"
+            app:layout_constraintStart_toEndOf="@+id/pizza_pizzeria_label"
+            app:layout_constraintTop_toTopOf="@+id/pizza_pizzeria_label"
+            app:pizzaPizzeriaDisplay="@{pizza}"
+            tools:text="Babilon" />
+
+        <TextView
+            android:id="@+id/pizza_size_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/pizza_list_size_label"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pizza_pizzeria_label"
+            app:layout_constraintTop_toBottomOf="@+id/pizza_pizzeria_label" />
+
+        <TextView
+            android:id="@+id/pizza_price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/pizza_list_price_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/pizza_size_display"
+            app:layout_constraintTop_toTopOf="@+id/pizza_size_display" />
+
+        <TextView
+            android:id="@+id/pizza_ratio_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/pizza_list_ratio_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/pizza_price_display"
+            app:layout_constraintTop_toTopOf="@+id/pizza_price_display" />
+
+        <TextView
+            android:id="@+id/pizza_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/pizza_list_name_label"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_pizzeria_display"
+            app:layout_constraintStart_toEndOf="@+id/pizza_pizzeria_display"
+            app:layout_constraintTop_toTopOf="@+id/pizza_pizzeria_display" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

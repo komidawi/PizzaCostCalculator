@@ -9,6 +9,11 @@ import com.github.komidawi.pizzacostcalculator.domain.Pizza
     extracting complicated setter logic such as ImageView (down)loading
  */
 
+@BindingAdapter("pizzaPizzeriaDisplay")
+fun TextView.setPizzaPizzeriaDisplay(pizza: Pizza?) {
+    pizza?.let { text = pizza.pizzeria }
+}
+
 @BindingAdapter("pizzaNameDisplay")
 fun TextView.setPizzaNameDisplay(pizza: Pizza?) {
     pizza?.let { text = pizza.name }

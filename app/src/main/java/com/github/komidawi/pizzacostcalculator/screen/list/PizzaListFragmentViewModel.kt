@@ -1,6 +1,5 @@
 package com.github.komidawi.pizzacostcalculator.screen.list
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,16 +12,16 @@ class PizzaListFragmentViewModel(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    private val _displayFetchStatusToast = MutableLiveData(false)
-    val displayFetchStatusToast: LiveData<Boolean>
-        get() = _displayFetchStatusToast
-
-    private val _fetchStatusMessage = MutableLiveData<String>()
-    val fetchStatusMessage: LiveData<String>
-        get() = _fetchStatusMessage
+    var sortingMode = MutableLiveData(SortingMode.RATIO_ASCENDING)
 
     val pizzaList = pizzaRepository.getAll()
 
+
+    fun reverseSorting() {
+        sortingMode.value =
+            if (sortingMode.value == SortingMode.RATIO_ASCENDING) SortingMode.PIZZERIA_DESCENDING
+            else SortingMode.RATIO_ASCENDING
+    }
 
     fun onRemove(pizza: Pizza) {
         viewModelScope.launch {

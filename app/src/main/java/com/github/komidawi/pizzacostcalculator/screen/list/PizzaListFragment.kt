@@ -15,6 +15,7 @@ class PizzaListFragment : Fragment() {
 
     private lateinit var binding: FragmentPizzaListBinding
     private lateinit var viewModel: PizzaListFragmentViewModel
+    private lateinit var adapter: PizzaListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,6 @@ class PizzaListFragment : Fragment() {
 
         setupRecyclerView()
         setupFabOnClickListener()
-        setupDisplayFetchStatusToastObserver()
 
         binding.lifecycleOwner = this
 
@@ -42,12 +42,20 @@ class PizzaListFragment : Fragment() {
             Toast.makeText(context, "$pizza", Toast.LENGTH_SHORT).show()
         }
 
-        val adapter = PizzaListAdapter(clickListener, viewModel)
+        adapter = PizzaListAdapter(clickListener, viewModel)
         binding.pizzaListRecyclerView.adapter = adapter
 
-        viewModel.pizzaList.observe(viewLifecycleOwner, { pizzas ->
-            pizzas?.let { adapter.submitList(pizzas) }
-        })
+        viewModel.apply {
+            pizzaList.observe(viewLifecycleOwner, { updateList() })
+            sortingMode.observe(viewLifecycleOwner, { updateList() })
+        }
+    }
+
+    private fun updateList() {
+        val pizzas = viewModel.pizzaList.value
+        val sortingMode = viewModel.sortingMode.value
+
+        adapter.sortAndSubmitList(pizzas, sortingMode)
     }
 
     private fun setupFabOnClickListener() {
@@ -55,14 +63,5 @@ class PizzaListFragment : Fragment() {
             view.findNavController()
                 .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())
         }
-    }
-
-    private fun setupDisplayFetchStatusToastObserver() {
-        viewModel.displayFetchStatusToast.observe(viewLifecycleOwner, { displayToast ->
-            if (displayToast) {
-                Toast.makeText(context, viewModel.fetchStatusMessage.value, Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
     }
 }

@@ -22,6 +22,20 @@ class PizzaListAdapter(
         holder.bind(clickListener, pizzaItem, pizzaListFragmentViewModel)
     }
 
+    // TODO: add coroutine
+    fun sortAndSubmitList(list: List<Pizza>?, sortingMode: SortingMode?) {
+        val items = list?.let {
+            when (sortingMode) {
+                SortingMode.RATIO_ASCENDING -> it.sortedBy(Pizza::ratio)
+                SortingMode.RATIO_DESCENDING -> it.sortedByDescending(Pizza::ratio)
+                SortingMode.PIZZERIA_ASCENDING -> it.sortedBy(Pizza::pizzeria)
+                SortingMode.PIZZERIA_DESCENDING -> it.sortedByDescending(Pizza::pizzeria)
+                else -> it
+            }
+        }
+        submitList(items)
+    }
+
     class PizzaItemViewHolder private constructor(private val binding: ListItemPizzaElementBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

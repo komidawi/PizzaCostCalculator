@@ -55,12 +55,21 @@
             android:id="@+id/reverse_sorting_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="reverse sorting"
             android:onClick="@{() -> viewModel.reverseSorting()}"
+            android:text="reverse sorting"
             app:layout_constraintBottom_toBottomOf="@+id/clear_data_button"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sorting_mode_spinner"
             app:layout_constraintStart_toEndOf="@+id/clear_data_button"
             app:layout_constraintTop_toTopOf="@+id/clear_data_button" />
+
+        <Spinner
+            android:id="@+id/sorting_mode_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/reverse_sorting_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/reverse_sorting_button"
+            app:layout_constraintTop_toTopOf="@+id/reverse_sorting_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

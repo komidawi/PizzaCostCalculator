@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -30,11 +32,33 @@ class PizzaListFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupRecyclerView()
+        setupArrayAdapter()
         setupFabOnClickListener()
 
         binding.lifecycleOwner = this
 
         return binding.root
+    }
+
+    private fun setupArrayAdapter() {
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            SortingMode.values()
+        ).also { arrayAdapter ->
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.sortingModeSpinner.apply {
+                adapter = arrayAdapter
+                onItemSelectedListener = SortingModeSpinnerListener(viewModel)
+            }
+        }
+    }
+
+    private fun updateList() {
+        val pizzas = viewModel.pizzaList.value
+        val sortingMode = viewModel.sortingMode.value
+
+        adapter.sortAndSubmitList(pizzas, sortingMode)
     }
 
     private fun setupRecyclerView() {
@@ -51,17 +75,20 @@ class PizzaListFragment : Fragment() {
         }
     }
 
-    private fun updateList() {
-        val pizzas = viewModel.pizzaList.value
-        val sortingMode = viewModel.sortingMode.value
-
-        adapter.sortAndSubmitList(pizzas, sortingMode)
-    }
-
     private fun setupFabOnClickListener() {
         binding.addPizzaFab.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())
         }
+    }
+
+    class SortingModeSpinnerListener(private val viewModel: PizzaListFragmentViewModel) :
+        AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            viewModel.sortingMode.value = SortingMode.values()[position]
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 }

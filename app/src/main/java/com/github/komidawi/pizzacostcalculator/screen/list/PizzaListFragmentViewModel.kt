@@ -16,13 +16,6 @@ class PizzaListFragmentViewModel(
 
     val pizzaList = pizzaRepository.getAll()
 
-
-    fun reverseSorting() {
-        sortingMode.value =
-            if (sortingMode.value == SortingMode.RATIO_ASCENDING) SortingMode.PIZZERIA_DESCENDING
-            else SortingMode.RATIO_ASCENDING
-    }
-
     fun onRemove(pizza: Pizza) {
         viewModelScope.launch {
             withContext(ioDispatcher) {

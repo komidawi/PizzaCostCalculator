@@ -32,33 +32,12 @@ class PizzaListFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupRecyclerView()
-        setupArrayAdapter()
+        setupSortingModeSpinner()
         setupFabOnClickListener()
 
         binding.lifecycleOwner = this
 
         return binding.root
-    }
-
-    private fun setupArrayAdapter() {
-        ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            SortingMode.values()
-        ).also { arrayAdapter ->
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.sortingModeSpinner.apply {
-                adapter = arrayAdapter
-                onItemSelectedListener = SortingModeSpinnerListener(viewModel)
-            }
-        }
-    }
-
-    private fun updateList() {
-        val pizzas = viewModel.pizzaList.value
-        val sortingMode = viewModel.sortingMode.value
-
-        adapter.sortAndSubmitList(pizzas, sortingMode)
     }
 
     private fun setupRecyclerView() {
@@ -73,6 +52,29 @@ class PizzaListFragment : Fragment() {
             pizzaList.observe(viewLifecycleOwner, { updateList() })
             sortingMode.observe(viewLifecycleOwner, { updateList() })
         }
+    }
+
+    private fun setupSortingModeSpinner() {
+        binding.sortingModeSpinner.apply {
+            adapter = createSpinnerAdapter()
+            onItemSelectedListener = SortingModeSpinnerListener(viewModel)
+        }
+    }
+
+    private fun createSpinnerAdapter() =
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            SortingMode.values()
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+    private fun updateList() {
+        val pizzas = viewModel.pizzaList.value
+        val sortingMode = viewModel.sortingMode.value
+
+        adapter.sortAndSubmitList(pizzas, sortingMode)
     }
 
     private fun setupFabOnClickListener() {

@@ -9,8 +9,10 @@ import java.util.*
 /**
  * Database-side Pizza object
  */
-@Entity(tableName = "pizza_table")
+@Entity(tableName = "pizza")
 data class PizzaEntity(
+
+    val pizzeria: String?,
 
     val name: String,
 
@@ -27,7 +29,15 @@ data class PizzaEntity(
 )
 
 fun PizzaEntity.asDomainModel(): Pizza =
-    Pizza(name, BigDecimal(size), BigDecimal(price), BigDecimal(ratio), UUID.fromString(uuid), id)
+    Pizza(
+        pizzeria,
+        name,
+        BigDecimal(size),
+        BigDecimal(price),
+        BigDecimal(ratio),
+        UUID.fromString(uuid),
+        id
+    )
 
 fun List<PizzaEntity>.asDomainModel(): List<Pizza> =
     map { pizzaEntity -> pizzaEntity.asDomainModel() }

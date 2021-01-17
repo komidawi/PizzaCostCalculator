@@ -36,7 +36,7 @@ class PizzaListFragmentViewModelTest {
     @Test
     fun onRemove_removesPizzaFromDatabase() = mainCoroutineRule.runBlockingTest {
         // given
-        val pizzaEntity = PizzaFactory.create("RemovePizzaTest", 1, "1")
+        val pizzaEntity = PizzaFactory.create("", "", 1, "1")
         pizzaRepository.insert(pizzaEntity)
 
         // when

@@ -9,6 +9,8 @@ import java.util.*
  */
 class Pizza(
 
+    val pizzeria: String?,
+
     val name: String,
 
     val size: BigDecimal,
@@ -23,11 +25,47 @@ class Pizza(
 
 ) {
     override fun toString(): String {
-        return "Pizza(name='$name', size=$size, price=$price, ratio=$ratio, uuid=$uuid, id=$id)"
+        return "Pizza(pizzeria='$pizzeria', name='$name', size=$size, price=$price, ratio=$ratio, uuid=$uuid, id=$id)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Pizza
+
+        if (pizzeria != other.pizzeria) return false
+        if (name != other.name) return false
+        if (size != other.size) return false
+        if (price != other.price) return false
+        if (ratio != other.ratio) return false
+        if (uuid != other.uuid) return false
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = pizzeria?.hashCode() ?: 0
+        result = 31 * result + name.hashCode()
+        result = 31 * result + size.hashCode()
+        result = 31 * result + price.hashCode()
+        result = 31 * result + ratio.hashCode()
+        result = 31 * result + uuid.hashCode()
+        result = 31 * result + (id?.hashCode() ?: 0)
+        return result
     }
 }
 
 fun Pizza.asDatabaseModel(): PizzaEntity =
-    PizzaEntity(name, size.toString(), price.toString(), ratio.toString(), uuid.toString(), id)
+    PizzaEntity(
+        pizzeria,
+        name,
+        size.toString(),
+        price.toString(),
+        ratio.toString(),
+        uuid.toString(),
+        id
+    )
 
 fun List<Pizza>.asDatabaseModel(): List<PizzaEntity> = map(Pizza::asDatabaseModel)

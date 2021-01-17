@@ -10,6 +10,8 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPizzeria
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -42,20 +44,21 @@ class MainActivityTest {
     @Test
     fun addNewPizza_displaysPizzaInList() = runBlocking {
         // given
-        val testPizzaName = "TestPizzaName"
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
         // when
         onView(withId(R.id.add_pizza_fab)).perform(click())
 
         // and
-        onView(withId(R.id.pizza_name_input)).perform(typeText(testPizzaName))
+        onView(withId(R.id.pizza_pizzeria_input)).perform(typeText(testPizzeria))
+        onView(withId(R.id.pizza_name_input)).perform(typeText(testName))
         onView(withId(R.id.pizza_size_input)).perform(typeText("50"))
         onView(withId(R.id.pizza_price_input)).perform(typeText("34.99"))
         onView(withId(R.id.pizza_add_button)).perform(click())
 
         // then
-        onView(withText(testPizzaName)).check(matches(isDisplayed()))
+        onView(withText(testPizzeria)).check(matches(isDisplayed()))
+        onView(withText(testName)).check(matches(isDisplayed()))
 
         // cleanup
         activityScenario.close()

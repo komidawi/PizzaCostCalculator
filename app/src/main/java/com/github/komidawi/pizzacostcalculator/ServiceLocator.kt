@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.room.Room
 import com.github.komidawi.pizzacostcalculator.data.datasource.LocalDataSource
+import com.github.komidawi.pizzacostcalculator.data.db.Migrations
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
 import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
@@ -11,7 +12,6 @@ import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepositoryIm
 import kotlinx.coroutines.runBlocking
 
 
-// TODO: replace with proper DI in the future
 object ServiceLocator {
 
     private var database: PizzaDatabase? = null
@@ -68,6 +68,7 @@ object ServiceLocator {
             PizzaDatabase::class.java,
             "pizza_database"
         )
+            .addMigrations(Migrations.MIGRATION_3_4)
             .build()
         database = result
         return result

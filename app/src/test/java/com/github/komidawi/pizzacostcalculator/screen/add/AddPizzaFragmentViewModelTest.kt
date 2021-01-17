@@ -3,6 +3,7 @@ package com.github.komidawi.pizzacostcalculator.screen.add
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.delta
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPizzeria
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatio
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
@@ -48,6 +49,7 @@ class AddPizzaFragmentViewModelTest {
         val createdPizza = viewModel.createPizza()!!
 
         // then
+        assertEquals(testPizzeria, createdPizza.pizzeria)
         assertEquals(testName, createdPizza.name)
         assertEquals(testSize.toBigDecimal(), createdPizza.size)
         assertEquals(testPrice.toBigDecimal(), createdPizza.price)
@@ -72,6 +74,7 @@ class AddPizzaFragmentViewModelTest {
 
         // then
         val receivedPizza = pizzaRepository.getByUuid(createdPizza.uuid)!!
+        assertEquals(testPizzeria, createdPizza.pizzeria)
         assertEquals(testName, receivedPizza.name)
         assertEquals(testSize.toBigDecimal(), receivedPizza.size)
         assertEquals(testPrice.toBigDecimal(), receivedPizza.price)
@@ -229,13 +232,19 @@ class AddPizzaFragmentViewModelTest {
         assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
     }
 
-    private fun setPizzaData(name: String? = null, size: String? = null, price: String? = null) {
+    private fun setPizzaData(
+        pizzeria: String? = null,
+        name: String? = null,
+        size: String? = null,
+        price: String? = null
+    ) {
+        viewModel.pizzeria.value = pizzeria
         viewModel.name.value = name
         viewModel.size.value = size
         viewModel.price.value = price
     }
 
     private fun setValidTestPizzaData() {
-        setPizzaData(testName, testSize, testPrice)
+        setPizzaData(testPizzeria, testName, testSize, testPrice)
     }
 }

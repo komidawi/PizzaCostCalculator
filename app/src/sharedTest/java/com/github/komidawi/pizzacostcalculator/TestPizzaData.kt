@@ -5,6 +5,7 @@ import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
 
 object TestPizzaData {
 
+    const val testPizzeria = "TestPizzeriaName"
     const val testName = "TestPizzaName"
     const val testSize = "42"
     const val testPrice = "24.99"
@@ -18,5 +19,5 @@ object TestPizzaData {
      */
     const val delta = 0.01
 
-    fun createTestPizza(): Pizza = PizzaFactory.create(testName, testSize, testPrice)
+    fun createTestPizza(): Pizza = PizzaFactory.create(testPizzeria, testName, testSize, testPrice)
 }

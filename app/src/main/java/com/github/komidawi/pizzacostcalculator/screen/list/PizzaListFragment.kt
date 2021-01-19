@@ -1,5 +1,6 @@
 package com.github.komidawi.pizzacostcalculator.screen.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +33,7 @@ class PizzaListFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupRecyclerView()
-        setupSortingModeSpinner()
+        setupSortingModeSpinner(requireContext())
         setupFabOnClickListener()
 
         binding.lifecycleOwner = this
@@ -54,18 +55,18 @@ class PizzaListFragment : Fragment() {
         }
     }
 
-    private fun setupSortingModeSpinner() {
+    private fun setupSortingModeSpinner(context: Context) {
         binding.sortingModeSpinner.apply {
-            adapter = createSpinnerAdapter()
+            adapter = createSpinnerAdapter(context)
             onItemSelectedListener = SortingModeSpinnerListener(viewModel)
         }
     }
 
-    private fun createSpinnerAdapter() =
+    private fun createSpinnerAdapter(context: Context) =
         ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            SortingMode.values()
+            SortingMode.values().map { it.getStringResource(context) }
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }

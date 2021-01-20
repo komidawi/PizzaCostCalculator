@@ -77,7 +77,7 @@ class MainActivityTest {
         onView(withId(R.id.pizza_remove_button)).perform(click())
 
         // then
-        onView(withId(R.id.list_item_pizza_element_root)).check(doesNotExist())
+        onView(withId(R.id.pizza_name_display)).check(doesNotExist())
         assertNull(pizzaRepository.getByUuid(pizza.uuid))
 
         // cleanup

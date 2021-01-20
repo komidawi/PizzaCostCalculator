@@ -5,8 +5,8 @@ import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
 
 object TestPizzaData {
 
-    const val testPizzeria = "TestPizzeriaName"
-    const val testName = "TestPizzaName"
+    const val testPizzeria = "tPizzeria"
+    const val testName = "tPizza"
     const val testSize = "42"
     const val testPrice = "24.99"
 

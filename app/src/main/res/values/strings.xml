@@ -12,6 +12,8 @@
     <string name="pizza_list_ratio_label">Ratio:</string>
     <string name="pizza_list_name_label">Name:</string>
 
+    <string name="pizza_list_sorting_mode_label">Sorting Mode:</string>
+
     <!-- Sorting Mode Spinner-->
     <!-- Be aware that these resource names have to be the same as enum values -->
     <string name="RATIO_ASCENDING">Ratio ascending</string>
@@ -20,8 +22,7 @@
     <string name="PIZZERIA_DESCENDING">Pizzeria descending</string>
 
     <!-- Other -->
-    <string name="pizza_list_clear_button">Clear data</string>
-
+    <string name="add_new_pizza_button_description">Add New Pizza Button</string>
 
     <!-- Add Pizza Fragment -->
     <string name="add_pizza_fragment_title">Add Pizza</string>

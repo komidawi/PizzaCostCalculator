@@ -24,14 +24,6 @@ class PizzaListFragmentViewModel(
         }
     }
 
-    fun onClear() {
-        viewModelScope.launch {
-            withContext(ioDispatcher) {
-                pizzaRepository.deleteAll()
-            }
-        }
-    }
-
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()

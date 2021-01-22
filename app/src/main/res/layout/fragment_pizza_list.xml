@@ -16,23 +16,12 @@
         android:layout_height="match_parent"
         tools:context=".screen.list.PizzaListFragment">
 
-        <Button
-            android:id="@+id/clear_data_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:onClick="@{() -> viewModel.onClear()}"
-            android:text="@string/pizza_list_clear_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pizza_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/clear_data_button"
+            app:layout_constraintBottom_toTopOf="@+id/sorting_mode_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,9 +32,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
             android:src="@android:drawable/ic_input_add"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_list_recycler_view"
+            app:layout_constraintRight_toRightOf="parent"
+            android:contentDescription="@string/add_new_pizza_button_description" />
+
+        <Spinner
+            android:id="@+id/sorting_mode_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/sorting_mode_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sorting_mode_label"
+            app:layout_constraintTop_toTopOf="@+id/sorting_mode_label" />
+
+        <TextView
+            android:id="@+id/sorting_mode_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/pizza_list_sorting_mode_label"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/sorting_mode_spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pizza_list_recycler_view"
+            tools:text="Sorting Mode:" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

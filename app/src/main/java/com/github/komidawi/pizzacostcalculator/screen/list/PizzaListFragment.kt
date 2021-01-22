@@ -1,9 +1,12 @@
 package com.github.komidawi.pizzacostcalculator.screen.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -15,6 +18,7 @@ class PizzaListFragment : Fragment() {
 
     private lateinit var binding: FragmentPizzaListBinding
     private lateinit var viewModel: PizzaListFragmentViewModel
+    private lateinit var adapter: PizzaListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +33,8 @@ class PizzaListFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupRecyclerView()
+        setupSortingModeSpinner(requireContext())
         setupFabOnClickListener()
-        setupDisplayFetchStatusToastObserver()
 
         binding.lifecycleOwner = this
 
@@ -42,12 +46,36 @@ class PizzaListFragment : Fragment() {
             Toast.makeText(context, "$pizza", Toast.LENGTH_SHORT).show()
         }
 
-        val adapter = PizzaListAdapter(clickListener, viewModel)
+        adapter = PizzaListAdapter(clickListener, viewModel)
         binding.pizzaListRecyclerView.adapter = adapter
 
-        viewModel.pizzaList.observe(viewLifecycleOwner, { pizzas ->
-            pizzas?.let { adapter.submitList(pizzas) }
-        })
+        viewModel.apply {
+            pizzaList.observe(viewLifecycleOwner, { updateList() })
+            sortingMode.observe(viewLifecycleOwner, { updateList() })
+        }
+    }
+
+    private fun setupSortingModeSpinner(context: Context) {
+        binding.sortingModeSpinner.apply {
+            adapter = createSpinnerAdapter(context)
+            onItemSelectedListener = SortingModeSpinnerListener(viewModel)
+        }
+    }
+
+    private fun createSpinnerAdapter(context: Context) =
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            SortingMode.values().map { it.getStringResource(context) }
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+    private fun updateList() {
+        val pizzas = viewModel.pizzaList.value
+        val sortingMode = viewModel.sortingMode.value
+
+        adapter.sortAndSubmitList(pizzas, sortingMode)
     }
 
     private fun setupFabOnClickListener() {
@@ -57,12 +85,13 @@ class PizzaListFragment : Fragment() {
         }
     }
 
-    private fun setupDisplayFetchStatusToastObserver() {
-        viewModel.displayFetchStatusToast.observe(viewLifecycleOwner, { displayToast ->
-            if (displayToast) {
-                Toast.makeText(context, viewModel.fetchStatusMessage.value, Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
+    class SortingModeSpinnerListener(private val viewModel: PizzaListFragmentViewModel) :
+        AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            viewModel.sortingMode.value = SortingMode.values()[position]
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 }

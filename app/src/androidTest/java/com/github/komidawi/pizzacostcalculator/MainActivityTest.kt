@@ -3,8 +3,7 @@ package com.github.komidawi.pizzacostcalculator
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -54,6 +53,7 @@ class MainActivityTest {
         onView(withId(R.id.pizza_name_input)).perform(typeText(testName))
         onView(withId(R.id.pizza_size_input)).perform(typeText("50"))
         onView(withId(R.id.pizza_price_input)).perform(typeText("34.99"))
+        onView(withId(R.id.pizza_add_button)).perform(closeSoftKeyboard())
         onView(withId(R.id.pizza_add_button)).perform(click())
 
         // then
@@ -77,7 +77,7 @@ class MainActivityTest {
         onView(withId(R.id.pizza_remove_button)).perform(click())
 
         // then
-        onView(withId(R.id.list_item_pizza_element_root)).check(doesNotExist())
+        onView(withId(R.id.pizza_name_display)).check(doesNotExist())
         assertNull(pizzaRepository.getByUuid(pizza.uuid))
 
         // cleanup

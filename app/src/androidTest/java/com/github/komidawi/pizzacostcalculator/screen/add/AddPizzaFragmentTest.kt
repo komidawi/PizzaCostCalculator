@@ -15,6 +15,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testDeliveryCost
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPizzeria
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
@@ -102,5 +103,6 @@ class AddPizzaFragmentTest {
         onView(withId(R.id.pizza_name_input)).perform(typeText(testName))
         onView(withId(R.id.pizza_size_input)).perform(typeText(testSize))
         onView(withId(R.id.pizza_price_input)).perform(typeText(testPrice))
+        onView(withId(R.id.pizza_delivery_cost_input)).perform(typeText(testDeliveryCost))
     }
 }

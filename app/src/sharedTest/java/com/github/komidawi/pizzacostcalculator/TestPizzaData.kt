@@ -9,6 +9,7 @@ object TestPizzaData {
     const val testName = "tPizza"
     const val testSize = "42"
     const val testPrice = "24.99"
+    const val testDeliveryCost = "3.50"
 
     const val testRatio = 180.3756022
 
@@ -19,5 +20,6 @@ object TestPizzaData {
      */
     const val delta = 0.01
 
-    fun createTestPizza(): Pizza = PizzaFactory.create(testPizzeria, testName, testSize, testPrice)
+    fun createTestPizza(): Pizza =
+        PizzaFactory.create(testPizzeria, testName, testSize, testPrice, testDeliveryCost)
 }

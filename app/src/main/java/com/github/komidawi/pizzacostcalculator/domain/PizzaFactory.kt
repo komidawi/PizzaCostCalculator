@@ -10,21 +10,35 @@ object PizzaFactory {
     /**
      * Makes providing numbers easier
      */
-    fun create(pizzeria: String, name: String, size: Int, price: String): Pizza {
+    fun create(
+        pizzeria: String,
+        name: String,
+        size: Int,
+        price: String,
+        deliveryCost: String
+    ): Pizza {
         val sizeNumber = BigDecimal(size)
         val priceNumber = BigDecimal(price)
+        val deliveryCostNumber = BigDecimal(deliveryCost)
 
-        return create(pizzeria, name, sizeNumber, priceNumber)
+        return create(pizzeria, name, sizeNumber, priceNumber, deliveryCostNumber)
     }
 
     /**
      * Makes providing numbers easier
      */
-    fun create(pizzeria: String, name: String, size: String, price: String): Pizza {
+    fun create(
+        pizzeria: String,
+        name: String,
+        size: String,
+        price: String,
+        deliveryCost: String
+    ): Pizza {
         val sizeNumber = BigDecimal(size)
         val priceNumber = BigDecimal(price)
+        val deliveryCostNumber = BigDecimal(deliveryCost)
 
-        return create(pizzeria, name, sizeNumber, priceNumber)
+        return create(pizzeria, name, sizeNumber, priceNumber, deliveryCostNumber)
     }
 
     // TODO: move out of production code
@@ -35,11 +49,17 @@ object PizzaFactory {
         val sizeNumber = BigDecimal(size)
         val priceNumber = BigDecimal(price)
 
-        return create("", "", sizeNumber, priceNumber)
+        return create("", "", sizeNumber, priceNumber, BigDecimal.ZERO)
     }
 
-    fun create(pizzeria: String, name: String, size: BigDecimal, price: BigDecimal): Pizza {
+    fun create(
+        pizzeria: String,
+        name: String,
+        size: BigDecimal,
+        price: BigDecimal,
+        deliveryCost: BigDecimal
+    ): Pizza {
         val ratio = calculator.calculateRatioPerSqMeter(size, price)
-        return Pizza(pizzeria, name, size, price, ratio)
+        return Pizza(pizzeria, name, size, price, ratio, deliveryCost)
     }
 }

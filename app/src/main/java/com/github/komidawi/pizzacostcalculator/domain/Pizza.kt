@@ -64,14 +64,14 @@ class Pizza(
 
 fun Pizza.asDatabaseModel(): PizzaEntity =
     PizzaEntity(
-        pizzeria,
-        name,
-        size.toString(),
-        price.toString(),
-        ratio.toString(),
-        uuid.toString(),
-        deliveryCost.toString(),
-        id
+        pizzeria = pizzeria,
+        name = name,
+        size = size.toString(),
+        price = price.toString(),
+        ratio = ratio.toString(),
+        deliveryCost = deliveryCost.toString(),
+        uuid = uuid.toString(),
+        id = id
     )
 
 fun List<Pizza>.asDatabaseModel(): List<PizzaEntity> = map(Pizza::asDatabaseModel)

@@ -29,6 +29,8 @@ class AddPizzaFragmentViewModel(
 
     val price = MutableLiveData<String>()
 
+    val deliveryCost = MutableLiveData<String>()
+
     private val _ratio = MutableLiveData(BigDecimal.ZERO)
     val ratio: LiveData<String>
         get() = _ratio.map { it.setScale(0, RoundingMode.HALF_UP).toString() }
@@ -66,13 +68,20 @@ class AddPizzaFragmentViewModel(
         val currentName = name.value
         val currentSize = size.value
         val currentPrice = price.value
+        val currentDeliveryCost = deliveryCost.value
 
         return if (currentPizzeria.isNullOrEmpty() || currentName.isNullOrEmpty()
             || currentSize.isNullOrEmpty() || currentPrice.isNullOrEmpty()
         ) {
             null
         } else {
-            PizzaFactory.create(currentPizzeria, currentName, currentSize, currentPrice)
+            PizzaFactory.create(
+                currentPizzeria,
+                currentName,
+                currentSize,
+                currentPrice,
+                currentDeliveryCost ?: "0"
+            )
         }
     }
 

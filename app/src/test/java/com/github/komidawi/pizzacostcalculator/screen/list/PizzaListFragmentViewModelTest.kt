@@ -36,13 +36,13 @@ class PizzaListFragmentViewModelTest {
     @Test
     fun onRemove_removesPizzaFromDatabase() = mainCoroutineRule.runBlockingTest {
         // given
-        val pizzaEntity = PizzaFactory.create("", "", 1, "1")
-        pizzaRepository.insert(pizzaEntity)
+        val pizza = PizzaFactory.create("", "", 1, "1", "0")
+        pizzaRepository.insert(pizza)
 
         // when
-        viewModel.onRemove(pizzaEntity)
+        viewModel.onRemove(pizza)
 
         // then
-        assertNull(pizzaRepository.getByUuid(pizzaEntity.uuid))
+        assertNull(pizzaRepository.getByUuid(pizza.uuid))
     }
 }

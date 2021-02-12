@@ -4,6 +4,7 @@ import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import java.math.BigDecimal
 import java.math.RoundingMode
 
+// TODO: use interface
 object CostCalculator {
 
     private val sqCentimetersInSqMeter = BigDecimal(10_000)

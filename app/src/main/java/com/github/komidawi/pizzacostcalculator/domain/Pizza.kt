@@ -19,13 +19,16 @@ class Pizza(
 
     val ratio: BigDecimal,
 
+    val deliveryCost: BigDecimal = BigDecimal.ZERO,
+
     val uuid: UUID = UUID.randomUUID(),
 
     val id: Long? = null
 
 ) {
     override fun toString(): String {
-        return "Pizza(pizzeria='$pizzeria', name='$name', size=$size, price=$price, ratio=$ratio, uuid=$uuid, id=$id)"
+        return "Pizza(pizzeria=$pizzeria, name='$name', size=$size, price=$price, ratio=$ratio, " +
+                "deliveryCost=$deliveryCost, uuid=$uuid, id=$id)"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -39,6 +42,7 @@ class Pizza(
         if (size != other.size) return false
         if (price != other.price) return false
         if (ratio != other.ratio) return false
+        if (deliveryCost != other.deliveryCost) return false
         if (uuid != other.uuid) return false
         if (id != other.id) return false
 
@@ -51,6 +55,7 @@ class Pizza(
         result = 31 * result + size.hashCode()
         result = 31 * result + price.hashCode()
         result = 31 * result + ratio.hashCode()
+        result = 31 * result + deliveryCost.hashCode()
         result = 31 * result + uuid.hashCode()
         result = 31 * result + (id?.hashCode() ?: 0)
         return result
@@ -65,6 +70,7 @@ fun Pizza.asDatabaseModel(): PizzaEntity =
         price.toString(),
         ratio.toString(),
         uuid.toString(),
+        deliveryCost.toString(),
         id
     )
 

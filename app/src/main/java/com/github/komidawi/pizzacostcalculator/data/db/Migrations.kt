@@ -12,4 +12,10 @@ object Migrations {
         }
     }
 
+    val MIGRATION_4_5 = object : Migration(4, 5) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE pizza ADD delivery_cost TEXT DEFAULT '0' NOT NULL")
+        }
+    }
+
 }

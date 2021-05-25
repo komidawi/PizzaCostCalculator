@@ -41,17 +41,6 @@ object PizzaFactory {
         return create(pizzeria, name, sizeNumber, priceNumber, deliveryCostNumber)
     }
 
-    // TODO: move out of production code
-    /**
-     * Creates [Pizza] with empty non-numeric fields for testing purposes
-     */
-    fun create(size: Int, price: String): Pizza {
-        val sizeNumber = BigDecimal(size)
-        val priceNumber = BigDecimal(price)
-
-        return create("", "", sizeNumber, priceNumber, BigDecimal.ZERO)
-    }
-
     fun create(
         pizzeria: String,
         name: String,

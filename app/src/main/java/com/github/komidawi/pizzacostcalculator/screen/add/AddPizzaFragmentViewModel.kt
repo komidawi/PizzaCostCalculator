@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
+import com.github.komidawi.pizzacostcalculator.calc.CostCalculatorImpl
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
@@ -20,6 +21,8 @@ class AddPizzaFragmentViewModel(
     private val viewModelJob = Job()
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    private val costCalculator: CostCalculator = CostCalculatorImpl()
 
     val pizzeria = MutableLiveData<String>()
 
@@ -91,7 +94,7 @@ class AddPizzaFragmentViewModel(
                 if (!deliveryCost.value.isNullOrEmpty())
                     BigDecimal(price.value) + BigDecimal(deliveryCost.value)
                 else BigDecimal(price.value)
-            CostCalculator.calculateRatioPerSqMeter(BigDecimal(size.value), totalPrice)
+            costCalculator.calculateRatioPerSqMeter(BigDecimal(size.value), totalPrice)
         } else {
             BigDecimal.ZERO
         }

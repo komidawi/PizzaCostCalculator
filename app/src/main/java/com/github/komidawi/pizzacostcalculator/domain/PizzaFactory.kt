@@ -1,11 +1,11 @@
 package com.github.komidawi.pizzacostcalculator.domain
 
-import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
+import com.github.komidawi.pizzacostcalculator.calc.CostCalculatorImpl
 import java.math.BigDecimal
 
 object PizzaFactory {
 
-    private val calculator = CostCalculator
+    private val calculator = CostCalculatorImpl()
 
     /**
      * Makes providing numbers easier

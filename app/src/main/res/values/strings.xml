@@ -11,6 +11,8 @@
     <string name="pizza_list_price_label">Price:</string>
     <string name="pizza_list_ratio_label">Ratio:</string>
     <string name="pizza_list_name_label">Name:</string>
+    <string name="pizza_list_delivery_cost_label">Delivery:</string>
+    <string name="pizza_list_total_cost_label">Total:</string>
 
     <string name="pizza_list_sorting_mode_label">Sorting Mode:</string>
 

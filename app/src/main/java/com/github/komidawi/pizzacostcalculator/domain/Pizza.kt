@@ -31,6 +31,8 @@ class Pizza(
                 "deliveryCost=$deliveryCost, uuid=$uuid, id=$id)"
     }
 
+    fun getTotalCost() = price + deliveryCost
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

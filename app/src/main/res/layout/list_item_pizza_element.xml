@@ -83,17 +83,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@android:drawable/ic_delete"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/pizza_pizzeria_label"
+            style="@style/PizzaListItemElementKeyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/pizza_list_pizzeria_label"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,46 +111,92 @@
 
         <TextView
             android:id="@+id/pizza_size_label"
+            style="@style/PizzaListItemElementKeyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/pizza_list_size_label"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/pizza_pizzeria_label"
             app:layout_constraintTop_toBottomOf="@+id/pizza_pizzeria_label" />
 
         <TextView
             android:id="@+id/pizza_price_label"
+            style="@style/PizzaListItemElementKeyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="@dimen/list_item_pizza_element_property_horizontal_gap"
             android:text="@string/pizza_list_price_label"
-            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_size_display"
             app:layout_constraintStart_toEndOf="@+id/pizza_size_display"
             app:layout_constraintTop_toTopOf="@+id/pizza_size_display" />
 
         <TextView
             android:id="@+id/pizza_ratio_label"
+            style="@style/PizzaListItemElementKeyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:text="@string/pizza_list_ratio_label"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pizza_price_display"
-            app:layout_constraintTop_toTopOf="@+id/pizza_price_display" />
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_name_display"
+            app:layout_constraintStart_toEndOf="@+id/pizza_name_display"
+            app:layout_constraintTop_toTopOf="@+id/pizza_name_display" />
 
         <TextView
             android:id="@+id/pizza_name_label"
+            style="@style/PizzaListItemElementKeyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/pizza_list_name_label"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pizza_pizzeria_display"
             app:layout_constraintStart_toEndOf="@+id/pizza_pizzeria_display"
             app:layout_constraintTop_toTopOf="@+id/pizza_pizzeria_display" />
+
+        <TextView
+            android:id="@+id/pizza_delivery_cost_label"
+            style="@style/PizzaListItemElementKeyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_item_pizza_element_property_horizontal_gap"
+            android:text="@string/pizza_list_delivery_cost_label"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_price_display"
+            app:layout_constraintStart_toEndOf="@+id/pizza_price_display"
+            app:layout_constraintTop_toTopOf="@+id/pizza_price_display" />
+
+        <TextView
+            android:id="@+id/pizza_delivery_cost_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_delivery_cost_label"
+            app:layout_constraintStart_toEndOf="@+id/pizza_delivery_cost_label"
+            app:layout_constraintTop_toTopOf="@+id/pizza_delivery_cost_label"
+            app:pizzaDeliveryCostDisplay="@{pizza}"
+            tools:text="Delivery" />
+
+        <TextView
+            android:id="@+id/pizza_total_cost_label"
+            style="@style/PizzaListItemElementKeyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_item_pizza_element_property_horizontal_gap"
+            android:text="@string/pizza_list_total_cost_label"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_delivery_cost_display"
+            app:layout_constraintStart_toEndOf="@+id/pizza_delivery_cost_display"
+            app:layout_constraintTop_toTopOf="@+id/pizza_delivery_cost_display" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pizza_total_cost_label"
+            app:layout_constraintStart_toEndOf="@+id/pizza_total_cost_label"
+            app:layout_constraintTop_toTopOf="@+id/pizza_total_cost_label"
+            app:pizzaTotalCostDisplay="@{pizza}"
+            tools:text="Total" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

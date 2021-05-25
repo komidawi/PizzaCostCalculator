@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_pizza_element_property_horizontal_gap">16dp</dimen>
+</resources>

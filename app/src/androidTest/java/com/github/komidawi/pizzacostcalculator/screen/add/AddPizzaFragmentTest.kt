@@ -19,7 +19,7 @@ import com.github.komidawi.pizzacostcalculator.TestPizzaData.testDeliveryCost
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPizzeria
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
-import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatioDisplayText
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatioWithDeliveryDisplayText
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
@@ -95,7 +95,7 @@ class AddPizzaFragmentTest {
 
         // then
         onView(withId(R.id.list_pizza_ratio_display))
-            .check(matches(withText(containsString(testRatioDisplayText))))
+            .check(matches(withText(containsString(testRatioWithDeliveryDisplayText))))
     }
 
     private fun provideTestPizzaData() {

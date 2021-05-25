@@ -67,5 +67,8 @@ class AddPizzaFragment : Fragment() {
         binding.pizzaPriceInput.addTextChangedListener {
             viewModel.updateRatioDisplay()
         }
+        binding.pizzaDeliveryCostInput.addTextChangedListener {
+            viewModel.updateRatioDisplay()
+        }
     }
 }

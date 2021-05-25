@@ -7,6 +7,7 @@ import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPizzeria
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatio
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRationWithDelivery
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
@@ -66,6 +67,18 @@ class AddPizzaFragmentViewModelTest {
 
         // then
         assertEquals(testRatio, ratio.toDouble(), delta)
+    }
+
+    @Test
+    fun calculateRationWithValidValueWithDeliveryCost_returnsRatio() {
+        // given
+        setPizzaData(size = testSize, price = testPrice, deliveryCost = testDeliveryCost)
+
+        // when
+        val ratio = viewModel.calculateRatio()
+
+        // then
+        assertEquals(testRationWithDelivery, ratio.toDouble(), delta)
     }
 
     @Test

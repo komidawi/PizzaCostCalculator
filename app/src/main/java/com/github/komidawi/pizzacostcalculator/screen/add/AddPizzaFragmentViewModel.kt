@@ -87,10 +87,11 @@ class AddPizzaFragmentViewModel(
 
     fun calculateRatio(): BigDecimal {
         return if (!price.value.isNullOrEmpty() && !size.value.isNullOrEmpty() && BigDecimal(size.value) != BigDecimal.ZERO) {
-            CostCalculator.calculateRatioPerSqMeter(
-                BigDecimal(size.value),
-                BigDecimal(price.value)
-            )
+            val totalPrice =
+                if (!deliveryCost.value.isNullOrEmpty())
+                    BigDecimal(price.value) + BigDecimal(deliveryCost.value)
+                else BigDecimal(price.value)
+            CostCalculator.calculateRatioPerSqMeter(BigDecimal(size.value), totalPrice)
         } else {
             BigDecimal.ZERO
         }

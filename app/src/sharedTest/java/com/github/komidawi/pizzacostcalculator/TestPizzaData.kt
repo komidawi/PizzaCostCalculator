@@ -12,8 +12,10 @@ object TestPizzaData {
     const val testDeliveryCost = "3.50"
 
     const val testRatio = 180.3756022
+    const val testRationWithDelivery = 205.6382916
 
     const val testRatioDisplayText = "180"
+    const val testRatioWithDeliveryDisplayText = "206"
 
     /**
      * Precision delta for calculations

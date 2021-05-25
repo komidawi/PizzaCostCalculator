@@ -69,6 +69,7 @@ object ServiceLocator {
             "pizza_database"
         )
             .addMigrations(Migrations.MIGRATION_3_4)
+            .addMigrations(Migrations.MIGRATION_4_5)
             .build()
         database = result
         return result

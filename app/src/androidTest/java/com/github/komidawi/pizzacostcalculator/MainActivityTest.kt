@@ -53,6 +53,7 @@ class MainActivityTest {
         onView(withId(R.id.pizza_name_input)).perform(typeText(testName))
         onView(withId(R.id.pizza_size_input)).perform(typeText("50"))
         onView(withId(R.id.pizza_price_input)).perform(typeText("34.99"))
+        onView(withId(R.id.pizza_delivery_cost_input)).perform(typeText("3.50"))
         onView(withId(R.id.pizza_add_button)).perform(closeSoftKeyboard())
         onView(withId(R.id.pizza_add_button)).perform(click())
 

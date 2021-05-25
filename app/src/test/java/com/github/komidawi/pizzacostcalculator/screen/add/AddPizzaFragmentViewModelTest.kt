@@ -2,10 +2,12 @@ package com.github.komidawi.pizzacostcalculator.screen.add
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.delta
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testDeliveryCost
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPizzeria
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatio
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRationWithDelivery
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
@@ -18,7 +20,6 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.math.BigDecimal
 
 @ExperimentalCoroutinesApi
 class AddPizzaFragmentViewModelTest {
@@ -53,10 +54,35 @@ class AddPizzaFragmentViewModelTest {
         assertEquals(testName, createdPizza.name)
         assertEquals(testSize.toBigDecimal(), createdPizza.size)
         assertEquals(testPrice.toBigDecimal(), createdPizza.price)
+        assertEquals(testDeliveryCost.toBigDecimal(), createdPizza.deliveryCost)
     }
 
     @Test
-    fun createPizzaWithNullValue_returnsNull() {
+    fun calculateRatioWithValidValue_returnsRatio() {
+        // given
+        setPizzaData(size = testSize, price = testPrice)
+
+        // when
+        val ratio = viewModel.calculateRatio()
+
+        // then
+        assertEquals(testRatio, ratio.toDouble(), delta)
+    }
+
+    @Test
+    fun calculateRationWithValidValueWithDeliveryCost_returnsRatio() {
+        // given
+        setPizzaData(size = testSize, price = testPrice, deliveryCost = testDeliveryCost)
+
+        // when
+        val ratio = viewModel.calculateRatio()
+
+        // then
+        assertEquals(testRationWithDelivery, ratio.toDouble(), delta)
+    }
+
+    @Test
+    fun createPizzaWithNullValues_returnsNull() {
         // when
         val createdPizza = viewModel.createPizza()
 
@@ -78,6 +104,7 @@ class AddPizzaFragmentViewModelTest {
         assertEquals(testName, receivedPizza.name)
         assertEquals(testSize.toBigDecimal(), receivedPizza.size)
         assertEquals(testPrice.toBigDecimal(), receivedPizza.price)
+        assertEquals(testDeliveryCost.toBigDecimal(), receivedPizza.deliveryCost)
     }
 
     @Test
@@ -112,139 +139,22 @@ class AddPizzaFragmentViewModelTest {
             assertFalse(viewModel.navigateToPizzaListFragment.getOrAwaitValue())
         }
 
-    @Test
-    fun calculateRatioWithValidValue_returnsRatio() {
-        // given
-        setPizzaData(size = testSize, price = testPrice)
-
-        // when
-        val ratio = viewModel.calculateRatio()
-
-        // then
-        assertEquals(testRatio, ratio.toDouble(), delta)
-    }
-
-    @Test
-    fun calculateRatioWhenNullSize_returnsZero() {
-        // given
-        setPizzaData(price = testPrice)
-
-        // when
-        val ratio = viewModel.calculateRatio()
-
-        // then
-        assertEquals(BigDecimal.ZERO, ratio)
-    }
-
-    @Test
-    fun calculateRatioWhenEmptySize_returnsZero() {
-        // given
-        setPizzaData(price = "")
-
-        // when
-        val ratio = viewModel.calculateRatio()
-
-        // then
-        assertEquals(BigDecimal.ZERO, ratio)
-    }
-
-    @Test
-    fun calculateRatioWhenZeroSize_returnsZero() {
-        // given
-        setPizzaData(price = "0")
-
-        // when
-        val ratio = viewModel.calculateRatio()
-
-        // then
-        assertEquals(BigDecimal.ZERO, ratio)
-    }
-
-    @Test
-    fun handleAddPizzaWithNullName_triggersEmptyFieldsToastEvent() {
-        // given
-        setPizzaData(null, testSize, testPrice)
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithNullSize_triggersEmptyFieldsToastEvent() {
-        // given
-        setPizzaData(testSize, null, testPrice)
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithNullPrice_triggersEmptyFieldsToastEvent() {
-        // given
-        setPizzaData(testName, testSize, null)
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithEmptyName_triggersEmptyFieldsToastEvent() {
-        // given
-        setPizzaData("", testSize, testPrice)
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithEmptySize_triggersEmptyFieldsToastEvent() {
-        // given
-        setPizzaData(testName, "", testPrice)
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
-
-    @Test
-    fun handleAddPizzaWithEmptyPrice_triggersEmptyFieldsToastEvent() {
-        // given
-        setPizzaData(testName, testSize, "")
-
-        // when
-        viewModel.handleAddPizza()
-
-        // then
-        assertTrue(viewModel.displayEmptyFieldsToast.getOrAwaitValue())
-    }
 
     private fun setPizzaData(
         pizzeria: String? = null,
         name: String? = null,
         size: String? = null,
-        price: String? = null
+        price: String? = null,
+        deliveryCost: String? = null
     ) {
         viewModel.pizzeria.value = pizzeria
         viewModel.name.value = name
         viewModel.size.value = size
         viewModel.price.value = price
+        viewModel.deliveryCost.value = deliveryCost
     }
 
     private fun setValidTestPizzaData() {
-        setPizzaData(testPizzeria, testName, testSize, testPrice)
+        setPizzaData(testPizzeria, testName, testSize, testPrice, testDeliveryCost)
     }
 }

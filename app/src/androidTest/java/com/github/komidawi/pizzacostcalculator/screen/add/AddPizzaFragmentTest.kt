@@ -15,10 +15,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.github.komidawi.pizzacostcalculator.R
 import com.github.komidawi.pizzacostcalculator.ServiceLocator
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testDeliveryCost
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testName
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPizzeria
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testPrice
-import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatioDisplayText
+import com.github.komidawi.pizzacostcalculator.TestPizzaData.testRatioWithDeliveryDisplayText
 import com.github.komidawi.pizzacostcalculator.TestPizzaData.testSize
 import com.github.komidawi.pizzacostcalculator.TestRepositoryFactory
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
@@ -94,7 +95,7 @@ class AddPizzaFragmentTest {
 
         // then
         onView(withId(R.id.list_pizza_ratio_display))
-            .check(matches(withText(containsString(testRatioDisplayText))))
+            .check(matches(withText(containsString(testRatioWithDeliveryDisplayText))))
     }
 
     private fun provideTestPizzaData() {
@@ -102,5 +103,6 @@ class AddPizzaFragmentTest {
         onView(withId(R.id.pizza_name_input)).perform(typeText(testName))
         onView(withId(R.id.pizza_size_input)).perform(typeText(testSize))
         onView(withId(R.id.pizza_price_input)).perform(typeText(testPrice))
+        onView(withId(R.id.pizza_delivery_cost_input)).perform(typeText(testDeliveryCost))
     }
 }

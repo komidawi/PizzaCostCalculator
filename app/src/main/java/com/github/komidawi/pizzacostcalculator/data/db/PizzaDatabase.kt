@@ -3,7 +3,7 @@ package com.github.komidawi.pizzacostcalculator.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [PizzaEntity::class], version = 4, exportSchema = true)
+@Database(entities = [PizzaEntity::class], version = 5, exportSchema = true)
 abstract class PizzaDatabase : RoomDatabase() {
 
     abstract val pizzaDatabaseDao: PizzaDatabaseDao

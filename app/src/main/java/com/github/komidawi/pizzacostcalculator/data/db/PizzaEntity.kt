@@ -1,5 +1,6 @@
 package com.github.komidawi.pizzacostcalculator.data.db
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.github.komidawi.pizzacostcalculator.domain.Pizza
@@ -22,6 +23,9 @@ data class PizzaEntity(
 
     val ratio: String,
 
+    @ColumnInfo(name = "delivery_cost", defaultValue = "0")
+    val deliveryCost: String,
+
     val uuid: String,
 
     @PrimaryKey(autoGenerate = true)
@@ -30,13 +34,14 @@ data class PizzaEntity(
 
 fun PizzaEntity.asDomainModel(): Pizza =
     Pizza(
-        pizzeria,
-        name,
-        BigDecimal(size),
-        BigDecimal(price),
-        BigDecimal(ratio),
-        UUID.fromString(uuid),
-        id
+        pizzeria = pizzeria,
+        name = name,
+        size = BigDecimal(size),
+        price = BigDecimal(price),
+        ratio = BigDecimal(ratio),
+        deliveryCost = BigDecimal(deliveryCost),
+        uuid = UUID.fromString(uuid),
+        id = id
     )
 
 fun List<PizzaEntity>.asDomainModel(): List<Pizza> =

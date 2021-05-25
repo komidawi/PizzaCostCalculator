@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 4,
-    "identityHash": "dd913ada099bb2ca70eb1fd54f8cc63c",
+    "version": 5,
+    "identityHash": "072193fbb59eca515c16e84ceac77cb0",
     "entities": [
       {
         "tableName": "pizza",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pizzeria` TEXT, `name` TEXT NOT NULL, `size` TEXT NOT NULL, `price` TEXT NOT NULL, `ratio` TEXT NOT NULL, `deliveryCost` TEXT NOT NULL, `uuid` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pizzeria` TEXT, `name` TEXT NOT NULL, `size` TEXT NOT NULL, `price` TEXT NOT NULL, `ratio` TEXT NOT NULL, `delivery_cost` TEXT NOT NULL DEFAULT '0', `uuid` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT)",
         "fields": [
           {
             "fieldPath": "pizzeria",
@@ -40,9 +40,10 @@
           },
           {
             "fieldPath": "deliveryCost",
-            "columnName": "deliveryCost",
+            "columnName": "delivery_cost",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "'0'"
           },
           {
             "fieldPath": "uuid",
@@ -70,7 +71,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dd913ada099bb2ca70eb1fd54f8cc63c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '072193fbb59eca515c16e84ceac77cb0')"
     ]
   }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.github.komidawi.pizzacostcalculator.calc.CostCalculator
+import com.github.komidawi.pizzacostcalculator.calc.CostCalculatorImpl
 import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
 import com.github.komidawi.pizzacostcalculator.domain.Pizza
 import com.github.komidawi.pizzacostcalculator.domain.PizzaFactory
@@ -21,6 +22,8 @@ class AddPizzaFragmentViewModel(
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    private val costCalculator: CostCalculator = CostCalculatorImpl()
+
     val pizzeria = MutableLiveData<String>()
 
     val name = MutableLiveData<String>()
@@ -28,6 +31,8 @@ class AddPizzaFragmentViewModel(
     val size = MutableLiveData<String>()
 
     val price = MutableLiveData<String>()
+
+    val deliveryCost = MutableLiveData<String>()
 
     private val _ratio = MutableLiveData(BigDecimal.ZERO)
     val ratio: LiveData<String>
@@ -66,22 +71,30 @@ class AddPizzaFragmentViewModel(
         val currentName = name.value
         val currentSize = size.value
         val currentPrice = price.value
+        val currentDeliveryCost = deliveryCost.value
 
         return if (currentPizzeria.isNullOrEmpty() || currentName.isNullOrEmpty()
             || currentSize.isNullOrEmpty() || currentPrice.isNullOrEmpty()
         ) {
             null
         } else {
-            PizzaFactory.create(currentPizzeria, currentName, currentSize, currentPrice)
+            PizzaFactory.create(
+                currentPizzeria,
+                currentName,
+                currentSize,
+                currentPrice,
+                currentDeliveryCost ?: "0"
+            )
         }
     }
 
     fun calculateRatio(): BigDecimal {
         return if (!price.value.isNullOrEmpty() && !size.value.isNullOrEmpty() && BigDecimal(size.value) != BigDecimal.ZERO) {
-            CostCalculator.calculateRatioPerSqMeter(
-                BigDecimal(size.value),
-                BigDecimal(price.value)
-            )
+            val totalPrice =
+                if (!deliveryCost.value.isNullOrEmpty())
+                    BigDecimal(price.value) + BigDecimal(deliveryCost.value)
+                else BigDecimal(price.value)
+            costCalculator.calculateRatioPerSqMeter(BigDecimal(size.value), totalPrice)
         } else {
             BigDecimal.ZERO
         }

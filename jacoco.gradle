@@ -78,9 +78,9 @@ project.afterEvaluate {
                     includes: ["**/*.ec"])
 
             executionData(files([
-                    "$project.buildDir/jacoco/${unitTestTask}.exec",
+                    "$project.buildDir/outputs/unit_test_code_coverage/debugUnitTest/${unitTestTask}.exec",
                     uiTestsData,
-                    "$project.rootDir/app/build/jacoco/testDebugUnitTest.exec"
+                    "$project.rootDir/app/build/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
             ]))
         }
     }

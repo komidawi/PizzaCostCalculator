@@ -2,7 +2,7 @@
 
 ## Description
 
-WIP: Handy Android app which helps to make an optimal decision when choosing pizza size and shape.
+Handy Android app which helps to make an optimal decision when choosing pizza size and shape.
 Project focused on high code quality and proper coding and Android architecture practices. Much code
 written with TDD, high coverage levels. Unit tests, integration tests, e2e tests. CI/CD made with
 Bitrise. SonarQube and CodeCov for metrics. I wanted to make it the best way possible, taking no

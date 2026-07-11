@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.github.komidawi.pizzacostcalculator.MainActivityTest" tests="8" failures="0" errors="0" skipped="0" time="11.324" timestamp="2026-07-11T10:57:40" hostname="localhost">
+  <properties>
+    <property name="device" value="Pixel_5_API_24(AVD) - 7.0" />
+    <property name="flavor" value="" />
+    <property name="project" value="app" />
+  </properties>
+  <testcase name="removePizzaButton_removesPizzaFromList" classname="com.github.komidawi.pizzacostcalculator.MainActivityTest" time="0.944" />
+  <testcase name="addNewPizza_displaysPizzaInList" classname="com.github.komidawi.pizzacostcalculator.MainActivityTest" time="3.218" />
+  <testcase name="insertPizzaAndGetByUuid" classname="com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDaoTest" time="0.0" />
+  <testcase name="insertValidPizzaData_updatesRatioValue" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentTest" time="2.445" />
+  <testcase name="insertNoPizzaDataAndClickAdd_notTriggersNavigation" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentTest" time="0.559" />
+  <testcase name="insertValidPizzaDataAndClickAdd_triggersNavigation" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentTest" time="2.657" />
+  <testcase name="addPizzaFabClick_triggersNavigation" classname="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentTest" time="0.378" />
+  <testcase name="removePizzaButton_removesPizza" classname="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentTest" time="0.342" />
+</testsuite>

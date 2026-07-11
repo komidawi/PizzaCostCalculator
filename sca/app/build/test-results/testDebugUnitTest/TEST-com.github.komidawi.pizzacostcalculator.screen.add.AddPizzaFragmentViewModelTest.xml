@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-07-11T10:41:56" hostname="ROG-STRIX-G18V2" time="0.249">
+  <properties/>
+  <testcase name="handleAddPizzaWithNullValue_notInsertsPizzaToDatabase" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.226"/>
+  <testcase name="createPizzaWithValidInput_returnsPizza" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.0"/>
+  <testcase name="calculateRationWithValidValueWithDeliveryCost_returnsRatio" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.0"/>
+  <testcase name="createPizzaWithNullValues_returnsNull" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.0"/>
+  <testcase name="handleAddPizzaWithValidValue_triggersNavigationEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.015"/>
+  <testcase name="calculateRatioWithValidValue_returnsRatio" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.001"/>
+  <testcase name="handleAddPizzaWithNullValue_notTriggersNavigationEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.001"/>
+  <testcase name="handleAddPizzaWithValidValue_insertsPizzaToDatabase" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

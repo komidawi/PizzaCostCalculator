@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-07-11T10:41:53" hostname="ROG-STRIX-G18V2" time="0.004">
+  <properties/>
+  <testcase name="handleAddPizzaWithNullName_triggersEmptyFieldsToastEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.001"/>
+  <testcase name="handleAddPizzaWithNullSize_triggersEmptyFieldsToastEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.0"/>
+  <testcase name="calculateRatioWhenNullSize_returnsZero" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.0"/>
+  <testcase name="handleAddPizzaWithNullPrice_triggersEmptyFieldsToastEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.0"/>
+  <testcase name="handleAddPizzaWithEmptyPrice_triggersEmptyFieldsToastEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.0"/>
+  <testcase name="handleAddPizzaWithEmptyName_triggersEmptyFieldsToastEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.001"/>
+  <testcase name="handleAddPizzaWithEmptySize_triggersEmptyFieldsToastEvent" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.0"/>
+  <testcase name="calculateRatioWhenZeroSize_returnsZero" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.0"/>
+  <testcase name="calculateRatioWhenEmptySize_returnsZero" classname="com.github.komidawi.pizzacostcalculator.screen.add.AddPizzaFragmentViewModelTrivialTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

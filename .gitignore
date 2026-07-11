@@ -12,7 +12,8 @@
 /captures
 .externalNativeBuild
 .cxx
-
+.scannerwork
+.idea
 
 
 # Created by https://www.gitignore.io/api/code,java,linux,gradle,windows,android,intellij,androidstudio
@@ -386,3 +387,5 @@ obj/
 .idea/discord.xml
 app/src/main/java/com/github/komidawi/pizzacostcalculator/config/Env.kt
 env.gradle
+
+!sca/**

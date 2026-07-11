@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ServiceLocator.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.github.komidawi.pizzacostcalculator</a> &gt; <span class="el_source">ServiceLocator.kt</span></div><h1>ServiceLocator.kt</h1><pre class="source lang-java linenums">package com.github.komidawi.pizzacostcalculator
+
+import android.content.Context
+import androidx.annotation.VisibleForTesting
+import androidx.room.Room
+import com.github.komidawi.pizzacostcalculator.data.datasource.LocalDataSource
+import com.github.komidawi.pizzacostcalculator.data.db.Migrations
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabase
+import com.github.komidawi.pizzacostcalculator.data.db.PizzaDatabaseDao
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepository
+import com.github.komidawi.pizzacostcalculator.data.repository.PizzaRepositoryImpl
+import kotlinx.coroutines.runBlocking
+
+
+<span class="fc" id="L15">object ServiceLocator {</span>
+
+    private var database: PizzaDatabase? = null
+
+    private var databaseDao: PizzaDatabaseDao? = null
+
+    @Volatile
+<span class="pc" id="L22">    var repository: PizzaRepository? = null</span>
+        @VisibleForTesting set
+
+<span class="fc" id="L25">    private val lock = Any()</span>
+
+
+    @VisibleForTesting
+    fun resetRepository() {
+<span class="fc" id="L30">        synchronized(lock) {</span>
+<span class="pc bpc" id="L31" title="1 of 3 branches missed.">            runBlocking {</span>
+<span class="pc bpc" id="L32" title="1 of 4 branches missed.">                databaseDao?.deleteAll()</span>
+            }
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            database?.apply {</span>
+<span class="fc" id="L35">                clearAllTables()</span>
+<span class="fc" id="L36">                close()</span>
+<span class="fc" id="L37">            }</span>
+<span class="fc" id="L38">            database = null</span>
+<span class="fc" id="L39">            databaseDao = null</span>
+<span class="fc" id="L40">            repository = null</span>
+<span class="fc" id="L41">        }</span>
+<span class="fc" id="L42">    }</span>
+
+    fun providePizzaRepository(context: Context): PizzaRepository {
+<span class="fc" id="L45">        synchronized(this) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            return repository ?: createPizzaRepository(context)</span>
+        }
+    }
+
+    private fun createPizzaRepository(context: Context): PizzaRepository {
+<span class="fc" id="L51">        val pizzaDatabaseDao = createDatabaseDao(context)</span>
+<span class="fc" id="L52">        val localDataSource = LocalDataSource(pizzaDatabaseDao)</span>
+<span class="fc" id="L53">        val newRepository = PizzaRepositoryImpl(localDataSource)</span>
+<span class="fc" id="L54">        repository = newRepository</span>
+<span class="fc" id="L55">        return newRepository</span>
+    }
+
+    private fun createDatabaseDao(context: Context): PizzaDatabaseDao {
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        val db = database ?: createDatabase(context)</span>
+<span class="fc" id="L60">        val newDatabaseDao = db.pizzaDatabaseDao</span>
+<span class="fc" id="L61">        databaseDao = newDatabaseDao</span>
+<span class="fc" id="L62">        return newDatabaseDao</span>
+    }
+
+    private fun createDatabase(context: Context): PizzaDatabase {
+<span class="fc" id="L66">        val result = Room.databaseBuilder(</span>
+<span class="fc" id="L67">            context.applicationContext,</span>
+<span class="fc" id="L68">            PizzaDatabase::class.java,</span>
+<span class="fc" id="L69">            &quot;pizza_database&quot;</span>
+        )
+<span class="fc" id="L71">            .addMigrations(Migrations.MIGRATION_3_4)</span>
+<span class="fc" id="L72">            .addMigrations(Migrations.MIGRATION_4_5)</span>
+<span class="fc" id="L73">            .build()</span>
+<span class="fc" id="L74">        database = result</span>
+<span class="fc" id="L75">        return result</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentViewModelTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-11T10:41:53" hostname="ROG-STRIX-G18V2" time="0.012">
+  <properties/>
+  <testcase name="onRemove_removesPizzaFromDatabase" classname="com.github.komidawi.pizzacostcalculator.screen.list.PizzaListFragmentViewModelTest" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

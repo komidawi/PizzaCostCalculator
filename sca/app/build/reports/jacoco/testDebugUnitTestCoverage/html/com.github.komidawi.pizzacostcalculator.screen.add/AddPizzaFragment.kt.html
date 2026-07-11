@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddPizzaFragment.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.github.komidawi.pizzacostcalculator.screen.add</a> &gt; <span class="el_source">AddPizzaFragment.kt</span></div><h1>AddPizzaFragment.kt</h1><pre class="source lang-java linenums">package com.github.komidawi.pizzacostcalculator.screen.add
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.github.komidawi.pizzacostcalculator.PizzaApplication
+import com.github.komidawi.pizzacostcalculator.R
+import com.github.komidawi.pizzacostcalculator.databinding.FragmentAddPizzaBinding
+import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
+
+
+<span class="fc" id="L17">class AddPizzaFragment : Fragment() {</span>
+
+    private lateinit var binding: FragmentAddPizzaBinding
+    private lateinit var viewModel: AddPizzaFragmentViewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+<span class="fc" id="L26">        binding = FragmentAddPizzaBinding.inflate(inflater, container, false)</span>
+
+<span class="fc" id="L28">        val pizzaRepository =</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">            (requireContext().applicationContext as PizzaApplication).pizzaRepository</span>
+
+<span class="fc" id="L31">        viewModel = ViewModelFactory(pizzaRepository).create(AddPizzaFragmentViewModel::class.java)</span>
+<span class="fc" id="L32">        binding.viewModel = viewModel</span>
+
+<span class="fc" id="L34">        setupNavigateToPizzaListObserver()</span>
+<span class="fc" id="L35">        setupDisplayEmptyFieldsToastObserver()</span>
+<span class="fc" id="L36">        setupUpdateRatioListeners()</span>
+
+<span class="fc" id="L38">        binding.lifecycleOwner = this</span>
+
+<span class="fc" id="L40">        return binding.root</span>
+    }
+
+    private fun setupNavigateToPizzaListObserver() {
+<span class="fc" id="L44">        viewModel.navigateToPizzaListFragment.observe(viewLifecycleOwner, { navigate -&gt;</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            if (navigate) {</span>
+<span class="fc" id="L46">                this.findNavController()</span>
+<span class="fc" id="L47">                    .navigate(AddPizzaFragmentDirections.actionAddPizzaFragmentToPizzaListFragment())</span>
+<span class="fc" id="L48">                viewModel.doneNavigating()</span>
+            }
+<span class="fc" id="L50">        })</span>
+<span class="fc" id="L51">    }</span>
+
+    private fun setupDisplayEmptyFieldsToastObserver() {
+<span class="fc" id="L54">        viewModel.displayEmptyFieldsToast.observe(viewLifecycleOwner, { displayToast -&gt;</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            if (displayToast) {</span>
+<span class="fc" id="L56">                val message = getString(R.string.all_fields_are_required_message)</span>
+<span class="fc" id="L57">                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()</span>
+<span class="fc" id="L58">                viewModel.doneDisplayingEmptyFieldsToast()</span>
+            }
+<span class="fc" id="L60">        })</span>
+<span class="fc" id="L61">    }</span>
+
+    private fun setupUpdateRatioListeners() {
+<span class="fc" id="L64">        binding.pizzaSizeInput.addTextChangedListener {</span>
+            viewModel.updateRatioDisplay()
+        }
+<span class="fc" id="L67">        binding.pizzaPriceInput.addTextChangedListener {</span>
+            viewModel.updateRatioDisplay()
+        }
+<span class="fc" id="L70">        binding.pizzaDeliveryCostInput.addTextChangedListener {</span>
+            viewModel.updateRatioDisplay()
+        }
+<span class="fc" id="L73">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

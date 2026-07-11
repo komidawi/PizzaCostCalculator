@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PizzaListFragment.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.github.komidawi.pizzacostcalculator.screen.list</a> &gt; <span class="el_source">PizzaListFragment.kt</span></div><h1>PizzaListFragment.kt</h1><pre class="source lang-java linenums">package com.github.komidawi.pizzacostcalculator.screen.list
+
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.github.komidawi.pizzacostcalculator.PizzaApplication
+import com.github.komidawi.pizzacostcalculator.databinding.FragmentPizzaListBinding
+import com.github.komidawi.pizzacostcalculator.screen.factory.ViewModelFactory
+
+<span class="fc" id="L17">class PizzaListFragment : Fragment() {</span>
+
+    private lateinit var binding: FragmentPizzaListBinding
+    private lateinit var viewModel: PizzaListFragmentViewModel
+    private lateinit var adapter: PizzaListAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+<span class="fc" id="L27">        binding = FragmentPizzaListBinding.inflate(inflater, container, false)</span>
+
+<span class="fc" id="L29">        val pizzaRepository =</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">            (requireContext().applicationContext as PizzaApplication).pizzaRepository</span>
+
+<span class="fc" id="L32">        viewModel = ViewModelFactory(pizzaRepository).create(PizzaListFragmentViewModel::class.java)</span>
+<span class="fc" id="L33">        binding.viewModel = viewModel</span>
+
+<span class="fc" id="L35">        setupRecyclerView()</span>
+<span class="fc" id="L36">        setupSortingModeSpinner(requireContext())</span>
+<span class="fc" id="L37">        setupFabOnClickListener()</span>
+
+<span class="fc" id="L39">        binding.lifecycleOwner = this</span>
+
+<span class="fc" id="L41">        return binding.root</span>
+    }
+
+    private fun setupRecyclerView() {
+<span class="fc" id="L45">        val clickListener = PizzaItemListener { pizza -&gt;</span>
+<span class="nc" id="L46">            Toast.makeText(context, &quot;$pizza&quot;, Toast.LENGTH_SHORT).show()</span>
+<span class="nc" id="L47">        }</span>
+
+<span class="fc" id="L49">        adapter = PizzaListAdapter(clickListener, viewModel)</span>
+<span class="fc" id="L50">        binding.pizzaListRecyclerView.adapter = adapter</span>
+
+<span class="fc" id="L52">        viewModel.apply {</span>
+<span class="fc" id="L53">            pizzaList.observe(viewLifecycleOwner, { updateList() })</span>
+<span class="fc" id="L54">            sortingMode.observe(viewLifecycleOwner, { updateList() })</span>
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">    }</span>
+
+    private fun setupSortingModeSpinner(context: Context) {
+<span class="fc" id="L59">        binding.sortingModeSpinner.apply {</span>
+<span class="fc" id="L60">            adapter = createSpinnerAdapter(context)</span>
+<span class="fc" id="L61">            onItemSelectedListener = SortingModeSpinnerListener(viewModel)</span>
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">    }</span>
+
+    private fun createSpinnerAdapter(context: Context) =
+<span class="fc" id="L66">        ArrayAdapter(</span>
+<span class="fc" id="L67">            requireContext(),</span>
+<span class="fc" id="L68">            android.R.layout.simple_spinner_item,</span>
+<span class="fc" id="L69">            SortingMode.values().map { it.getStringResource(context) }</span>
+<span class="fc" id="L70">        ).also {</span>
+<span class="fc" id="L71">            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)</span>
+<span class="fc" id="L72">        }</span>
+
+    private fun updateList() {
+<span class="fc" id="L75">        val pizzas = viewModel.pizzaList.value</span>
+<span class="fc" id="L76">        val sortingMode = viewModel.sortingMode.value</span>
+
+<span class="fc" id="L78">        adapter.sortAndSubmitList(pizzas, sortingMode)</span>
+<span class="fc" id="L79">    }</span>
+
+    private fun setupFabOnClickListener() {
+<span class="fc" id="L82">        binding.addPizzaFab.setOnClickListener { view: View -&gt;</span>
+<span class="fc" id="L83">            view.findNavController()</span>
+<span class="fc" id="L84">                .navigate(PizzaListFragmentDirections.actionPizzaListFragmentToAddPizzaFragment())</span>
+<span class="fc" id="L85">        }</span>
+<span class="fc" id="L86">    }</span>
+
+<span class="fc" id="L88">    class SortingModeSpinnerListener(private val viewModel: PizzaListFragmentViewModel) :</span>
+        AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView&lt;*&gt;?, view: View?, position: Int, id: Long) {
+<span class="fc" id="L92">            viewModel.sortingMode.value = SortingMode.values()[position]</span>
+<span class="fc" id="L93">        }</span>
+
+<span class="nc" id="L95">        override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {}</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

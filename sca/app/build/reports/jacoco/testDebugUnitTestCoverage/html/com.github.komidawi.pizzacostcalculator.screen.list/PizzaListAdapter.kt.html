@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PizzaListAdapter.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.github.komidawi.pizzacostcalculator.screen.list</a> &gt; <span class="el_source">PizzaListAdapter.kt</span></div><h1>PizzaListAdapter.kt</h1><pre class="source lang-java linenums">package com.github.komidawi.pizzacostcalculator.screen.list
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.github.komidawi.pizzacostcalculator.databinding.ListItemPizzaElementBinding
+import com.github.komidawi.pizzacostcalculator.domain.Pizza
+
+<span class="fc" id="L11">class PizzaListAdapter(</span>
+    private val clickListener: PizzaItemListener,
+    private val pizzaListFragmentViewModel: PizzaListFragmentViewModel
+) :
+<span class="fc" id="L15">    ListAdapter&lt;Pizza, PizzaListAdapter.PizzaItemViewHolder&gt;(PizzaDiffCallback()) {</span>
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PizzaItemViewHolder =
+<span class="fc" id="L18">        PizzaItemViewHolder.from(parent)</span>
+
+    override fun onBindViewHolder(holder: PizzaItemViewHolder, position: Int) {
+<span class="fc" id="L21">        val pizzaItem = getItem(position)</span>
+<span class="fc" id="L22">        holder.bind(clickListener, pizzaItem, pizzaListFragmentViewModel)</span>
+<span class="fc" id="L23">    }</span>
+
+    // TODO: add coroutine
+    fun sortAndSubmitList(list: List&lt;Pizza&gt;?, sortingMode: SortingMode?) {
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        val items = list?.let {</span>
+<span class="pc bpc" id="L28" title="5 of 7 branches missed.">            when (sortingMode) {</span>
+<span class="fc" id="L29">                SortingMode.RATIO_ASCENDING -&gt; it.sortedBy(Pizza::ratio)</span>
+<span class="nc" id="L30">                SortingMode.RATIO_DESCENDING -&gt; it.sortedByDescending(Pizza::ratio)</span>
+<span class="nc" id="L31">                SortingMode.PIZZERIA_ASCENDING -&gt; it.sortedBy(Pizza::pizzeria)</span>
+<span class="nc" id="L32">                SortingMode.PIZZERIA_DESCENDING -&gt; it.sortedByDescending(Pizza::pizzeria)</span>
+<span class="nc" id="L33">                else -&gt; it</span>
+            }
+        }
+<span class="fc" id="L36">        submitList(items)</span>
+<span class="fc" id="L37">    }</span>
+
+<span class="fc" id="L39">    class PizzaItemViewHolder private constructor(private val binding: ListItemPizzaElementBinding) :</span>
+<span class="fc" id="L40">        RecyclerView.ViewHolder(binding.root) {</span>
+
+        fun bind(
+            clickListener: PizzaItemListener,
+            pizza: Pizza,
+            pizzaListFragmentViewModel: PizzaListFragmentViewModel
+        ) {
+<span class="fc" id="L47">            binding.pizza = pizza</span>
+<span class="fc" id="L48">            binding.clickListener = clickListener</span>
+<span class="fc" id="L49">            binding.viewModel = pizzaListFragmentViewModel</span>
+<span class="fc" id="L50">            binding.executePendingBindings()</span>
+<span class="fc" id="L51">        }</span>
+
+        companion object {
+            fun from(parent: ViewGroup): PizzaItemViewHolder {
+                val inflater = LayoutInflater.from(parent.context)
+                val binding = ListItemPizzaElementBinding.inflate(inflater, parent, false)
+                return PizzaItemViewHolder(binding)
+            }
+        }
+    }
+}
+
+<span class="fc" id="L63">class PizzaDiffCallback : DiffUtil.ItemCallback&lt;Pizza&gt;() {</span>
+
+<span class="fc" id="L65">    override fun areItemsTheSame(oldItem: Pizza, newItem: Pizza) = oldItem.uuid == newItem.uuid</span>
+
+<span class="fc" id="L67">    override fun areContentsTheSame(oldItem: Pizza, newItem: Pizza) = oldItem == newItem</span>
+}
+
+<span class="pc" id="L70">class PizzaItemListener(val clickListener: (pizza: Pizza) -&gt; Unit) {</span>
+<span class="nc" id="L71">    fun onClick(pizza: Pizza) = clickListener(pizza)</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

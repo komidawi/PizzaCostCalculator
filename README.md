@@ -2,7 +2,7 @@
 
 ## Description
 
-Handy Android app helping make an optimal decision when choosing pizza size and shape.\
+Handy Android app helping make an optimal decision when choosing pizza size.\
 Project focused on high quality and proper Android architecture practices.\
 Most code written using TDD, high coverage levels. Unit tests, integration tests, e2e tests.\
 CI/CD made with Bitrise. SonarQube and CodeCov for metrics.\
@@ -11,19 +11,20 @@ Functionality is just a background of this project, yet still working and helpfu
 ## Features
 
 - Calculating pizza price/area ratio
+- Including delivery costs into calculations
 - Sorting by ratio ascending/descending
-- Saving/deleting provided data
+- Adding/removing list entries
 
 ## Technologies
 
-- Kotlin
-- Room
-- JUnit
-- Mockito
-- Espresso
-- Gradle
+- `Kotlin`
+- `Room`
+- `JUnit`
+- `Mockito`
+- `Espresso`
+- `Gradle`
 
-and AndroidX stack elements such as Navigation, Lifecycle, Fragment, etc.
+and `AndroidX` stack elements such as `Navigation`, `Lifecycle`, `Fragment`, etc.
 
 ## Code Quality
 
@@ -47,6 +48,30 @@ Detailed results can be found in [jaCoCo Report][jaCoCo].
 
 ## Screenshots
 
-Will appear in the far future, as frontend side is not the point of this app.
+<details>
+  <summary>Show screenshots</summary>
+
+   <div align="center">
+
+   <table>
+      <tr>
+         <td align="center">
+            <img src="./img/01_empty.png" alt="Empty Add Screen" width="300px"><br>
+            <b>Figure 1. Empty Add Form</b>
+         </td>
+         <td align="center">
+            <img src="./img/02_filled.png" alt="Filled Add Screen" width="300px"><br>
+            <b>Figure 2. Filled Add Form</b>
+         </td>
+         <td align="center">
+            <img src="./img/03_list.png" alt="Item List Screen" width="300px"><br>
+            <b>Figure 3. Item List View</b>
+         </td>
+      </tr>
+      </table>
+
+   </div>
+
+</details>
 
 [jaCoCo]: sca/app/build/reports/jacoco/testDebugUnitTestCoverage/html/index.html

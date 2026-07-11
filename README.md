@@ -2,13 +2,11 @@
 
 ## Description
 
-Handy Android app which helps to make an optimal decision when choosing pizza size and shape.
-Project focused on high code quality and proper coding and Android architecture practices. Much code
-written with TDD, high coverage levels. Unit tests, integration tests, e2e tests. CI/CD made with
-Bitrise. SonarQube and CodeCov for metrics. I wanted to make it the best way possible, taking no
-half measures and being a contrary to commercial projects limited by deadlines and other business
-factors. One might say it's trivial in functionality, but it's not the point as the real effort has
-been put predominantly in its codebase.
+Handy Android app helping make an optimal decision when choosing pizza size and shape.\
+Project focused on high quality and proper Android architecture practices.\
+Most code written using TDD, high coverage levels. Unit tests, integration tests, e2e tests.\
+CI/CD made with Bitrise. SonarQube and CodeCov for metrics.\
+Functionality is just a background of this project, yet still working and helpful.
 
 ## Features
 

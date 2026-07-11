@@ -3,6 +3,9 @@
 apply from: "$project.rootDir/sonar.gradle"
 
 buildscript {
+    dependencyLocking {
+        lockAllConfigurations()
+    }
     ext {
         kotlin_version = '1.4.21'
         navigation_ktx_version = '2.3.5'
